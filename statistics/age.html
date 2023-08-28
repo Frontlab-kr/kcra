@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>통합시스템</title>
+
+		<!-- Global stylesheets -->
+		<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" />
+		<link rel="stylesheet" type="text/css" href="http://dev2.onesnc.co.kr/static/global_assets/css/icons/icomoon/styles.css" />
+		<link rel="stylesheet" type="text/css" href="http://dev2.onesnc.co.kr/static/global_assets/css/icons/fontawesome/styles.min.css" />
+		<link rel="stylesheet" type="text/css" href="http://dev2.onesnc.co.kr/static/global_assets/css/bootstrap.css" />
+		<link rel="stylesheet" type="text/css" href="http://dev2.onesnc.co.kr/static/global_assets/css/core.css" />
+		<link rel="stylesheet" type="text/css" href="http://dev2.onesnc.co.kr/static/global_assets/css/components.css" />
+		<link rel="stylesheet" type="text/css" href="http://dev2.onesnc.co.kr/static/global_assets/css/colors.min.css" />
+		<!-- /global stylesheets -->
+
+		<!-- Core JS files -->
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/plugins/loaders/pace.min.js"></script>
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/core/libraries/jquery.min.js"></script>
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/core/libraries/bootstrap.min.js"></script>
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/plugins/loaders/blockui.min.js"></script>
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/app.js"></script>
+		<!-- /core JS files -->
+
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/plugins/ui/moment/moment.min.js"></script>
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/plugins/ui/moment/moment_locales.min.js"></script>
+
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/plugins/editors/summernote/summernote.min.js"></script>
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/plugins/forms/styling/uniform.min.js"></script>
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/plugins/editors/summernote/lang/summernote-ko-KR.js"></script>
+
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/plugins/forms/selects/select2.min.js"></script>
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/plugins/jquery-form/jquery.form.js"></script>
+
+		<!-- datepicker -->
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/core/libraries/jquery_ui/core.min.js"></script>
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/core/libraries/jquery_ui/interactions.min.js"></script>
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/core/libraries/jquery_ui/widgets.min.js"></script>
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/core/libraries/jquery_ui/effects.min.js"></script>
+		<!-- /datepicker -->
+
+		<script src="https://cdn.jsdelivr.net/lodash/4.17.4/lodash.min.js"></script>
+
+		<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+		<script src="http://dev2.onesnc.co.kr/static/common_js.js"></script>
+		<!-- /theme JS files -->
+		<!-- sheetjs  -->
+		<script type="text/javascript" src="//cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
+	</head>
+
+	<body>
+		<!-- Main navbar -->
+		<div class="navbar navbar-inverse header-highlight">
+			<!-- navbar-default 제거 -->
+			<div class="navbar-header">
+				<a class="navbar-brand" href="/">한국휴게음식업중앙회</a>
+
+				<ul class="nav navbar-nav visible-xs-block">
+					<li>
+						<a data-toggle="collapse" data-target="#navbar-mobile"><i class="icon-tree5"></i></a>
+					</li>
+					<li>
+						<a class="sidebar-mobile-main-toggle"><i class="icon-paragraph-justify3"></i></a>
+					</li>
+				</ul>
+			</div>
+
+			<div class="navbar-collapse collapse" id="navbar-mobile">
+				<ul class="nav navbar-nav">
+					<li>
+						<a class="sidebar-control sidebar-main-toggle hidden-xs"><i class="icon-paragraph-justify3"></i></a>
+					</li>
+				</ul>
+
+				<ul class="nav navbar-nav navbar-right">
+					<!-- 	<li><a href="#">Text link</a></li>
+
+				<li>
+					<a href="#">
+						<i class="icon-cog3"></i>
+						<span class="visible-xs-inline-block position-right">Icon link</span>
+					</a>
+				</li> -->
+
+					<li class="dropdown dropdown-user">
+						<a class="dropdown-toggle" data-toggle="dropdown">
+							<img src="http://dev2.onesnc.co.kr/static/global_assets/images/image.png" alt="" />
+							<span>관리자</span>
+							<i class="caret"></i>
+						</a>
+
+						<ul class="dropdown-menu dropdown-menu-right">
+							<li>
+								<a href="/logout"><i class="icon-switch2"></i> Logout</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<!-- /main navbar -->
+		<script>
+			var LOGIN_USER_ID = 'admin';
+			var LOGIN_USER_TYPE = 'MASTER_ADMIN';
+			$.datepicker.setDefaults({
+				dateFormat: 'yymmdd',
+				prevText: '이전 달',
+				nextText: '다음 달',
+				monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+				monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+				dayNames: ['일', '월', '화', '수', '목', '금', '토'],
+				dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
+				dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
+				showMonthAfterYear: true,
+				yearSuffix: '년',
+			});
+		</script>
+
+		<!-- Page container -->
+		<div class="page-container">
+			<!-- Page content -->
+			<div class="page-content">
+				<!-- Main sidebar -->
+				<div class="sidebar sidebar-main sidebar-default">
+					<div class="sidebar-content">
+						<!-- Main navigation -->
+						<div class="sidebar-category sidebar-category-visible">
+							<div class="category-content no-padding">
+								<ul class="navigation navigation-main navigation-accordion" id="site_menu"></ul>
+							</div>
+						</div>
+						<!-- /main navigation -->
+					</div>
+				</div>
+				<!-- /main sidebar -->
+
+				<script>
+					commonAjaxFunc('/site/menu', { menuType: 'MENU_' + LOGIN_USER_TYPE }, 'GET', function (data) {
+						if (data != null) {
+							$('#site_menu').empty();
+							for (var i = 0; i < data.length; i++) {
+								var vo = data[i];
+								var menuCd = vo.menuCd;
+								var moduleCd = vo.moduleCd;
+								var menuName = vo.menuName;
+								var moduleUri = vo.moduleUri;
+								var menuDepthType = vo.menuDepthType;
+								if (menuDepthType == 'U') {
+									if (menuCd == 'MENU_00016') {
+										$('#site_menu').append(
+											"<li  data-id='" +
+												menuCd +
+												"' class='active'><a href='" +
+												moduleUri +
+												"'><i class='" +
+												vo.iconClass +
+												"'></i><span>" +
+												menuName +
+												'</span></a></li>'
+										);
+									} else {
+										$('#site_menu').append(
+											"<li  data-id='" + menuCd + "'><a href='" + moduleUri + "'><i class='" + vo.iconClass + "'></i><span>" + menuName + '</span></a></li>'
+										);
+									}
+								} else if (menuDepthType == 'M') {
+									if (menuCd == 'MENU_00016' || moduleUri == '/admin/statistics/age') {
+										if ($('#site_menu > li').last().find('ul').length == 0) {
+											$('#site_menu li')
+												.last()
+												.append(
+													"<ul><li data-id='" +
+														menuCd +
+														"' class='active'><a href='" +
+														moduleUri +
+														"'><i class=''></i><span>" +
+														menuName +
+														'</span></a></li></ul>'
+												);
+										} else {
+											$('#site_menu > li')
+												.last()
+												.find('ul')
+												.append(
+													"<li data-id='" + menuCd + "' class='active'><a href='" + moduleUri + "'><i class=''></i><span>" + menuName + '</span></a></li>'
+												);
+										}
+									} else {
+										if ($('#site_menu > li').last().find('ul').length == 0) {
+											$('#site_menu li')
+												.last()
+												.append("<ul><li data-id='" + menuCd + "'><a href='" + moduleUri + "'><i class=''></i><span>" + menuName + '</span></a></li></ul>');
+										} else {
+											$('#site_menu > li')
+												.last()
+												.find('ul')
+												.append("<li data-id='" + menuCd + "'><a href='" + moduleUri + "'><i class=''></i><span>" + menuName + '</span></a></li>');
+										}
+									}
+								}
+							}
+							//$("#site_menu li[data-id = 'MENU_00016']").addClass("active");
+							mainNavigationSetting();
+						}
+					});
+
+					$(document).on('click', '#site_menu li > a', function (e) {
+						if ($(this).parent().attr('data-id') != undefined) {
+							moveMenu($(this).parent().attr('data-id'));
+						}
+					});
+				</script>
+
+				<div class="content-wrapper">
+					<div class="content">
+						<!-- list table s  -->
+						<form name="searchForm" method="post">
+							<input type="hidden" name="excelForm" id="excelForm" value="" />
+						</form>
+						<div class="row">
+							<div class="panel panel-flat">
+								<div class="panel-heading">
+									<h5 class="panel-title">연령대별 통계</h5>
+								</div>
+								<div class="panel-body">
+									<div class="table-responsive">
+										<table class="table search-table">
+											<tbody>
+												<tr>
+													<th>구분</th>
+													<td>
+														<select name="searchCcTarget" id="searchCcTarget" class="form-control">
+															<option value="" selected="selected">구분</option>
+															<option value="기존영업자">기존영업자</option>
+															<option value="신규영업자">신규영업자</option>
+															<option value="자판기영업자">자판기영업자</option>
+														</select>
+													</td>
+												</tr>
+												<tr>
+													<th>수료일자</th>
+													<td>
+														<div class="kcra-datepicker">
+															<div class="kcra-datepicker__input">
+																<input type="text" class="form-control datepicker" name="schStartDate" placeholder="" />
+																<span class="material-symbols-outlined"> calendar_month </span>
+															</div>
+															<span>~</span>
+															<div class="kcra-datepicker__input">
+																<input type="text" class="form-control datepicker" name="schEndDate" placeholder="" />
+																<span class="material-symbols-outlined"> calendar_month </span>
+															</div>
+														</div>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+										<div class="text-center mt-10">
+											<button type="button" class="btn btn-xs btn-search" onclick="statistics.init();">검색</button>
+										</div>
+									</div>
+									<div class="d-flex flex-row-reverse">
+										<button type="button" class="btn btn-xs btn-info mr-5" onclick="statistics.excelDown('xlsx');">다운로드</button>
+									</div>
+									<div class="table-responsive">
+										<table class="table result-table" id="dataTable">
+											<thead>
+												<tr>
+													<th class="text-center">연령대</th>
+													<th class="text-center">수료건수</th>
+													<th class="text-center">비율</th>
+												</tr>
+											</thead>
+											<tbody></tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- list table e  -->
+
+						<!-- Footer -->
+						<div class="footer text-muted">© 2021 ONESNC-Software & Creative</div>
+						<!-- /footer -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
+
+<script>
+	$('.datepicker').datepicker({ dateFormat: 'yy-mm-dd' });
+	var statistics = (function () {
+		var init = function () {
+			commonLoadingAjaxFunc(
+				'/statistics/age/list',
+				{
+					searchCcTarget: $('#searchCcTarget').val(),
+					searchStartDate: $('input[name=searchStartDate]').val(),
+					searchEndDate: $('input[name=searchEndDate]').val(),
+				},
+				'GET',
+				function (data) {
+					if (data != null) {
+						var htmlStr = '';
+						if (data.list == null || data.list.length == 0) {
+						} else {
+							var t_result = _(data.list)
+								.groupBy('ageGroup')
+								.map((ageGroup, id) => ({ ageGroup: id, cnt: _.sumBy(ageGroup, 'cnt') }))
+								.value();
+							var totalCnt = _.sumBy(t_result, 'cnt');
+							for (var i = 0; i < t_result.length; i++) {
+								var vo = t_result[i];
+								var title = '';
+								if (vo.ageGroup == '10age') {
+									title = '10대';
+								} else if (vo.ageGroup == '20age') {
+									title = '20대';
+								} else if (vo.ageGroup == '30age') {
+									title = '30대';
+								} else if (vo.ageGroup == '40age') {
+									title = '40대';
+								} else if (vo.ageGroup == '50age') {
+									title = '50대';
+								} else if (vo.ageGroup == '60age') {
+									title = '60대';
+								} else if (vo.ageGroup == '70age') {
+									title = '70대';
+								}
+
+								htmlStr += '<tr>';
+
+								htmlStr += "<td class='text-center'>" + title + '</td>';
+								htmlStr += "<td class='text-center'>" + vo.cnt + '</td>';
+								htmlStr += "<td class='text-center'>" + calculatePercentage(vo.cnt, totalCnt) + '%</td>';
+								htmlStr += '</tr>';
+							}
+							htmlStr += '<tr>';
+
+							htmlStr += "<td class='text-center'>합계</td>";
+							htmlStr += "<td class='text-center'>" + totalCnt + '</td>';
+							htmlStr += "<td class='text-center'>" + calculatePercentage(vo.cnt, totalCnt) + '%</td>';
+							htmlStr += '</tr>';
+						}
+						$('#dataTable tbody').html(htmlStr);
+					}
+				}
+			);
+		};
+		var excelDown = function (type, fn) {
+			var elt = document.getElementById('dataTable');
+			var wb = XLSX.utils.table_to_book(elt, { sheet: '통계', raw: true });
+			var date = moment().format('YYYYMMDD');
+			XLSX.writeFile(wb, fn || 'age_statistics_' + date + '.' + (type || 'xlsx'));
+		};
+
+		return { init: init, excelDown: excelDown };
+	})();
+	statistics.init();
+</script>

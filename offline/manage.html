@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>통합시스템</title>
+
+		<!-- Global stylesheets -->
+		<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" />
+		<link rel="stylesheet" type="text/css" href="http://dev2.onesnc.co.kr/static/global_assets/css/icons/icomoon/styles.css" />
+		<link rel="stylesheet" type="text/css" href="http://dev2.onesnc.co.kr/static/global_assets/css/icons/fontawesome/styles.min.css" />
+		<link rel="stylesheet" type="text/css" href="http://dev2.onesnc.co.kr/static/global_assets/css/bootstrap.css" />
+		<link rel="stylesheet" type="text/css" href="http://dev2.onesnc.co.kr/static/global_assets/css/core.css" />
+		<link rel="stylesheet" type="text/css" href="http://dev2.onesnc.co.kr/static/global_assets/css/components.css" />
+		<link rel="stylesheet" type="text/css" href="http://dev2.onesnc.co.kr/static/global_assets/css/colors.min.css" />
+		<!-- /global stylesheets -->
+
+		<!-- Core JS files -->
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/plugins/loaders/pace.min.js"></script>
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/core/libraries/jquery.min.js"></script>
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/core/libraries/bootstrap.min.js"></script>
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/plugins/loaders/blockui.min.js"></script>
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/app.js"></script>
+		<!-- /core JS files -->
+
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/plugins/ui/moment/moment.min.js"></script>
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/plugins/ui/moment/moment_locales.min.js"></script>
+
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/plugins/editors/summernote/summernote.min.js"></script>
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/plugins/forms/styling/uniform.min.js"></script>
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/plugins/editors/summernote/lang/summernote-ko-KR.js"></script>
+
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/plugins/forms/selects/select2.min.js"></script>
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/plugins/jquery-form/jquery.form.js"></script>
+
+		<!-- datepicker -->
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/core/libraries/jquery_ui/core.min.js"></script>
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/core/libraries/jquery_ui/interactions.min.js"></script>
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/core/libraries/jquery_ui/widgets.min.js"></script>
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/core/libraries/jquery_ui/effects.min.js"></script>
+		<!-- /datepicker -->
+
+		<script src="https://cdn.jsdelivr.net/lodash/4.17.4/lodash.min.js"></script>
+
+		<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+		<script src="http://dev2.onesnc.co.kr/static/common_js.js"></script>
+		<!-- /theme JS files -->
+		<!-- sheetjs  -->
+		<script type="text/javascript" src="//cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
+
+		<!-- frontlab -->
+		<link rel="stylesheet" type="text/css" href="/assets/css/common.css" />
+		<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/colresizable/1.6.0/colResizable-1.6.js"
+			integrity="sha512-0HfjrMq6p8VBkVjp/gy/obELN81BCwmKRd7fongBsAPw49BeKAfXpQn6PWSPa8rm7mvblqyV2P1kVNzvW6qR4Q=="
+			crossorigin="anonymous"
+			referrerpolicy="no-referrer"
+		></script>
+		<script>
+			$(document).ready(function () {
+				$('.kcra-list .table').colResizable({
+					liveDrag: true,
+					gripInnerHtml: "<div class='grip'></div>",
+					draggingClass: 'dragging',
+					resizeMode: 'fit',
+				});
+				$('.kcra-sidebar-list__item a').on('click', function () {
+					$(this).parents('.kcra-sidebar-list__item').toggleClass('active');
+					return false;
+				});
+			});
+		</script>
+	</head>
+
+	<body>
+		<div class="kcra">
+			<div class="kcra-sidebar">
+				<div class="kcra-sidebar-logo">
+					<a href=""><img src="/assets/images/logo.png" alt="KCRA 한국휴게음식업중앙회교육원" /></a>
+				</div>
+				<div class="kcra-sidebar-user">
+					<div class="dropdown">
+						<button id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<img src="../assets/images/user.png" alt="" />
+							관리자
+							<span class="material-symbols-outlined"> expand_more </span>
+						</button>
+						<ul class="dropdown-menu">
+							<li>
+								<a href="/logout">로그아웃</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="kcra-sidebar-list">
+					<div class="kcra-sidebar-list__item">
+						<a href=""><span class="material-symbols-outlined"> settings </span><strong>설정</strong></a>
+					</div>
+					<div class="kcra-sidebar-list__item">
+						<a href=""><span class="material-symbols-outlined"> corporate_fare </span><strong>업소정보관리</strong></a>
+					</div>
+					<div class="kcra-sidebar-list__item">
+						<a href=""><span class="material-symbols-outlined"> school </span><strong>교육결과조회</strong></a>
+					</div>
+					<div class="kcra-sidebar-list__item depth">
+						<a href=""><span class="material-symbols-outlined"> stress_management </span><strong>집합교육관리조회</strong></a>
+						<ul>
+							<li class="active">
+								<a href="/admin/offline/manage"><span>신규영업자</span></a>
+							</li>
+						</ul>
+					</div>
+					<div class="kcra-sidebar-list__item">
+						<a href=""><span class="material-symbols-outlined"> contract_edit </span><strong>통보서관리</strong></a>
+					</div>
+					<div class="kcra-sidebar-list__item">
+						<a href=""><span class="material-symbols-outlined"> data_table </span><strong>이관데이터관리</strong></a>
+					</div>
+					<div class="kcra-sidebar-list__item">
+						<a href=""><span class="material-symbols-outlined"> analytics </span><strong>수료현황</strong></a>
+					</div>
+					<div class="kcra-sidebar-list__item">
+						<a href=""><span class="material-symbols-outlined"> assignment_ind </span><strong>수료자등록</strong></a>
+					</div>
+					<div class="kcra-sidebar-list__item active depth">
+						<a href=""><span class="material-symbols-outlined"> bar_chart_4_bars </span><strong>통계</strong></a>
+						<ul>
+							<li class="active">
+								<a href="/admin/statistics/company"><span>영업대장별 통계</span></a>
+							</li>
+							<li>
+								<a href="/admin/statistics/edu"><span>교육통계</span></a>
+							</li>
+							<li>
+								<a href="/admin/statistics/period"><span>기간대비통계</span></a>
+							</li>
+							<li>
+								<a href="/admin/statistics/age"><span>연령별통계</span></a>
+							</li>
+						</ul>
+					</div>
+					<div class="kcra-sidebar-list__item">
+						<a href=""> <span class="material-symbols-outlined"> settings_cinematic_blur </span><strong>계정관리</strong></a>
+					</div>
+				</div>
+			</div>
+			<div class="kcra-contents kcra-list-form">
+				<div class="kcra-title">
+					<h1>집합교육관리 <span style="font-weight: 400">-</span> 신규영업자</h1>
+				</div>
+				<div class="kcra-form">
+					<div class="kcra-form__box">
+						<form name="searchForm" id="searchForm" method="post">
+							<table>
+								<colgroup>
+									<col style="width: 10%" />
+									<col style="width: 40%" />
+									<col style="width: 10%" />
+									<col style="width: 40%" />
+								</colgroup>
+								<tbody>
+									<tr>
+										<th>회원구분</th>
+										<td>
+											<label class="radio-inline"><input type="radio" class="styled" name="schMemberYn" value="" checked />전체</label>
+											<label class="radio-inline"><input type="radio" class="styled" name="schMemberYn" value="Y" />회원</label>
+											<label class="radio-inline"><input type="radio" class="styled" name="schMemberYn" value="N" />비회원</label>
+										</td>
+										<th>영업자구분</th>
+										<td>
+											<label class="radio-inline"><input type="radio" class="styled" name="schCcTarget" value="" checked />전체</label>
+											<label class="radio-inline"><input type="radio" class="styled" name="schCcTarget" value="N" />신규</label>
+											<label class="radio-inline"><input type="radio" class="styled" name="schCcTarget" value="V" />자판기</label>
+										</td>
+									</tr>
+									<tr>
+										<th>지역</th>
+										<td class="d-flex">
+											<select class="form-control" id="schSido">
+												<option value="">시/도</option>
+											</select>
+										</td>
+										<th>교육날짜</th>
+										<td>
+											<div class="kcra-datepicker">
+												<div class="kcra-datepicker__input">
+													<input type="text" class="form-control datepicker" name="schStartDate" placeholder="" />
+													<span class="material-symbols-outlined"> calendar_month </span>
+												</div>
+												<span>~</span>
+												<div class="kcra-datepicker__input">
+													<input type="text" class="form-control datepicker" name="schEndDate" placeholder="" />
+													<span class="material-symbols-outlined"> calendar_month </span>
+												</div>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<th>이수상태</th>
+										<td>
+											<label class="radio-inline"><input type="radio" class="styled" name="schStudyStatus" value="" checked />전체</label>
+											<label class="radio-inline"><input type="radio" class="styled" name="schStudyStatus" value="S" />수강중</label>
+											<label class="radio-inline"><input type="radio" class="styled" name="schStudyStatus" value="C" />이수</label>
+											<label class="radio-inline"><input type="radio" class="styled" name="schStudyStatus" value="F" />미이수</label>
+										</td>
+										<th>검색어</th>
+										<td>
+											<input type="text" class="form-control" name="schValue" placeholder="ID 또는 이름으로 검색하세요." />
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</form>
+					</div>
+					<div class="kcra-form__button">
+						<button type="button" class="btn" onclick="completeStudent.search();"><span class="material-symbols-outlined"> search </span>검색</button>
+						<button type="button" class="btn" onclick="completeStudent.searchReset();">
+							<span class="material-symbols-outlined"> device_reset </span>조회조건초기화
+						</button>
+					</div>
+				</div>
+				<div class="kcra-list">
+					<div class="kcra-list-head">
+						<div class="kcra-list-head__total">조회건수 : <strong>43</strong>건</div>
+						<div class="kcra-list-head__button">
+							<button type="button" class="btn btn-sm btn-gray" onclick="offline.excelDown();">
+								<span class="material-symbols-outlined"> download </span>엑셀다운로드
+							</button>
+							<button type="button" class="btn btn-sm btn-gray" onclick="offline.certificateAllDown();">
+								<span class="material-symbols-outlined"> download </span>수료증 일괄다운
+							</button>
+							<button type="button" class="btn btn-sm btn-gray" onclick="offline.openModal();">
+								<span class="material-symbols-outlined"> upload </span>현장일괄등록
+							</button>
+						</div>
+					</div>
+					<div class="table-responsive">
+						<div class="table-responsive">
+							<table class="table result-table" id="dataTable">
+								<thead>
+									<tr>
+										<th><input type="checkbox" name="chkAll" value="Y" /></th>
+										<th>NO</th>
+										<th>회원구분</th>
+										<th>영업자구분</th>
+										<th>장소명</th>
+										<th>교육일시</th>
+										<th>이름</th>
+										<th>아이디</th>
+										<th>업소명</th>
+										<th>대표자명</th>
+										<th>신청일</th>
+										<th>이수상태</th>
+										<th>수료번호</th>
+										<th>수료일자</th>
+										<th>수료증</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td colspan="15" class="text-center" style="height: 300px">검색조건을 입력한 뒤 검색버튼을 눌러주세요.</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<div class="kcra-pagination">
+						<ul class="pagination">
+							<li><a href="javascript:goPage(1);">이전</a></li>
+							<li class="active"><a href="#">1</a></li>
+							<li><a href="javascript:goPage('2');">2</a></li>
+							<li><a href="javascript:goPage('3');">3</a></li>
+							<li><a href="javascript:goPage('4');">4</a></li>
+							<li><a href="javascript:goPage('5');">5</a></li>
+							<li><a href="javascript:goPage('6');">6</a></li>
+							<li><a href="javascript:goPage('7');">7</a></li>
+							<li><a href="javascript:goPage('8');">8</a></li>
+							<li><a href="javascript:goPage('9');">9</a></li>
+							<li><a href="javascript:goPage('10');">10</a></li>
+							<li><a href="javascript:goPage(11);">다음</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- modal s -->
+		<div id="offlineUploadModal" class="modal fade" tabindex="-1">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h5 class="modal-title">현장등록 일괄업로드</h5>
+					</div>
+
+					<div class="modal-body">
+						<form name="upalodForm" id="upalodForm" enctype="multipart/form-data" method="post">
+							<input type="hidden" name="ccCd" value="" />
+							<input type="hidden" name="ccYear" value="" />
+							<input type="hidden" name="ccName" value="" />
+							<input type="hidden" name="regUserId" value="" />
+							<input type="hidden" name="regUserName" value="" />
+							<input type="hidden" name="offlineCd" value="" />
+							<input type="hidden" name="placeCd" value="" />
+							<input type="hidden" name="placeNm" value="" />
+							<div class="form-group">
+								<label>과정선택</label>
+								<select name="curriculumSel" id="curriculumSel" class="form-control" onchange="offline.getOfflinePlace();">
+									<option value="">선택</option>
+								</select>
+							</div>
+							<div class="form-group">
+								<label>오프라인 장소 선택</label>
+								<select name="offlineSel" id="offlineSel" class="form-control">
+									<option value="">선택</option>
+								</select>
+							</div>
+							<div class="form-group">
+								<label>일괄업로드</label>
+								<input type="file" class="form-control" name="uploadFile" id="uploadFile" />
+							</div>
+
+							<div class="form-group">
+								<a href="/static/file/down?originalNm=offline_regist_sample.xlsx">샘플 파일 다운로드</a>
+							</div>
+							<div>
+								<p class="text-danger">현장등록자의 수강상태는 수료로 등록됩니다.</p>
+							</div>
+						</form>
+					</div>
+
+					<div class="modal-footer">
+						<button type="button" class="btn btn-gray" data-dismiss="modal">취소</button>
+						<button type="button" class="btn" onclick="offline.offlineUpload();">엑셀파일업로드</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- modal e -->
+		<!-- modal s -->
+		<div id="uploadResultModal" class="modal fade" tabindex="-1">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h5 class="modal-title">일괄업로드</h5>
+					</div>
+
+					<div class="modal-body">
+						<p class="upload-status">등록중</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn" data-dismiss="modal">확인</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- modal e -->
+
+		<!-- Basic modal -->
+		<div id="sendEmailModal" class="modal fade" tabindex="-1">
+			<div class="modal-dialog modal-lg">
+				<form id="transferDataEmailForm" name="transferDataEmailForm" class="form-horizontal" method="post">
+					<input type="hidden" name="_userName" value="" />
+					<input type="hidden" name="_certNo" value="" />
+					<input type="hidden" name="_ccName" value="" />
+					<input type="hidden" name="body" value="" />
+
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h5 class="modal-title">이메일 발송</h5>
+						</div>
+
+						<div class="modal-body">
+							<div class="form-group">
+								<label>받는사람</label>
+								<input type="text" name="to" class="form-control" />
+							</div>
+							<div class="form-group">
+								<label>제목</label>
+								<input type="text" name="subject" class="form-control" />
+							</div>
+							<div class="form-group">
+								<label>내용</label>
+								<div id="summernote"></div>
+							</div>
+						</div>
+						<!-- /.modal-body -->
+						<div class="modal-footer">
+							<button type="button" class="btn btn-gray" data-dismiss="modal">닫기</button>
+							<button type="button" class="btn" onclick="stuInfoMd.sendEmail();">보내기</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+		<!-- /basic modal -->
+	</body>
+</html>
+
+<script>
+	$(document).ready(function () {
+		getSido();
+		//offline.init();
+		$('.datepicker').datepicker({ dateFormat: 'yy-mm-dd' });
+		$('input[name=chkAll]').change(function () {
+			if ($('input[name=chkAll]').is(':checked')) {
+				$('input[name=chk]').each(function () {
+					if (!$(this).attr('disabled')) {
+						$(this).prop('checked', true);
+					}
+				});
+			} else {
+				$('input[name=chk]').prop('checked', false);
+			}
+		});
+	});
+
+	function getSido() {
+		commonAjaxFunc('/common/sido', {}, 'GET', function (data) {
+			$('#schSido').empty();
+			$('#schSido').append("<option value=''>시/도</option>");
+			for (var i = 0; i < data.length; i++) {
+				$('#schSido').append("<option value='" + data[i].sidoNo + "'>" + data[i].sidoNm + '</option>');
+			}
+		});
+	}
+
+	function getGungu() {
+		var sidoNo = $('#schSido').val();
+		commonAjaxFunc('/common/gungu', { sidoNo: sidoNo }, 'GET', function (data) {
+			$('#schGungu').empty();
+			$('#schGungu').append("<option value=''>군/구</option>");
+			for (var i = 0; i < data.length; i++) {
+				$('#schGungu').append("<option value='" + data[i].gunguNm + "'>" + data[i].gunguNm + '</option>');
+			}
+		});
+	}
+	//페이징
+	function goPage(currentPageNo) {
+		$('input[name=currentPageNo]').val(currentPageNo);
+		offline.init();
+	}
+	//페이지당 노출갯수 선택
+	function pageUnitChange() {
+		$('input[name=currentPageNo]').val('1');
+		offline.init();
+	}
+
+	var offline = (function () {
+		var searchReset = function () {
+			$('#searchForm')[0].reset();
+		};
+		var search = function () {
+			$('input[name=currentPageNo]').val('1');
+			init();
+		};
+
+		var init = function () {
+			var sendData = {
+				currentPageNo: $('input[name=currentPageNo]').val(),
+				recordsPerPage: $('select[name=recordsPerPage]').val(),
+				schMemberYn: $('input[name=schMemberYn]:checked').val(),
+				schCcTarget: $('input[name=schCcTarget]:checked').val(),
+				schSido: $('#schSido option:selected').text(),
+				schGungu: $('#schGungu').val(),
+				schStartDate: $('input[name=schStartDate]').val(),
+				schEndDate: $('input[name=schEndDate]').val(),
+				schStudyStatus: $('input[name=schStudyStatus]:checked').val(),
+				schValue: $('input[name=schValue]').val(),
+				orderColumn: $('input[name=orderColumn]').val(),
+				orderBy: $('input[name=orderBy]').val(),
+				ccType: $('input[name=ccType]').val(),
+			};
+			commonLoadingAjaxFunc('/offline/manage', sendData, 'GET', function (data) {
+				var htmlStr = '';
+				if (data.list == null || data.list.length == 0) {
+					htmlStr = '<tr><td colspan="14">등록된  정보가 없습니다.</td></tr>';
+				} else {
+					var no = data.pagingUtil.displayTotalRecordCount;
+					for (var i = 0; i < data.list.length; i++) {
+						var vo = data.list[i];
+
+						htmlStr += '<tr>';
+						if (vo.studyStatus == 'C') {
+							htmlStr +=
+								'<td><input type="checkbox" name="chk" value="" data-id="' +
+								vo.userId +
+								'" data-enrol="' +
+								vo.enrolNo +
+								'" data-curri="' +
+								vo.ccCd +
+								'" data-ismember="' +
+								vo.memberYn +
+								'"></td>';
+						} else {
+							htmlStr += '<td><input type="checkbox" name="chk" value="" disabled></td>';
+						}
+						htmlStr += '    <td>' + no + '</td>';
+						if (vo.memberYn == 'Y') {
+							htmlStr += '    <td>회원</td>';
+						} else {
+							htmlStr += '    <td>비회원</td>';
+						}
+						if (vo.ccTarget == 'N') {
+							htmlStr += '    <td>신규</td>';
+						} else if (vo.ccTarget == 'V') {
+							htmlStr += '    <td>자판기</td>';
+						}
+						htmlStr += '    <td>' + vo.placeNm + '</td>';
+						htmlStr +=
+							'    <td>' +
+							moment(vo.studyStartDate, 'YYYYMMDDHHmmss').format('YYYY.MM.DD HH:mm') +
+							'~' +
+							moment(vo.studyEndDate, 'YYYYMMDDHHmmss').format('HH:mm') +
+							'</td>';
+						htmlStr += '    <td>' + vo.userName + '</td>';
+						if (vo.memberYn == 'Y') {
+							htmlStr += '    <td>' + vo.userId + '</td>';
+						} else {
+							htmlStr += '    <td>-</td>';
+						}
+						htmlStr += '    <td>' + vo.companyName + '</td>';
+						htmlStr += '    <td>' + vo.ceoName + '</td>';
+						htmlStr += '    <td>' + moment(vo.regDate, 'YYYYMMDD').format('YYYY.MM.DD') + '</td>';
+						if (vo.studyStatus == 'C') {
+							htmlStr += '    <td>수료</td>';
+						} else if (vo.studyStatus == 'F') {
+							htmlStr += '    <td>미수료</td>';
+						} else if (vo.enrolStatus == 'S' && vo.studyStatus == 'S') {
+							htmlStr += '    <td>수강중</td>';
+						} else {
+							htmlStr += '    <td>-</td>';
+						}
+
+						if (vo.studyStatus == 'C') {
+							htmlStr += '    <td>' + vo.certNo + '</td>';
+						} else {
+							htmlStr += '    <td>-</td>';
+						}
+
+						if (vo.studyStatus == 'C' && !isEmpty(vo.certDate)) {
+							htmlStr += '    <td>' + moment(vo.certDate, 'YYYYMMDD').format('YYYY.MM.DD') + '</td>';
+						} else {
+							htmlStr += '    <td>-</td>';
+						}
+
+						if (vo.studyStatus == 'C') {
+							htmlStr +=
+								'    <td><button type="button" class="btn btn-xs" onclick="offline.showCertificate(\'' +
+								vo.ccCd +
+								"','" +
+								vo.userId +
+								"','" +
+								vo.enrolNo +
+								"','" +
+								vo.memberYn +
+								'\')">보기</button></td>';
+						} else {
+							htmlStr += '    <td>-</td>';
+						}
+
+						htmlStr += '</tr>';
+						no--;
+					}
+				}
+				makePagination(data.pagingUtil, '', 'goPage', 'pageUnitChange');
+				$('#dataTable tbody').html(htmlStr);
+			});
+		};
+
+		var excelDown = function () {
+			$('input[name=e_schSido]').val($('#schSido option:selected').text());
+			if (confirm('엑셀을 다운로드 하시겠습니까?')) {
+				$('form[name=searchForm]').attr('action', '/offilne/excel/down');
+				$('form[name=searchForm]').submit();
+			}
+		};
+
+		var showCertificate = function (ccCd, userId, enrolNo, memberYn) {
+			var width = '870';
+			var height = '950';
+
+			if (isMobile()) {
+				width = window.innerWidth;
+				height = window.innerHeight;
+			}
+
+			var studyWin = window.open('about:blank', 'certificate', 'width=' + width + ',height=' + height + ',resizable=no,scrollbars=yes');
+			$('input[name=certi_ccCd]').val(ccCd);
+			$('input[name=certi_userId]').val(userId);
+			$('input[name=certi_enrolNo]').val(enrolNo);
+			$('input[name=certi_memberYn]').val(memberYn);
+			$('input[name=certi_regUserId]').val('');
+
+			$('form[name=certiForm]').attr('action', 'http://dev.onesnc.co.kr/web/api/certificate/show');
+			$('form[name=certiForm]').attr('target', 'certificate');
+			$('form[name=certiForm]').submit();
+		};
+
+		var certificateAllDown = function () {
+			if ($('input[name=chk]:checked').length == 0) {
+				alert('수료증을 다운로드할 사용자를 선택해주세요.');
+				return false;
+			}
+
+			var selArray = [];
+			$('input[name=chk]:checked').each(function () {
+				var userId = $(this).data('id');
+				var enrolNo = $(this).data('enrol');
+				var ccCd = $(this).data('curri');
+				var memberYn = $(this).data('ismember');
+				selArray.push({ userId: userId, enrolNo: enrolNo, ccCd: ccCd, memberYn: memberYn });
+			});
+
+			var studyWin2 = window.open('about:blank', 'certificateAllView', 'width=830,height=950,resizable=yes,scrollbars=yes');
+			$('form[name=certiForm] input[name=studentArr]').val(JSON.stringify(selArray));
+
+			$('form[name=certiForm]').attr('action', 'http://dev.onesnc.co.kr/web/api/certificate/all/down');
+			$('form[name=certiForm]').attr('target', 'certificateAllView');
+			$('form[name=certiForm]').submit();
+
+			/* 	$("#allCertificateForm").attr("action","/admin/curriculum/certificate/all/view");
+			$("#allCertificateForm").attr("target", "certificateAllView");
+			$("#allCertificateForm").submit(); */
+		};
+
+		var openModal = function () {
+			$('#upalodForm')[0].reset();
+			$('#offlineSel').html("<option value=''>선택</option>");
+			commonAjaxFunc('/curriculum/list', { ccType: 'OFFLINE' }, 'GET', function (data) {
+				$('#curriculumSel').empty();
+				$('#curriculumSel').html("<option value=''>선택</option>");
+
+				if (data != null) {
+					for (var i = 0; i < data.length; i++) {
+						$('#curriculumSel').append("<option value='" + data[i].ccCd + "'data-year ='" + data[i].ccYear + "'>" + data[i].ccName + '</option>');
+					}
+				}
+			});
+			$('#offlineUploadModal').modal('show');
+		};
+		var getOfflinePlace = function () {
+			$('#offlineSel').empty();
+			var ccCd = $('#curriculumSel').val();
+			$('#offlineSel').html("<option value=''>선택</option>");
+			if (ccCd != '') {
+				commonAjaxFunc('/curriculum/offline/place/list', { ccCd: ccCd }, 'GET', function (data) {
+					if (data != null) {
+						for (var i = 0; i < data.length; i++) {
+							$('#offlineSel').append(
+								"<option value='" +
+									data[i].placeCd +
+									"' data-place='" +
+									data[i].placeNm +
+									"' data-offline ='" +
+									data[i].offlineCd +
+									"'>" +
+									data[i].placeNm +
+									'[' +
+									moment(data[i].startDate, 'YYYYMMDD').format('YYYY.MM.DD') +
+									' ' +
+									moment(data[i].startTime, 'HHmmss').format('HH:mm') +
+									'~]</option>'
+							);
+						}
+					}
+				});
+			}
+		};
+
+		var offlineUpload = function () {
+			var ccCd = $('#curriculumSel').val();
+			var ccYear = $('#curriculumSel option:selected').attr('data-year');
+			var ccName = $('#curriculumSel option:selected').text();
+			var offlineCd = $('#offlineSel option:selected').attr('data-offline');
+			var placeCd = $('#offlineSel').val();
+			var placeNm = $('#offlineSel option:selected').attr('data-place');
+
+			if (isEmpty(ccCd)) {
+				alert('과정을 선택해주세요.');
+				return false;
+			}
+
+			if (isEmpty(placeCd)) {
+				alert('오프라인 장소를 선택해주세요.');
+				return false;
+			}
+
+			if ($('input[name=uploadFile]').val() == '') {
+				alert('파일을 등록해주세요.');
+				return false;
+			}
+			$('input[name=regUserId]').val('');
+			$('input[name=regUserName]').val('');
+			$('input[name=ccCd]').val(ccCd);
+			$('input[name=ccYear]').val(ccYear);
+			$('input[name=ccName]').val(ccName);
+			$('input[name=offlineCd]').val(offlineCd);
+			$('input[name=placeCd]').val(placeCd);
+			$('input[name=placeNm]').val(placeNm);
+
+			$('#upalodForm').attr('action', '/offline/regist/member/upload');
+			$('#upalodForm').ajaxSubmit({
+				beforeSubmit: function () {
+					var htmlStr = '<div id="upload-wrapper" style="width:100%;">';
+					htmlStr += '</div>';
+					$('#uploadResultModal .modal-body').html(htmlStr);
+					$('#uploadResultModal').modal('show');
+					uploadOverlayStart();
+				},
+				cache: false,
+				success: function (data) {
+					$('#offlineUploadModal').modal('hide');
+					//alert("총 "+data.totalCount+"건 중 성공 : "+data.successCount+"건, 실패 "+data.failCount+"건 등록되었습니다.");
+					//$("#modalOfflineComplete").modal('hide');
+					var htmlStr = '';
+					htmlStr +=
+						'총 ' +
+						data.totalCount +
+						"건 중 <span class='text-primary'>성공 : " +
+						data.successCount +
+						"건</span>, <span class='text-danger'>실패 " +
+						data.failCount +
+						'건</span>';
+					htmlStr += '<table class="table">';
+					htmlStr += '<thead>';
+					htmlStr += '<tr>';
+					htmlStr += '		<th>번호</th>';
+					htmlStr += '		<th>수료번호</th>';
+					htmlStr += '		<th>등록여부</th>';
+					htmlStr += '</tr>';
+					htmlStr += '<tbody>';
+					var totalCnt = data.totalCount;
+					if (data.resultList != null) {
+						for (var i = 0; i < data.resultList.length; i++) {
+							var vo = data.resultList[i];
+							htmlStr += '<tr>';
+							htmlStr += '		<th>' + totalCnt + '</th>';
+							htmlStr += '		<th>' + vo.certNo + '</th>';
+							if (vo.successYn == 'Y') {
+								htmlStr += '		<th>등록성공</th>';
+							} else {
+								htmlStr += '		<th>등록실패</th>';
+							}
+							htmlStr += '</tr>';
+							totalCnt--;
+						}
+					}
+
+					htmlStr += '</tbody>';
+					htmlStr += '</table>';
+					$('#uploadResultModal .modal-body').html(htmlStr);
+				},
+			});
+		};
+
+		return {
+			searchReset: searchReset,
+			search: search,
+			init: init,
+			excelDown: excelDown,
+			showCertificate: showCertificate,
+			certificateAllDown: certificateAllDown,
+			openModal: openModal,
+			getOfflinePlace: getOfflinePlace,
+			offlineUpload: offlineUpload,
+		};
+	})();
+</script>

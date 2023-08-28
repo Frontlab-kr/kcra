@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>통합시스템</title>
+
+		<!-- Global stylesheets -->
+		<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" />
+		<link rel="stylesheet" type="text/css" href="http://dev2.onesnc.co.kr/static/global_assets/css/icons/icomoon/styles.css" />
+		<link rel="stylesheet" type="text/css" href="http://dev2.onesnc.co.kr/static/global_assets/css/icons/fontawesome/styles.min.css" />
+		<link rel="stylesheet" type="text/css" href="http://dev2.onesnc.co.kr/static/global_assets/css/bootstrap.css" />
+		<link rel="stylesheet" type="text/css" href="http://dev2.onesnc.co.kr/static/global_assets/css/core.css" />
+		<link rel="stylesheet" type="text/css" href="http://dev2.onesnc.co.kr/static/global_assets/css/components.css" />
+		<link rel="stylesheet" type="text/css" href="http://dev2.onesnc.co.kr/static/global_assets/css/colors.min.css" />
+		<!-- /global stylesheets -->
+
+		<!-- Core JS files -->
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/plugins/loaders/pace.min.js"></script>
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/core/libraries/jquery.min.js"></script>
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/core/libraries/bootstrap.min.js"></script>
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/plugins/loaders/blockui.min.js"></script>
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/app.js"></script>
+		<!-- /core JS files -->
+
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/plugins/ui/moment/moment.min.js"></script>
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/plugins/ui/moment/moment_locales.min.js"></script>
+
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/plugins/editors/summernote/summernote.min.js"></script>
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/plugins/forms/styling/uniform.min.js"></script>
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/plugins/editors/summernote/lang/summernote-ko-KR.js"></script>
+
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/plugins/forms/selects/select2.min.js"></script>
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/plugins/jquery-form/jquery.form.js"></script>
+
+		<!-- datepicker -->
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/core/libraries/jquery_ui/core.min.js"></script>
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/core/libraries/jquery_ui/interactions.min.js"></script>
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/core/libraries/jquery_ui/widgets.min.js"></script>
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/core/libraries/jquery_ui/effects.min.js"></script>
+		<!-- /datepicker -->
+
+		<script src="https://cdn.jsdelivr.net/lodash/4.17.4/lodash.min.js"></script>
+
+		<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+		<script src="http://dev2.onesnc.co.kr/static/common_js.js"></script>
+		<!-- /theme JS files -->
+		<!-- sheetjs  -->
+		<script type="text/javascript" src="//cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
+
+		<!-- frontlab -->
+		<link rel="stylesheet" type="text/css" href="/assets/css/common.css" />
+		<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/colresizable/1.6.0/colResizable-1.6.js"
+			integrity="sha512-0HfjrMq6p8VBkVjp/gy/obELN81BCwmKRd7fongBsAPw49BeKAfXpQn6PWSPa8rm7mvblqyV2P1kVNzvW6qR4Q=="
+			crossorigin="anonymous"
+			referrerpolicy="no-referrer"
+		></script>
+		<script>
+			$(document).ready(function () {
+				$('.kcra-list .table').colResizable({
+					liveDrag: true,
+					gripInnerHtml: "<div class='grip'></div>",
+					draggingClass: 'dragging',
+					resizeMode: 'fit',
+				});
+				$('.kcra-sidebar-list__item a').on('click', function () {
+					$(this).parents('.kcra-sidebar-list__item').toggleClass('active');
+					return false;
+				});
+			});
+		</script>
+	</head>
+
+	<body>
+		<div class="kcra">
+			<div class="kcra-sidebar">
+				<div class="kcra-sidebar-logo">
+					<a href=""><img src="/assets/images/logo.png" alt="KCRA 한국휴게음식업중앙회교육원" /></a>
+				</div>
+				<div class="kcra-sidebar-user">
+					<div class="dropdown">
+						<button id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<img src="../assets/images/user.png" alt="" />
+							관리자
+							<span class="material-symbols-outlined"> expand_more </span>
+						</button>
+						<ul class="dropdown-menu">
+							<li>
+								<a href="/logout">로그아웃</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="kcra-sidebar-list">
+					<div class="kcra-sidebar-list__item">
+						<a href=""><span class="material-symbols-outlined"> settings </span><strong>설정</strong></a>
+					</div>
+					<div class="kcra-sidebar-list__item">
+						<a href=""><span class="material-symbols-outlined"> corporate_fare </span><strong>업소정보관리</strong></a>
+					</div>
+					<div class="kcra-sidebar-list__item">
+						<a href=""><span class="material-symbols-outlined"> school </span><strong>교육결과조회</strong></a>
+					</div>
+					<div class="kcra-sidebar-list__item depth">
+						<a href=""><span class="material-symbols-outlined"> stress_management </span><strong>집합교육관리조회</strong></a>
+						<ul>
+							<li class="active">
+								<a href="/admin/offline/manage"><span>신규영업자</span></a>
+							</li>
+						</ul>
+					</div>
+					<div class="kcra-sidebar-list__item">
+						<a href=""><span class="material-symbols-outlined"> contract_edit </span><strong>통보서관리</strong></a>
+					</div>
+					<div class="kcra-sidebar-list__item">
+						<a href=""><span class="material-symbols-outlined"> data_table </span><strong>이관데이터관리</strong></a>
+					</div>
+					<div class="kcra-sidebar-list__item">
+						<a href=""><span class="material-symbols-outlined"> analytics </span><strong>수료현황</strong></a>
+					</div>
+					<div class="kcra-sidebar-list__item">
+						<a href=""><span class="material-symbols-outlined"> assignment_ind </span><strong>수료자등록</strong></a>
+					</div>
+					<div class="kcra-sidebar-list__item active depth">
+						<a href=""><span class="material-symbols-outlined"> bar_chart_4_bars </span><strong>통계</strong></a>
+						<ul>
+							<li class="active">
+								<a href="/admin/statistics/company"><span>영업대장별 통계</span></a>
+							</li>
+							<li>
+								<a href="/admin/statistics/edu"><span>교육통계</span></a>
+							</li>
+							<li>
+								<a href="/admin/statistics/period"><span>기간대비통계</span></a>
+							</li>
+							<li>
+								<a href="/admin/statistics/age"><span>연령별통계</span></a>
+							</li>
+						</ul>
+					</div>
+					<div class="kcra-sidebar-list__item">
+						<a href=""> <span class="material-symbols-outlined"> settings_cinematic_blur </span><strong>계정관리</strong></a>
+					</div>
+				</div>
+			</div>
+			<div class="kcra-contents kcra-list-form">
+				<div class="kcra-title">
+					<h1>수료자 조회</h1>
+				</div>
+				<div class="kcra-form">
+					<div class="kcra-form__box">
+						<form name="searchForm" id="searchForm" method="post">
+							<input type="hidden" name="e_schSido" value="" />
+							<input type="hidden" name="orderColumn" value="" />
+							<input type="hidden" name="orderBy" value="" />
+							<input type="hidden" name="currentPageNo" value="1" />
+							<input type="hidden" name="studyStatus" value="C" />
+							<table>
+								<colgroup>
+									<col style="width: 10%" />
+									<col style="width: 90%" />
+								</colgroup>
+								<tbody>
+									<tr>
+										<th>구분</th>
+										<td>
+											<select class="form-control" id="schCcTarget" name="schCcTarget" style="width: 380px">
+												<option value="">전체</option>
+												<option value="O">기존영업자</option>
+												<option value="N">신규영업자</option>
+												<option value="V">자판기영업자</option>
+											</select>
+										</td>
+									</tr>
+									<tr>
+										<th>지역</th>
+										<td>
+											<div class="d-flex">
+												<select class="form-control mr-10" id="schSido" onchange="getGungu();" style="width: 220px">
+													<option value="">시/도</option>
+												</select>
+
+												<select class="form-control" id="schGungu" name="schGungu" style="width: 220px">
+													<option value="">군/구</option>
+												</select>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<th>수료일자</th>
+										<td colspan="3">
+											<div class="kcra-datepicker">
+												<div class="kcra-datepicker__input">
+													<input type="text" class="form-control datepicker" name="schStartDate" placeholder="" />
+													<span class="material-symbols-outlined"> calendar_month </span>
+												</div>
+												<span>~</span>
+												<div class="kcra-datepicker__input">
+													<input type="text" class="form-control datepicker" name="schEndDate" placeholder="" />
+													<span class="material-symbols-outlined"> calendar_month </span>
+												</div>
+											</div>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</form>
+					</div>
+					<div class="kcra-form__button">
+						<button type="button" class="btn" onclick="completeStudent.search();"><span class="material-symbols-outlined"> search </span>검색</button>
+						<button type="button" class="btn" onclick="completeStudent.searchReset();">
+							<span class="material-symbols-outlined"> device_reset </span>조회조건초기화
+						</button>
+					</div>
+				</div>
+				<div class="kcra-caution">
+					<ul>
+						<li>* 식약처 협업시스템 수료자등록 파일을 제공합니다.</li>
+					</ul>
+					<a
+						target="_blank"
+						id="btnLink"
+						href="https://coop.foodsafetykorea.go.kr/websquare/websquare.html?w2xPath=/ui/foodadmin/unitycprt/unitysanitation/UpsoDataList.xml&w2xHome=/ui/common/frame/&w2xDocumentRoot="
+						>식약처 행정포털 사이트 바로가기</a
+					>
+				</div>
+				<div class="kcra-list">
+					<div class="kcra-list-head">
+						<div class="kcra-list-head__total">조회건수 : <strong>43</strong>건</div>
+						<div class="kcra-list-head__button">
+							<button type="button" class="btn btn-sm btn-gray" onclick="completeStudent.excelDown();">
+								<span class="material-symbols-outlined"> download </span>엑셀다운로드
+							</button>
+						</div>
+					</div>
+					<div class="table-responsive">
+						<table class="table" id="dataTable">
+							<thead>
+								<tr>
+									<th>NO</th>
+									<th>인허가번호</th>
+									<th>성명</th>
+									<th>교육구분</th>
+									<th>대상구분</th>
+									<th>수료번호</th>
+									<th>생년월일</th>
+									<th>수료일자</th>
+									<th>수료여부</th>
+									<th>교육매체</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td class="text-center">56614</td>
+									<td class="text-center">20150199535</td>
+									<td class="text-center">이재선</td>
+									<td class="text-center">보수교육</td>
+									<td class="text-center">대표자</td>
+									<td class="text-center">37454</td>
+									<td class="text-center">1957-07-22</td>
+									<td class="text-center">20230801</td>
+									<td class="text-center"><span class="text-warning">수료</span></td>
+									<td class="text-center">온라인</td>
+								</tr>
+								<tr>
+									<td class="text-center">56613</td>
+									<td class="text-center">20140105792</td>
+									<td class="text-center">최현지</td>
+									<td class="text-center">보수교육</td>
+									<td class="text-center">위생책임자</td>
+									<td class="text-center">37453</td>
+									<td class="text-center">2000-11-17</td>
+									<td class="text-center">20230801</td>
+									<td class="text-center"><span class="text-warning">수료</span></td>
+									<td class="text-center">온라인</td>
+								</tr>
+								<tr>
+									<td class="text-center">56612</td>
+									<td class="text-center">20200587591</td>
+									<td class="text-center">이선화</td>
+									<td class="text-center">보수교육</td>
+									<td class="text-center">대표자</td>
+									<td class="text-center">37452</td>
+									<td class="text-center">1994-05-21</td>
+									<td class="text-center">20230801</td>
+									<td class="text-center"><span class="text-warning">수료</span></td>
+									<td class="text-center">온라인</td>
+								</tr>
+								<tr>
+									<td class="text-center">56611</td>
+									<td class="text-center">20180240019</td>
+									<td class="text-center">강재준</td>
+									<td class="text-center">보수교육</td>
+									<td class="text-center">대표자</td>
+									<td class="text-center">37451</td>
+									<td class="text-center">1967-01-29</td>
+									<td class="text-center">20230801</td>
+									<td class="text-center"><span class="text-warning">수료</span></td>
+									<td class="text-center">온라인</td>
+								</tr>
+								<tr>
+									<td class="text-center">56610</td>
+									<td class="text-center">19940513166</td>
+									<td class="text-center">유금순</td>
+									<td class="text-center">보수교육</td>
+									<td class="text-center">대표자</td>
+									<td class="text-center">37450</td>
+									<td class="text-center">1952-12-27</td>
+									<td class="text-center">20230801</td>
+									<td class="text-center"><span class="text-warning">수료</span></td>
+									<td class="text-center">온라인</td>
+								</tr>
+								<tr>
+									<td class="text-center">56609</td>
+									<td class="text-center">20100313071</td>
+									<td class="text-center">최미숙</td>
+									<td class="text-center">보수교육</td>
+									<td class="text-center">대표자</td>
+									<td class="text-center">37449</td>
+									<td class="text-center">1970-12-26</td>
+									<td class="text-center">20230801</td>
+									<td class="text-center"><span class="text-warning">수료</span></td>
+									<td class="text-center">온라인</td>
+								</tr>
+								<tr>
+									<td class="text-center">56608</td>
+									<td class="text-center">20220089102</td>
+									<td class="text-center">김동규</td>
+									<td class="text-center">보수교육</td>
+									<td class="text-center">대표자</td>
+									<td class="text-center">37448</td>
+									<td class="text-center">1987-06-19</td>
+									<td class="text-center">20230801</td>
+									<td class="text-center"><span class="text-warning">수료</span></td>
+									<td class="text-center">온라인</td>
+								</tr>
+								<tr>
+									<td class="text-center">56607</td>
+									<td class="text-center">20190091631</td>
+									<td class="text-center">안지애</td>
+									<td class="text-center">보수교육</td>
+									<td class="text-center">위생책임자</td>
+									<td class="text-center">37447</td>
+									<td class="text-center">1990-05-28</td>
+									<td class="text-center">20230801</td>
+									<td class="text-center"><span class="text-warning">수료</span></td>
+									<td class="text-center">온라인</td>
+								</tr>
+								<tr>
+									<td class="text-center">56606</td>
+									<td class="text-center">20150325057</td>
+									<td class="text-center">정연하</td>
+									<td class="text-center">보수교육</td>
+									<td class="text-center">대표자</td>
+									<td class="text-center">37446</td>
+									<td class="text-center">1965-05-10</td>
+									<td class="text-center">20230801</td>
+									<td class="text-center"><span class="text-warning">수료</span></td>
+									<td class="text-center">온라인</td>
+								</tr>
+								<tr>
+									<td class="text-center">56605</td>
+									<td class="text-center">20160338628</td>
+									<td class="text-center">정원준</td>
+									<td class="text-center">보수교육</td>
+									<td class="text-center">대표자</td>
+									<td class="text-center">37445</td>
+									<td class="text-center">1999-12-27</td>
+									<td class="text-center">20230801</td>
+									<td class="text-center"><span class="text-warning">수료</span></td>
+									<td class="text-center">온라인</td>
+								</tr>
+							</tbody>
+							<!-- <tbody>
+								<tr>
+									<td colspan="10" class="text-center" style="height: 300px">검색조건을 입력한 뒤 검색버튼을 눌러주세요.</td>
+								</tr>
+							</tbody> -->
+						</table>
+					</div>
+					<div class="kcra-pagination">
+						<ul class="pagination">
+							<li><a href="javascript:goPage(1);">이전</a></li>
+							<li class="active"><a href="#">1</a></li>
+							<li><a href="javascript:goPage('2');">2</a></li>
+							<li><a href="javascript:goPage('3');">3</a></li>
+							<li><a href="javascript:goPage('4');">4</a></li>
+							<li><a href="javascript:goPage('5');">5</a></li>
+							<li><a href="javascript:goPage('6');">6</a></li>
+							<li><a href="javascript:goPage('7');">7</a></li>
+							<li><a href="javascript:goPage('8');">8</a></li>
+							<li><a href="javascript:goPage('9');">9</a></li>
+							<li><a href="javascript:goPage('10');">10</a></li>
+							<li><a href="javascript:goPage(11);">다음</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
+<script>
+	$(document).ready(function () {
+		getSido();
+		//completeStudent.init();
+		$('.datepicker').datepicker({ dateFormat: 'yy-mm-dd' });
+	});
+	function getSido() {
+		commonAjaxFunc('/common/sido', {}, 'GET', function (data) {
+			$('#schSido').empty();
+			$('#schSido').append("<option value=''>시/도</option>");
+			for (var i = 0; i < data.length; i++) {
+				$('#schSido').append("<option value='" + data[i].sidoNo + "'>" + data[i].sidoNm + '</option>');
+			}
+		});
+	}
+
+	function getGungu() {
+		var sidoNo = $('#schSido').val();
+		commonAjaxFunc('/common/gungu', { sidoNo: sidoNo }, 'GET', function (data) {
+			$('#schGungu').empty();
+			$('#schGungu').append("<option value=''>군/구</option>");
+			for (var i = 0; i < data.length; i++) {
+				$('#schGungu').append("<option value='" + data[i].gunguNm + "'>" + data[i].gunguNm + '</option>');
+			}
+		});
+	}
+	//페이징
+	function goPage(currentPageNo) {
+		$('input[name=currentPageNo]').val(currentPageNo);
+		completeStudent.init();
+	}
+	//페이지당 노출갯수 선택
+	function pageUnitChange() {
+		$('input[name=currentPageNo]').val('1');
+		completeStudent.init();
+	}
+
+	var completeStudent = (function () {
+		var searchReset = function () {
+			$('#searchForm')[0].reset();
+		};
+		var search = function () {
+			$('input[name=currentPageNo]').val('1');
+			init();
+		};
+
+		var init = function () {
+			var sendData = {
+				currentPageNo: $('input[name=currentPageNo]').val(),
+				recordsPerPage: $('select[name=recordsPerPage]').val(),
+				schCcTarget: $('select[name=schCcTarget]').val(),
+				schSido: $('#schSido option:selected').text(),
+				schGungu: $('#schGungu').val(),
+				schStartDate: $('input[name=schStartDate]').val(),
+				schEndDate: $('input[name=schEndDate]').val(),
+				orderColumn: $('input[name=orderColumn]').val(),
+				orderBy: $('input[name=orderBy]').val(),
+				studyStatus: $('input[name=studyStatus]').val(),
+			};
+			commonLoadingAjaxFunc('/curriculum/complete/student/list', sendData, 'GET', function (data) {
+				var htmlStr = '';
+				if (data.list == null || data.list.length == 0) {
+					htmlStr = '<tr><td colspan="11">등록된  정보가 없습니다.</td></tr>';
+				} else {
+					var no = data.pagingUtil.displayTotalRecordCount;
+					for (var i = 0; i < data.list.length; i++) {
+						var vo = data.list[i];
+
+						htmlStr += '<tr>';
+						htmlStr += '    <td>' + no + '</td>';
+						htmlStr += '    <td>' + vo.licenseNo + '</td>';
+						htmlStr += '    <td>' + vo.userName + '</td>';
+						if (vo.ccTarget == 'O') {
+							htmlStr += '    <td>보수교육</td>';
+						} else {
+							htmlStr += '    <td>신규</td>';
+						}
+						if (vo.positionType == 'C') {
+							htmlStr += '    <td>대표자</td>';
+						} else {
+							htmlStr += '    <td>위생책임자</td>';
+						}
+
+						if (vo.studyStatus == 'C') {
+							htmlStr += '    <td>' + vo.certNo + '</td>';
+						} else {
+							htmlStr += '    <td>-</td>';
+						}
+						htmlStr += '    <td>' + moment(vo.birthday, 'YYYYMMDD').format('YYYY-MM-DD') + '</td>';
+						if (vo.studyStatus == 'C' && !isEmpty(vo.certDate)) {
+							htmlStr += '    <td>' + moment(vo.certDate, 'YYYYMMDD').format('YYYYMMDD') + '</td>';
+						} else {
+							htmlStr += '    <td>-</td>';
+						}
+						if (vo.studyStatus == 'C') {
+							htmlStr += '    <td><span class="text-warning">수료</span></td>';
+						} else {
+							htmlStr += '    <td>-</td>';
+						}
+
+						if (vo.ccType == 'ONLINE') {
+							htmlStr += '<td>온라인</td>';
+						} else if (vo.ccType == 'OFFLINE') {
+							htmlStr += '<td>집합교육</td>';
+						}
+
+						htmlStr += '</tr>';
+						no--;
+					}
+				}
+				makePagination(data.pagingUtil, '', 'goPage', 'pageUnitChange');
+				$('#dataTable tbody').html(htmlStr);
+			});
+		};
+
+		var excelDown = function () {
+			$('input[name=e_schSido]').val($('#schSido option:selected').text());
+			if (confirm('엑셀을 다운로드 하시겠습니까?')) {
+				$('form[name=searchForm]').attr('action', '/curriculum/complete/student/excel/down');
+				$('form[name=searchForm]').submit();
+			}
+		};
+
+		return { searchReset: searchReset, search: search, init: init, excelDown: excelDown };
+	})();
+</script>

@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>통합시스템</title>
+
+		<!-- Global stylesheets -->
+		<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" />
+		<link rel="stylesheet" type="text/css" href="http://dev2.onesnc.co.kr/static/global_assets/css/icons/icomoon/styles.css" />
+		<link rel="stylesheet" type="text/css" href="http://dev2.onesnc.co.kr/static/global_assets/css/icons/fontawesome/styles.min.css" />
+		<link rel="stylesheet" type="text/css" href="http://dev2.onesnc.co.kr/static/global_assets/css/bootstrap.css" />
+		<link rel="stylesheet" type="text/css" href="http://dev2.onesnc.co.kr/static/global_assets/css/core.css" />
+		<link rel="stylesheet" type="text/css" href="http://dev2.onesnc.co.kr/static/global_assets/css/components.css" />
+		<link rel="stylesheet" type="text/css" href="http://dev2.onesnc.co.kr/static/global_assets/css/colors.min.css" />
+		<!-- /global stylesheets -->
+
+		<!-- Core JS files -->
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/plugins/loaders/pace.min.js"></script>
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/core/libraries/jquery.min.js"></script>
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/core/libraries/bootstrap.min.js"></script>
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/plugins/loaders/blockui.min.js"></script>
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/app.js"></script>
+		<!-- /core JS files -->
+
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/plugins/ui/moment/moment.min.js"></script>
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/plugins/ui/moment/moment_locales.min.js"></script>
+
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/plugins/editors/summernote/summernote.min.js"></script>
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/plugins/forms/styling/uniform.min.js"></script>
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/plugins/editors/summernote/lang/summernote-ko-KR.js"></script>
+
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/plugins/forms/selects/select2.min.js"></script>
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/plugins/jquery-form/jquery.form.js"></script>
+
+		<!-- datepicker -->
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/core/libraries/jquery_ui/core.min.js"></script>
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/core/libraries/jquery_ui/interactions.min.js"></script>
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/core/libraries/jquery_ui/widgets.min.js"></script>
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/core/libraries/jquery_ui/effects.min.js"></script>
+		<!-- /datepicker -->
+
+		<script src="https://cdn.jsdelivr.net/lodash/4.17.4/lodash.min.js"></script>
+
+		<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+		<script src="http://dev2.onesnc.co.kr/static/common_js.js"></script>
+		<!-- /theme JS files -->
+		<!-- sheetjs  -->
+		<script type="text/javascript" src="//cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
+
+		<!-- frontlab -->
+		<link rel="stylesheet" type="text/css" href="/assets/css/common.css" />
+		<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/colresizable/1.6.0/colResizable-1.6.js"
+			integrity="sha512-0HfjrMq6p8VBkVjp/gy/obELN81BCwmKRd7fongBsAPw49BeKAfXpQn6PWSPa8rm7mvblqyV2P1kVNzvW6qR4Q=="
+			crossorigin="anonymous"
+			referrerpolicy="no-referrer"
+		></script>
+		<script>
+			$(document).ready(function () {
+				$('.kcra-list .table').colResizable({
+					liveDrag: true,
+					gripInnerHtml: "<div class='grip'></div>",
+					draggingClass: 'dragging',
+					resizeMode: 'fit',
+				});
+				$('.kcra-sidebar-list__item a').on('click', function () {
+					$(this).parents('.kcra-sidebar-list__item').toggleClass('active');
+					return false;
+				});
+			});
+		</script>
+	</head>
+
+	<body>
+		<div class="kcra">
+			<div class="kcra-sidebar">
+				<div class="kcra-sidebar-logo">
+					<a href=""><img src="/assets/images/logo.png" alt="KCRA 한국휴게음식업중앙회교육원" /></a>
+				</div>
+				<div class="kcra-sidebar-user">
+					<div class="dropdown">
+						<button id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<img src="../assets/images/user.png" alt="" />
+							관리자
+							<span class="material-symbols-outlined"> expand_more </span>
+						</button>
+						<ul class="dropdown-menu">
+							<li>
+								<a href="/logout">로그아웃</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="kcra-sidebar-list">
+					<div class="kcra-sidebar-list__item">
+						<a href=""><span class="material-symbols-outlined"> settings </span><strong>설정</strong></a>
+					</div>
+					<div class="kcra-sidebar-list__item">
+						<a href=""><span class="material-symbols-outlined"> corporate_fare </span><strong>업소정보관리</strong></a>
+					</div>
+					<div class="kcra-sidebar-list__item">
+						<a href=""><span class="material-symbols-outlined"> school </span><strong>교육결과조회</strong></a>
+					</div>
+					<div class="kcra-sidebar-list__item depth">
+						<a href=""><span class="material-symbols-outlined"> stress_management </span><strong>집합교육관리조회</strong></a>
+						<ul>
+							<li class="active">
+								<a href="/admin/offline/manage"><span>신규영업자</span></a>
+							</li>
+						</ul>
+					</div>
+					<div class="kcra-sidebar-list__item">
+						<a href=""><span class="material-symbols-outlined"> contract_edit </span><strong>통보서관리</strong></a>
+					</div>
+					<div class="kcra-sidebar-list__item">
+						<a href=""><span class="material-symbols-outlined"> data_table </span><strong>이관데이터관리</strong></a>
+					</div>
+					<div class="kcra-sidebar-list__item">
+						<a href=""><span class="material-symbols-outlined"> analytics </span><strong>수료현황</strong></a>
+					</div>
+					<div class="kcra-sidebar-list__item">
+						<a href=""><span class="material-symbols-outlined"> assignment_ind </span><strong>수료자등록</strong></a>
+					</div>
+					<div class="kcra-sidebar-list__item active depth">
+						<a href=""><span class="material-symbols-outlined"> bar_chart_4_bars </span><strong>통계</strong></a>
+						<ul>
+							<li class="active">
+								<a href="/admin/statistics/company"><span>영업대장별 통계</span></a>
+							</li>
+							<li>
+								<a href="/admin/statistics/edu"><span>교육통계</span></a>
+							</li>
+							<li>
+								<a href="/admin/statistics/period"><span>기간대비통계</span></a>
+							</li>
+							<li>
+								<a href="/admin/statistics/age"><span>연령별통계</span></a>
+							</li>
+						</ul>
+					</div>
+					<div class="kcra-sidebar-list__item">
+						<a href=""> <span class="material-symbols-outlined"> settings_cinematic_blur </span><strong>계정관리</strong></a>
+					</div>
+				</div>
+			</div>
+			<div class="kcra-contents kcra-list-form">
+				<input type="hidden" name="currentPageNo" value="1" />
+
+				<div class="kcra-title">
+					<h1>계정관리</h1>
+				</div>
+				<div class="kcra-list">
+					<div class="kcra-list-head">
+						<div class="kcra-list-head__total"></div>
+						<div class="kcra-list-head__button">
+							<button type="button" class="btn btn-sm btn-gray" onclick="showAddModal();">관리자 생성</button>
+						</div>
+					</div>
+					<div class="table-responsive">
+						<table class="table" id="dataTable">
+							<thead>
+								<tr>
+									<th>NO</th>
+									<th>아이디</th>
+									<th>이름</th>
+									<th>구분</th>
+									<th>등록일</th>
+									<th>공문</th>
+									<th>승인상태</th>
+									<th>관리</th>
+									<th>상태</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td class="text-center">1</td>
+									<td class="text-center">admin</td>
+									<td class="text-center">
+										<a href="javascript:void(0)" onclick="accountManage.getUserInfo('admin')">관리자</a>
+									</td>
+									<td class="text-center">슈퍼관리자</td>
+									<td class="text-center">-</td>
+									<td class="text-center">-</td>
+									<td class="text-center"><label class="label label-success">승인</label></td>
+									<td class="text-center">-</td>
+									<td class="text-center">-</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="kcra-pagination">
+						<ul class="pagination">
+							<li><a href="javascript:goPage(1);">이전</a></li>
+							<li class="active"><a href="#">1</a></li>
+							<li><a href="javascript:goPage('2');">2</a></li>
+							<li><a href="javascript:goPage('3');">3</a></li>
+							<li><a href="javascript:goPage('4');">4</a></li>
+							<li><a href="javascript:goPage('5');">5</a></li>
+							<li><a href="javascript:goPage('6');">6</a></li>
+							<li><a href="javascript:goPage('7');">7</a></li>
+							<li><a href="javascript:goPage('8');">8</a></li>
+							<li><a href="javascript:goPage('9');">9</a></li>
+							<li><a href="javascript:goPage('10');">10</a></li>
+							<li><a href="javascript:goPage(11);">다음</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- modal s -->
+		<div id="modal" class="modal fade" tabindex="-1">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h5 class="modal-title"></h5>
+					</div>
+
+					<div class="modal-body">
+						<form class="form-horizontal" name="accountRegistForm" id="accountRegistForm" method="post"></form>
+					</div>
+					<div class="modal-footer"></div>
+				</div>
+			</div>
+		</div>
+
+		<div id="userAuthModal" class="modal fade" tabindex="-1">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h5 class="modal-title">권한설정</h5>
+					</div>
+
+					<div class="modal-body">
+						<form name="userAuthForm" id="userAuthForm" method="post">
+							<input type="hidden" name="userAuthUserId" value="" />
+							<div>
+								<div><span>관리자 </span><span id="adminId"></span></div>
+								<div>
+									<style>
+										.auth-item-container {
+											border: 1px solid #ddd;
+											padding: 15px 0;
+											margin: 15px auto;
+										}
+										.auth-item-wrapper {
+											display: flex;
+										}
+										.auth-item-wrapper ul.auth-item {
+											list-style: none;
+										}
+									</style>
+									<span>권한설정</span>
+									<span>
+										<button type="button" class="btn btn-sm" onclick="$('.auth-item-container').toggleClass('hide');">메뉴 권한</button>
+										<div class="auth-item-container hide">
+											<div class="auth-item-wrapper">
+												<ul class="auth-item">
+													<li>
+														<label class="checkbox-inline"><input type="checkbox" name="authMenuCd" value="MENU_00002" /> 업소정보관리</label>
+													</li>
+													<li>
+														<label class="checkbox-inline"><input type="checkbox" name="authMenuCd" value="MENU_00008" /> 통보서관리</label>
+													</li>
+													<li>
+														<label class="checkbox-inline"><input type="checkbox" name="authMenuCd" value="MENU_00011" /> 통계</label>
+													</li>
+												</ul>
+												<ul class="auth-item">
+													<li>
+														<label class="checkbox-inline"><input type="checkbox" name="authMenuCd" value="MENU_00003" />교육결과조회</label>
+													</li>
+													<li>
+														<label class="checkbox-inline"><input type="checkbox" name="authMenuCd" value="MENU_00009" /> 이관데이터관리</label>
+													</li>
+												</ul>
+												<ul class="auth-item">
+													<li>
+														<label class="checkbox-inline"><input type="checkbox" name="authMenuCd" value="MENU_00006" /> 집합교육관리조회</label>
+													</li>
+													<li>
+														<label class="checkbox-inline"><input type="checkbox" name="authMenuCd" value="MENU_00010" /> 수료현황</label>
+													</li>
+												</ul>
+											</div>
+											<div class="d-flex flex-row-reverse">
+												<button type="button" class="btn btn-xs mr-10 btn-primary" onclick="checkAllMenuUnSel();">전체해제</button>
+												<button type="button" class="btn btn-xs mr-10" onclick="checkAllMenuSel();">전체선택</button>
+											</div>
+											<script>
+												function checkAllMenuSel() {
+													$('input[name=authMenuCd]').prop('checked', true);
+												}
+
+												function checkAllMenuUnSel() {
+													$('input[name=authMenuCd]').prop('checked', false);
+												}
+											</script>
+										</div>
+									</span>
+								</div>
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-gray" data-dismiss="modal">취소</button>
+						<button type="button" class="btn" onclick="accountManage.menuAuthRegist();">등록</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- modal e -->
+
+		<!-- modal s -->
+		<div id="modal" class="modal fade" tabindex="-1">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h5 class="modal-title"></h5>
+					</div>
+
+					<div class="modal-body">
+						<form class="form-horizontal" name="accountRegistForm" id="accountRegistForm" method="post"></form>
+					</div>
+					<div class="modal-footer"></div>
+				</div>
+			</div>
+		</div>
+
+		<div id="userAuthModal" class="modal fade" tabindex="-1">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h5 class="modal-title">권한설정</h5>
+					</div>
+
+					<div class="modal-body">
+						<form name="userAuthForm" id="userAuthForm" method="post">
+							<input type="hidden" name="userAuthUserId" value="" />
+							<div>
+								<div><span>관리자 </span><span id="adminId"></span></div>
+								<div>
+									<style>
+										.auth-item-container {
+											border: 1px solid #ddd;
+											padding: 15px 0;
+											margin: 15px auto;
+										}
+										.auth-item-wrapper {
+											display: flex;
+										}
+										.auth-item-wrapper ul.auth-item {
+											list-style: none;
+										}
+									</style>
+									<span>권한설정</span>
+									<span>
+										<button type="button" class="btn btn-sm" onclick="$('.auth-item-container').toggleClass('hide');">메뉴 권한</button>
+										<div class="auth-item-container hide">
+											<div class="auth-item-wrapper">
+												<ul class="auth-item">
+													<li>
+														<label class="checkbox-inline"><input type="checkbox" name="authMenuCd" value="MENU_00002" /> 업소정보관리</label>
+													</li>
+													<li>
+														<label class="checkbox-inline"><input type="checkbox" name="authMenuCd" value="MENU_00008" /> 통보서관리</label>
+													</li>
+													<li>
+														<label class="checkbox-inline"><input type="checkbox" name="authMenuCd" value="MENU_00011" /> 통계</label>
+													</li>
+												</ul>
+												<ul class="auth-item">
+													<li>
+														<label class="checkbox-inline"><input type="checkbox" name="authMenuCd" value="MENU_00003" />교육결과조회</label>
+													</li>
+													<li>
+														<label class="checkbox-inline"><input type="checkbox" name="authMenuCd" value="MENU_00009" /> 이관데이터관리</label>
+													</li>
+												</ul>
+												<ul class="auth-item">
+													<li>
+														<label class="checkbox-inline"><input type="checkbox" name="authMenuCd" value="MENU_00006" /> 집합교육관리조회</label>
+													</li>
+													<li>
+														<label class="checkbox-inline"><input type="checkbox" name="authMenuCd" value="MENU_00010" /> 수료현황</label>
+													</li>
+												</ul>
+											</div>
+											<div class="d-flex flex-row-reverse">
+												<button type="button" class="btn btn-xs mr-10 btn-primary" onclick="checkAllMenuUnSel();">전체해제</button>
+												<button type="button" class="btn btn-xs mr-10" onclick="checkAllMenuSel();">전체선택</button>
+											</div>
+											<script>
+												function checkAllMenuSel() {
+													$('input[name=authMenuCd]').prop('checked', true);
+												}
+
+												function checkAllMenuUnSel() {
+													$('input[name=authMenuCd]').prop('checked', false);
+												}
+											</script>
+										</div>
+									</span>
+								</div>
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-gray" data-dismiss="modal">취소</button>
+						<button type="button" class="btn" onclick="accountManage.menuAuthRegist();">등록</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- modal e -->
+	</body>
+</html>
+<script>
+	$('#userAuthModal').on('hide.bs.modal', function () {
+		$('#userAuthForm')[0].reset();
+		$('.auth-item-container').addClass('hide');
+	});
+	function showAddModal() {
+		$('#modal .modal-title').text('관리자 생성');
+		$('#accountRegistForm').empty();
+		var htmlStr = '';
+		htmlStr += '<div class="form-group">';
+		htmlStr += '    <label class="col-md-2">아이디</label>';
+		htmlStr += '    <div class="col-md-10 d-flex">';
+		htmlStr += '        <input type="text" class="form-control" name="userId" />';
+		htmlStr += '        <button type="button" class="btn btn-xs" onclick="accountManage.overlapChk();">중복체크</button>';
+		htmlStr += '        <input type="hidden" name="userIdChk" value="N" />';
+		htmlStr += '    </div>';
+		htmlStr += '</div>';
+		htmlStr += '<div class="form-group">';
+		htmlStr += '    <label class="col-md-2">비밀번호</label>';
+		htmlStr += '    <div class="col-md-10">';
+		htmlStr += '        <input type="password" class="form-control" name="passwd" />';
+		htmlStr += '    </div>';
+		htmlStr += '</div>';
+		htmlStr += '<div class="form-group">';
+		htmlStr += '    <label class="col-md-2">비밀번호확인</label>';
+		htmlStr += '    <div class="col-md-10">';
+		htmlStr += '        <input type="password" class="form-control" name="passwdConfirm" />';
+		htmlStr += '    </div>';
+		htmlStr += '</div>';
+		htmlStr += '<div class="form-group">';
+		htmlStr += '    <label class="col-md-2">이름</label>';
+		htmlStr += '    <div class="col-md-10">';
+		htmlStr += '        <input type="text" class="form-control" name="userName" />';
+		htmlStr += '    </div>';
+		htmlStr += '</div>';
+		htmlStr += '<div class="form-group">';
+		htmlStr += '    <label class="col-md-2">관리자 구분</label>';
+		htmlStr += '    <div class="col-md-10">';
+		htmlStr += '        <label class="radio-inline">';
+		htmlStr += '            <input type="radio" class="styled" name="userType" value="MASTER_ADMIN" />';
+		htmlStr += '            슈퍼관리자';
+		htmlStr += '        </label>';
+		htmlStr += '        <label class="radio-inline">';
+		htmlStr += '            <input type="radio" class="styled" name="userType" value="SITE_ADMIN" />';
+		htmlStr += '            지회</label>';
+		htmlStr += '        <label class="radio-inline">';
+		htmlStr += '            <input type="radio" class="styled" name="userType" value="LOCAL_ADMIN" />';
+		htmlStr += '            지자체</label>';
+		htmlStr += '';
+		htmlStr += '    </div>';
+		htmlStr += '</div>';
+		htmlStr += '<div class="form-group">';
+		htmlStr += '    <label class="col-md-2">연락처</label>';
+		htmlStr += '    <div class="col-md-10">';
+		htmlStr += '        <input type="text" class="form-control" name="phone" />';
+		htmlStr += '    </div>';
+		htmlStr += '</div>';
+
+		$('#accountRegistForm').html(htmlStr);
+		$('#modal').modal('show');
+
+		var footer = '<button type="button" class="btn btn-gray" data-dismiss="modal">취소</button>';
+		footer += '<button type="button" class="btn" onclick="accountManage.regist();">등록</button>';
+		$('#modal .modal-footer').html(footer);
+		//	$("#accountRegistForm")[0].reset();
+	}
+
+	function goPage(currentPageNo) {
+		$('input[name=currentPageNo]').val(currentPageNo);
+		accountManage.init();
+	}
+	//페이지당 노출갯수 선택
+	function pageUnitChange() {
+		$('input[name=currentPageNo]').val('1');
+		accountManage.init();
+	}
+	//메뉴권한 설정 modal
+	function showMenuAuthModal(userId) {
+		$('input[name=userAuthUserId]').val(userId);
+		$('span[id=adminId]').text(userId);
+		$('#userAuthModal').modal('show');
+
+		commonAjaxFunc('/site/menu/user/auth/list', { userId: userId }, 'GET', function (data) {
+			if (data != null) {
+				for (var i = 0; i < data.length; i++) {
+					var vo = data[i];
+					$("input[name=authMenuCd]input[value='" + vo.menuCd + "']").prop('checked', true);
+				}
+			}
+		});
+	}
+
+	function validUserIdCheck() {
+		var userId = $('input[name=userId]').val();
+		var intErr = '';
+		for (i = 0; i < userId.length; i++) {
+			var retCode = userId.charAt(i);
+			//입력받은 값중에 한글/특수문자제어
+			if (!(retCode >= '0' && retCode <= '9') && !(retCode >= 'a' && retCode <= 'z')) {
+				intErr = -1;
+				break;
+			} else if (userId.indexOf(' ') >= 0) {
+				//공백
+				intErr = -1;
+				break;
+			}
+		}
+
+		if (userId == '') {
+			alert('아이디를 입력해주세요.');
+			$('input[name=userId]').focus();
+			return false;
+		} else if (intErr == -1) {
+			alert('아이디에 한글/특수문자/영어 대문자/공백이 들어갈 수 없습니다.');
+			$('input[name=userId]').focus();
+			return false;
+		} else if (userId.length < 4 || userId.length > 10) {
+			alert('아이디는 4자리 이상 10자리 미만으로 입력해주세요.');
+			$('input[name=userId]').focus();
+			return false;
+		} else {
+			return true;
+		}
+	}
+
+	var accountManage = (function () {
+		var init = function () {
+			commonAjaxFunc(
+				'/account/manage/list',
+				{
+					currentPageNo: $('input[name=currentPageNo]').val(),
+					recordsPerPage: $('select[name=recordsPerPage]').val(),
+				},
+				'GET',
+				function (data) {
+					var htmlStr = '';
+					if (data.list == null || data.list.length == 0) {
+						htmlStr = '<tr><td colspan="9">등록된 관리자가 없습니다.</td></tr>';
+					} else {
+						var no = data.pagingUtil.displayTotalRecordCount;
+						for (var i = 0; i < data.list.length; i++) {
+							var vo = data.list[i];
+							htmlStr += '<tr>';
+							htmlStr += '	<td>' + no + '</td>';
+							htmlStr += '	<td>' + vo.userId + '</td>';
+							htmlStr +=
+								'	<td>' +
+								vo.userName +
+								'<button type="button" class="btn btn-xs btn-default" onclick="accountManage.getUserInfo(\'' +
+								vo.userId +
+								'\')"><i class="glyphicon glyphicon-user"></i></button></td>';
+							if (vo.userType == 'MASTER_ADMIN') {
+								htmlStr += '	<td>슈퍼관리자</td>';
+							} else if (vo.userType == 'SITE_ADMIN') {
+								htmlStr += '	<td>사이트관리자</td>';
+							} else if (vo.userType == 'LOCAL_ADMIN') {
+								htmlStr += '	<td>지자체</td>';
+							}
+
+							if (!isEmpty(vo.regDate)) {
+								htmlStr += '	<td>' + moment(vo.regDate, 'YYYYMMDD').format('YYYY.MM.DD') + '</td>';
+							} else {
+								htmlStr += '	<td>-</td>';
+							}
+							if (isEmpty(vo.officialFileUploadPath)) {
+								htmlStr += '	<td>-</td>'; //공문
+							} else {
+								htmlStr +=
+									'	<td><a href="javascript:fileDown(\'' +
+									vo.userId +
+									'\');" class="text-decoration-none text-default"><i class="icon-file-text2"></i></a></td>'; //공문
+							}
+
+							if (vo.useStatus == 'Y') {
+								htmlStr += '	<td><label class="label label-success">승인</label></td>';
+							} else if (vo.useStatus == 'W') {
+								htmlStr += '	<td><label class="label label-default">대기</label></td>';
+							} else {
+								htmlStr += '	<td><label class="label label-warning">반려</label></td>';
+							}
+
+							if (vo.userType != 'MASTER_ADMIN') {
+								htmlStr +=
+									'	<td><button type="button" class="btn btn-xs btn-default"  onclick="showMenuAuthModal(\'' + vo.userId + '\');">권한 설정</button></td>';
+
+								htmlStr +=
+									'	<td><button type="button" class="btn btn-xs btn-danger" onclick="accountManage.deleteAdmin(\'' + vo.userId + '\')">삭제</button></td>';
+							} else {
+								htmlStr += '	<td>-</td>';
+								htmlStr += '	<td>-</td>';
+							}
+							htmlStr += '</tr>';
+							no--;
+						}
+					}
+
+					makePagination(data.pagingUtil, '', 'goPage', 'pageUnitChange');
+					$('#dataTable tbody').html(htmlStr);
+				}
+			);
+		};
+
+		var getUserInfo = function (userId) {
+			$('#modal .modal-title').text('관리자 정보 조회');
+			commonAjaxFunc('/user/' + userId, {}, 'GET', function (data) {
+				if (data != null) {
+					$('#accountRegistForm').empty();
+					var htmlStr = '';
+					htmlStr += '<div class="form-group">';
+					htmlStr += '    <label class="col-md-2 text-bold">아이디</label>';
+					htmlStr += '    <div class="col-md-10 d-flex">';
+					htmlStr += '        <span>' + data.userId + '</span>';
+					htmlStr +=
+						'        <button type="button" class="btn btn-xs btn-warning ml-15" onclick="accountManage.passwdReset(\'' +
+						data.userId +
+						'\');">비밀번호초기화</button>';
+					htmlStr += '    </div>';
+					htmlStr += '</div>';
+					htmlStr += '<div class="form-group">';
+					htmlStr += '    <label class="col-md-2 text-bold">이름</label>';
+					htmlStr += '    <div class="col-md-10">';
+					htmlStr += '        <input type="text" class="form-control" name="userName" value="' + data.userName + '"/>';
+					htmlStr += '    </div>';
+					htmlStr += '</div>';
+					htmlStr += '<div class="form-group">';
+					htmlStr += '    <label class="col-md-2 text-bold">관리자 구분</label>';
+					htmlStr += '    <div class="col-md-10">';
+					htmlStr += '        <label class="radio-inline">';
+					htmlStr += '            <input type="radio" class="styled" name="userType" value="MASTER_ADMIN" />';
+					htmlStr += '            슈퍼관리자';
+					htmlStr += '        </label>';
+					htmlStr += '        <label class="radio-inline">';
+					htmlStr += '            <input type="radio" class="styled" name="userType" value="SITE_ADMIN" />';
+					htmlStr += '            지회</label>';
+					htmlStr += '        <label class="radio-inline">';
+					htmlStr += '            <input type="radio" class="styled" name="userType" value="LOCAL_ADMIN" />';
+					htmlStr += '            지자체</label>';
+					htmlStr += '';
+					htmlStr += '    </div>';
+					htmlStr += '</div>';
+					htmlStr += '<div class="form-group">';
+					htmlStr += '    <label class="col-md-2 text-bold">연락처</label>';
+					htmlStr += '    <div class="col-md-10">';
+					htmlStr += '        <input type="text" class="form-control" name="phone" value="' + data.phone + '"/>';
+					htmlStr += '    </div>';
+					htmlStr += '</div>';
+					htmlStr += '<div class="form-group">';
+					htmlStr += '    <label class="col-md-2 text-bold">승인상태</label>';
+					htmlStr += '    <div class="col-md-10">';
+					htmlStr += '        <label class="radio-inline">';
+					htmlStr += '            <input type="radio" class="styled" name="useStatus" value="W" />';
+					htmlStr += '            대기';
+					htmlStr += '        </label>';
+					htmlStr += '        <label class="radio-inline">';
+					htmlStr += '            <input type="radio" class="styled" name="useStatus" value="Y" />';
+					htmlStr += '            승인</label>';
+					htmlStr += '        <label class="radio-inline">';
+					htmlStr += '            <input type="radio" class="styled" name="useStatus" value="N" />';
+					htmlStr += '            반려</label>';
+					htmlStr += '';
+					htmlStr += '    </div>';
+					htmlStr += '</div>';
+					if (data.userType == 'LOCAL_ADMIN') {
+						htmlStr += '<div class="form-group">';
+						htmlStr += '    <label class="col-md-2 text-bold">지역</label>';
+						htmlStr += '    <div class="col-md-10 d-flex">';
+						htmlStr += '		<input type="hidden" name="t_orgSido" value="' + data.orgSido + '"/>';
+						htmlStr += '		<input type="hidden" name="t_orgGungu" value="' + data.orgGungu + '"/>';
+						htmlStr += '		<select class="form-control" id="sido" name="sido" onchange="getGungu();">';
+						htmlStr += '		<option value="">시/도</option>';
+						htmlStr += '	</select>';
+						htmlStr += '	<select class="form-control" id="gungu" name="gungu">';
+						htmlStr += '		<option value="">군/구</option>';
+						htmlStr += '		</select>';
+						htmlStr += '    </div>';
+						htmlStr += '</div>';
+					}
+					$('#accountRegistForm').html(htmlStr);
+
+					$("input[name=userType]input[value='" + data.userType + "']").prop('checked', true);
+					$("input[name=useStatus]input[value='" + data.useStatus + "']").prop('checked', true);
+					var footer = '<button type="button" class="btn btn-gray" data-dismiss="modal">취소</button>';
+					footer += '<button type="button" class="btn" onclick="accountManage.updateAdmin(\'' + data.userId + '\');">수정</button>';
+
+					$('#modal .modal-footer').html(footer);
+					$('#modal').modal('show');
+				} else {
+					alert('처리 중  오류가 발생했습니다.');
+				}
+				getSido();
+			});
+		};
+		var passwdReset = function (userId) {
+			commonAjaxFunc('/user/passwd/init', { userId: userId }, 'POST', function (data) {
+				if (data == 'success') {
+					alert('비밀번호가 아이디와 동일하게 초기화되었습니다.');
+				} else {
+					alert('처리 중 오류가 발생했습니다.');
+				}
+			});
+		};
+		var formValid = function () {
+			var userId = $('input[name=userId]').val();
+			var passwd = $('input[name=passwd]').val();
+			var passwdConfirm = $('input[name=passwdConfirm]').val();
+			var userName = $('input[name=userName]').val();
+
+			if (!validUserIdCheck()) {
+				return false;
+			}
+			if ($('input[name=userIdChk]').val() == 'N') {
+				alert('아이디 중복체크를 해주세요.');
+				$('input[name=userId]').focus();
+				return false;
+			}
+			if (isEmpty(passwd)) {
+				alert('비밀번호를 입력해주세요.');
+				$('input[name=passwd]').focus();
+				return false;
+			} else {
+				if (passwd != passwdConfirm) {
+					alert('비밀번호와 비밀번호확인 값이 일치하지 않습니다.');
+					$('input[name=passwdConfirm]').focus();
+					return false;
+				}
+			}
+			if (isEmpty(passwdConfirm)) {
+				alert('비밀번호 확인을 입력해주세요.');
+				$('input[name=passwdConfirm]').focus();
+				return false;
+			}
+
+			if (isEmpty(userName)) {
+				alert('이름을 입력해주세요.');
+				$('input[name=userName]').focus();
+				return false;
+			}
+
+			if ($('input[name=userType]:checked').length == 0) {
+				alert('관리자 구분을 선택해주세요.');
+				return false;
+			}
+			return true;
+		};
+		var regist = function () {
+			if (formValid()) {
+				if (confirm('해당 사용자를 등록하시겠습니까?')) {
+					var sendData = {
+						userId: $('input[name=userId]').val(),
+						passwd: $('input[name=passwd]').val(),
+						userName: $('input[name=userName]').val(),
+						userType: $('input[name=userType]:checked').val(),
+						phone: $('input[name=phone]').val(),
+					};
+					commonAjaxFunc('/account/regist', sendData, 'POST', function (data) {
+						if (data == 'success') {
+							alert('등록되었습니다.');
+							$('#modal').modal('hide');
+							accountManage.init();
+						}
+					});
+				}
+			}
+		};
+		var overlapChk = function () {
+			if (validUserIdCheck()) {
+				commonAjaxFunc('/user/' + $('input[name=userId]').val() + '/chk', {}, 'GET', function (data) {
+					if (data > 0) {
+						alert('이미 사용중인 아이디입니다.');
+						return false;
+					} else {
+						alert('사용 가능한 아이디입니다.');
+						$('input[name=userIdChk]').val('Y');
+					}
+				});
+			}
+		};
+		var updateAdmin = function (userId) {
+			var sendData = {
+				userName: $('input[name=userName]').val(),
+				userType: $('input[name=userType]:checked').val(),
+				phone: $('input[name=phone]').val(),
+				useStatus: $('input[name=useStatus]:checked').val(),
+				orgSido: $('#sido option:selected').text(),
+				orgGungu: $('#gungu').val(),
+			};
+			commonAjaxFunc('/user/' + userId, sendData, 'POST', function (data) {
+				if (data == 'success') {
+					alert('변경되었습니다.');
+					$('#modal').modal('hide');
+					accountManage.init();
+				} else {
+					alert('처리 중 오류가  발생했습니다.');
+				}
+			});
+		};
+		var deleteAdmin = function (userId) {
+			if (confirm(userId + '를 삭제하시겠습니까?')) {
+				commonAjaxFunc('/account/delete', { userId: userId }, 'DELETE', function (data) {
+					if (data == 'success') {
+						alert('삭제되었습니다.');
+						accountManage.init();
+					} else {
+						alert('처리 중 오류가 발생했습니다.');
+						return false;
+					}
+				});
+			}
+		};
+
+		//메뉴 권한 설정
+		var menuAuthRegist = function () {
+			var menuStr = '';
+			$('input[name=authMenuCd]:checked').each(function () {
+				if (!isEmpty(menuStr)) {
+					menuStr += ',';
+				}
+				menuStr += $(this).val();
+			});
+			if (confirm('등록하시겠습니까?')) {
+				commonAjaxFunc('/site/menu/user/auth/insert', { userId: $('input[name=userAuthUserId]').val(), menuStr: menuStr }, 'POST', function (data) {
+					if (data == 'success') {
+						alert('등록되었습니다.');
+					} else {
+						alert('처리 중 오류가 발생했습니다.');
+					}
+					$('#userAuthModal').modal('hide');
+				});
+			}
+		};
+
+		return {
+			init: init,
+			getUserInfo: getUserInfo,
+			passwdReset: passwdReset,
+			regist: regist,
+			overlapChk: overlapChk,
+			updateAdmin: updateAdmin,
+			deleteAdmin: deleteAdmin,
+			menuAuthRegist: menuAuthRegist,
+		};
+	})();
+
+	accountManage.init();
+
+	function getSido() {
+		var orgSido = $('input[name=t_orgSido]').val();
+		commonAsyncAjaxFunc('/common/sido', {}, 'GET', function (data) {
+			$('#sido').empty();
+			$('#sido').append("<option value=''>시/도</option>");
+			for (var i = 0; i < data.length; i++) {
+				if (orgSido == data[i].sidoNm) {
+					$('#sido').append("<option value='" + data[i].sidoNo + "' selected>" + data[i].sidoNm + '</option>');
+				} else {
+					$('#sido').append("<option value='" + data[i].sidoNo + "'>" + data[i].sidoNm + '</option>');
+				}
+			}
+			getGungu();
+		});
+	}
+
+	function getGungu() {
+		var sidoNo = $('#sido').val();
+		var orgGungu = $('input[name=t_orgGungu]').val();
+		commonAsyncAjaxFunc('/common/gungu', { sidoNo: sidoNo }, 'GET', function (data) {
+			$('#gungu').empty();
+			$('#gungu').append("<option value=''>군/구</option>");
+			for (var i = 0; i < data.length; i++) {
+				if (orgGungu == data[i].gunguNm) {
+					$('#gungu').append("<option value='" + data[i].gunguNm + "' selected>" + data[i].gunguNm + '</option>');
+				} else {
+					$('#gungu').append("<option value='" + data[i].gunguNm + "'>" + data[i].gunguNm + '</option>');
+				}
+			}
+		});
+	}
+
+	function fileDown(userId) {
+		location.href = '/file/download/user/official?userId=' + userId;
+	}
+</script>

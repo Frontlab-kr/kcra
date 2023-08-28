@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>통합시스템</title>
+
+		<!-- Global stylesheets -->
+		<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" />
+		<link rel="stylesheet" type="text/css" href="http://dev2.onesnc.co.kr/static/global_assets/css/icons/icomoon/styles.css" />
+		<link rel="stylesheet" type="text/css" href="http://dev2.onesnc.co.kr/static/global_assets/css/icons/fontawesome/styles.min.css" />
+		<link rel="stylesheet" type="text/css" href="http://dev2.onesnc.co.kr/static/global_assets/css/bootstrap.css" />
+		<link rel="stylesheet" type="text/css" href="http://dev2.onesnc.co.kr/static/global_assets/css/core.css" />
+		<link rel="stylesheet" type="text/css" href="http://dev2.onesnc.co.kr/static/global_assets/css/components.css" />
+		<link rel="stylesheet" type="text/css" href="http://dev2.onesnc.co.kr/static/global_assets/css/colors.min.css" />
+		<!-- /global stylesheets -->
+
+		<!-- Core JS files -->
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/plugins/loaders/pace.min.js"></script>
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/core/libraries/jquery.min.js"></script>
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/core/libraries/bootstrap.min.js"></script>
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/plugins/loaders/blockui.min.js"></script>
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/app.js"></script>
+		<!-- /core JS files -->
+
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/plugins/ui/moment/moment.min.js"></script>
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/plugins/ui/moment/moment_locales.min.js"></script>
+
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/plugins/editors/summernote/summernote.min.js"></script>
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/plugins/forms/styling/uniform.min.js"></script>
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/plugins/editors/summernote/lang/summernote-ko-KR.js"></script>
+
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/plugins/forms/selects/select2.min.js"></script>
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/plugins/jquery-form/jquery.form.js"></script>
+
+		<!-- datepicker -->
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/core/libraries/jquery_ui/core.min.js"></script>
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/core/libraries/jquery_ui/interactions.min.js"></script>
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/core/libraries/jquery_ui/widgets.min.js"></script>
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/core/libraries/jquery_ui/effects.min.js"></script>
+		<!-- /datepicker -->
+
+		<script src="https://cdn.jsdelivr.net/lodash/4.17.4/lodash.min.js"></script>
+
+		<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+		<script src="http://dev2.onesnc.co.kr/static/common_js.js"></script>
+		<!-- /theme JS files -->
+		<!-- sheetjs  -->
+		<script type="text/javascript" src="//cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
+	</head>
+
+	<body>
+		<!-- Main navbar -->
+		<div class="navbar navbar-inverse header-highlight">
+			<!-- navbar-default 제거 -->
+			<div class="navbar-header">
+				<a class="navbar-brand" href="/">한국휴게음식업중앙회</a>
+
+				<ul class="nav navbar-nav visible-xs-block">
+					<li>
+						<a data-toggle="collapse" data-target="#navbar-mobile"><i class="icon-tree5"></i></a>
+					</li>
+					<li>
+						<a class="sidebar-mobile-main-toggle"><i class="icon-paragraph-justify3"></i></a>
+					</li>
+				</ul>
+			</div>
+
+			<div class="navbar-collapse collapse" id="navbar-mobile">
+				<ul class="nav navbar-nav">
+					<li>
+						<a class="sidebar-control sidebar-main-toggle hidden-xs"><i class="icon-paragraph-justify3"></i></a>
+					</li>
+				</ul>
+
+				<ul class="nav navbar-nav navbar-right">
+					<!-- 	<li><a href="#">Text link</a></li>
+
+				<li>
+					<a href="#">
+						<i class="icon-cog3"></i>
+						<span class="visible-xs-inline-block position-right">Icon link</span>
+					</a>
+				</li> -->
+
+					<li class="dropdown dropdown-user">
+						<a class="dropdown-toggle" data-toggle="dropdown">
+							<img src="http://dev2.onesnc.co.kr/static/global_assets/images/image.png" alt="" />
+							<span>관리자</span>
+							<i class="caret"></i>
+						</a>
+
+						<ul class="dropdown-menu dropdown-menu-right">
+							<li>
+								<a href="/logout"><i class="icon-switch2"></i> Logout</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<!-- /main navbar -->
+		<script>
+			var LOGIN_USER_ID = 'admin';
+			var LOGIN_USER_TYPE = 'MASTER_ADMIN';
+			$.datepicker.setDefaults({
+				dateFormat: 'yymmdd',
+				prevText: '이전 달',
+				nextText: '다음 달',
+				monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+				monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+				dayNames: ['일', '월', '화', '수', '목', '금', '토'],
+				dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
+				dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
+				showMonthAfterYear: true,
+				yearSuffix: '년',
+			});
+		</script>
+
+		<!-- Page container -->
+		<div class="page-container">
+			<!-- Page content -->
+			<div class="page-content">
+				<!-- Main sidebar -->
+				<div class="sidebar sidebar-main sidebar-default">
+					<div class="sidebar-content">
+						<!-- Main navigation -->
+						<div class="sidebar-category sidebar-category-visible">
+							<div class="category-content no-padding">
+								<ul class="navigation navigation-main navigation-accordion" id="site_menu"></ul>
+							</div>
+						</div>
+						<!-- /main navigation -->
+					</div>
+				</div>
+				<!-- /main sidebar -->
+
+				<script>
+					commonAjaxFunc('/site/menu', { menuType: 'MENU_' + LOGIN_USER_TYPE }, 'GET', function (data) {
+						if (data != null) {
+							$('#site_menu').empty();
+							for (var i = 0; i < data.length; i++) {
+								var vo = data[i];
+								var menuCd = vo.menuCd;
+								var moduleCd = vo.moduleCd;
+								var menuName = vo.menuName;
+								var moduleUri = vo.moduleUri;
+								var menuDepthType = vo.menuDepthType;
+								if (menuDepthType == 'U') {
+									if (menuCd == 'MENU_00011') {
+										$('#site_menu').append(
+											"<li  data-id='" +
+												menuCd +
+												"' class='active'><a href='" +
+												moduleUri +
+												"'><i class='" +
+												vo.iconClass +
+												"'></i><span>" +
+												menuName +
+												'</span></a></li>'
+										);
+									} else {
+										$('#site_menu').append(
+											"<li  data-id='" + menuCd + "'><a href='" + moduleUri + "'><i class='" + vo.iconClass + "'></i><span>" + menuName + '</span></a></li>'
+										);
+									}
+								} else if (menuDepthType == 'M') {
+									if (menuCd == 'MENU_00011' || moduleUri == '/admin/statistics/company') {
+										if ($('#site_menu > li').last().find('ul').length == 0) {
+											$('#site_menu li')
+												.last()
+												.append(
+													"<ul><li data-id='" +
+														menuCd +
+														"' class='active'><a href='" +
+														moduleUri +
+														"'><i class=''></i><span>" +
+														menuName +
+														'</span></a></li></ul>'
+												);
+										} else {
+											$('#site_menu > li')
+												.last()
+												.find('ul')
+												.append(
+													"<li data-id='" + menuCd + "' class='active'><a href='" + moduleUri + "'><i class=''></i><span>" + menuName + '</span></a></li>'
+												);
+										}
+									} else {
+										if ($('#site_menu > li').last().find('ul').length == 0) {
+											$('#site_menu li')
+												.last()
+												.append("<ul><li data-id='" + menuCd + "'><a href='" + moduleUri + "'><i class=''></i><span>" + menuName + '</span></a></li></ul>');
+										} else {
+											$('#site_menu > li')
+												.last()
+												.find('ul')
+												.append("<li data-id='" + menuCd + "'><a href='" + moduleUri + "'><i class=''></i><span>" + menuName + '</span></a></li>');
+										}
+									}
+								}
+							}
+							//$("#site_menu li[data-id = 'MENU_00011']").addClass("active");
+							mainNavigationSetting();
+						}
+					});
+
+					$(document).on('click', '#site_menu li > a', function (e) {
+						if ($(this).parent().attr('data-id') != undefined) {
+							moveMenu($(this).parent().attr('data-id'));
+						}
+					});
+				</script>
+
+				<div class="content-wrapper">
+					<div class="content">
+						<!-- list table s  -->
+						<input type="hidden" name="currentPageNo" value="1" />
+						<div class="row">
+							<div class="panel panel-flat">
+								<div class="panel-heading">
+									<h5 class="panel-title">영업신고별 통계</h5>
+								</div>
+								<div class="panel-body">
+									<div class="table-responsive">
+										<form name="searchForm" id="searchForm" method="post">
+											<input type="hidden" class="form-control" name="searchStartDate" placeholder="" />
+											<input type="hidden" class="form-control" name="searchEndDate" placeholder="" />
+											<table class="table search-table">
+												<tbody>
+													<tr>
+														<th>구분</th>
+														<td>
+															<select name="searchCompanyType" id="searchCompanyType" class="form-control">
+																<option value="" selected="selected">구분</option>
+																<option value="신규영업자">신규영업자</option>
+																<option value="자판기영업자">자판기영업자</option>
+															</select>
+														</td>
+													</tr>
+													<tr>
+														<th>인허가일자</th>
+														<td>
+															<div class="form-inline">
+																<select name="searchStartYear" id="searchStartYear" class="form-control">
+																	<option value="">년도</option>
+																</select>
+																<select name="searchStartMonth" id="searchStartMonth" class="form-control">
+																	<option value="">월</option>
+																</select>
+																~
+																<select name="searchEndYear" id="searchEndYear" class="form-control">
+																	<option value="">년도</option>
+																</select>
+																<select name="searchEndMonth" id="searchEndMonth" class="form-control">
+																	<option value="">월</option>
+																</select>
+																<script>
+																	commonAjaxFunc('/common/code/list', { commonCode: 'CMM_MONTH' }, 'GET', function (data) {
+																		$('#searchStartMonth, #searchEndMonth').empty();
+																		$('#searchStartMonth, #searchEndMonth').append("<option value=''>월</option>");
+																		for (var i = 0; i < data.length; i++) {
+																			$('#searchStartMonth,#searchEndMonth').append(
+																				"<option value='" + data[i].codeValue + "'>" + data[i].codeName + '</option>'
+																			);
+																		}
+																	});
+																	commonAjaxFunc('/common/code/list', { commonCode: 'STATIC_YEAR' }, 'GET', function (data) {
+																		$('#searchStartYear, #searchEndYear').empty();
+																		$('#searchStartYear, #searchEndYear').append("<option value=''>년도</option>");
+																		for (var i = 0; i < data.length; i++) {
+																			$('#searchStartYear, #searchEndYear').append(
+																				"<option value='" + data[i].codeValue + "'>" + data[i].codeName + '</option>'
+																			);
+																		}
+																	});
+																</script>
+															</div>
+														</td>
+													</tr>
+													<tr>
+														<th>영업상태</th>
+														<td>
+															<div>
+																<label class="radio-inline"><input type="radio" name="searchCompanyStatus" value="" checked />전체</label>
+																<label class="radio-inline"><input type="radio" name="searchCompanyStatus" value="1" />운영</label>
+																<label class="radio-inline"><input type="radio" name="searchCompanyStatus" value="2" />양도양수</label>
+																<label class="radio-inline"><input type="radio" name="searchCompanyStatus" value="3" />상속</label>
+																<label class="radio-inline"><input type="radio" name="searchCompanyStatus" value="4" />폐업</label>
+																<label class="radio-inline"><input type="radio" name="searchCompanyStatus" value="5" />기타</label>
+															</div>
+														</td>
+													</tr>
+												</tbody>
+											</table>
+										</form>
+										<div class="text-center mt-10">
+											<button type="button" class="btn btn-xs btn-search" onclick="statistics.init();">검색</button>
+										</div>
+									</div>
+									<div class="d-flex flex-row-reverse">
+										<button type="button" class="btn btn-xs btn-info mr-5" onclick="statistics.excelDown('xlsx');">다운로드</button>
+									</div>
+									<div class="table-responsive">
+										<table class="table result-table" id="dataTable">
+											<thead></thead>
+											<tbody></tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- list table e  -->
+
+						<!-- Footer -->
+						<div class="footer text-muted">© 2021 ONESNC-Software & Creative</div>
+						<!-- /footer -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
+<script>
+	var statistics = (function () {
+		var makeTableHeader = function () {
+			commonAjaxFunc('/common/code/list', { commonCode: 'CMM_MONTH' }, 'GET', function (data) {
+				var theadHtml = "<tr><th style='background-color:#ddd;'>지역</th><th style='background-color:#ddd;'>합계</th>";
+				if (data != null) {
+					for (var i = 0; i < data.length; i++) {
+						theadHtml += "<th style='background-color:#ddd;width:7%;'>" + data[i].codeName + '</th>';
+					}
+				}
+				theadHtml += '</tr>';
+				$('#dataTable thead').html(theadHtml);
+			});
+			statistics.init();
+		};
+		var init = function () {
+			var searchStartDate = $('#searchStartYear').val() + $('#searchStartMonth').val();
+			var searchEndDate = $('#searchEndYear').val() + $('#searchEndMonth').val();
+			commonAjaxFunc(
+				'/statistics/cil/list',
+				{
+					searchCompanyType: $('#searchCompanyType').val(),
+					searchStartDate: searchStartDate,
+					searchEndDate: searchEndDate,
+					searchCompanyStatus: $('input[name=searchCompanyStatus]:checked').val(),
+				},
+				'GET',
+				function (data) {
+					if (data != null) {
+						var list = data.list;
+						var htmlStr = '';
+
+						if (list == null || list.length == 0) {
+						} else {
+							for (var i = 0; i < list.length; i++) {
+								htmlStr += '<tr>';
+								htmlStr += '<td>' + list[i].codeName + '</td>';
+								htmlStr += '<td>' + list[i].total + '</td>';
+								htmlStr += '<td>' + list[i].month01 + '</td>';
+								htmlStr += '<td>' + list[i].month02 + '</td>';
+								htmlStr += '<td>' + list[i].month03 + '</td>';
+								htmlStr += '<td>' + list[i].month04 + '</td>';
+								htmlStr += '<td>' + list[i].month05 + '</td>';
+								htmlStr += '<td>' + list[i].month06 + '</td>';
+								htmlStr += '<td>' + list[i].month07 + '</td>';
+								htmlStr += '<td>' + list[i].month08 + '</td>';
+								htmlStr += '<td>' + list[i].month09 + '</td>';
+								htmlStr += '<td>' + list[i].month10 + '</td>';
+								htmlStr += '<td>' + list[i].month11 + '</td>';
+								htmlStr += '<td>' + list[i].month12 + '</td>';
+								htmlStr += '</tr>';
+							}
+							htmlStr += '<tr><td>합계</td><td>' + _.sumBy(data.list, 'total') + '</td>';
+							htmlStr += '<td>' + _.sumBy(data.list, 'month01') + '</td>';
+							htmlStr += '<td>' + _.sumBy(data.list, 'month02') + '</td>';
+							htmlStr += '<td>' + _.sumBy(data.list, 'month03') + '</td>';
+							htmlStr += '<td>' + _.sumBy(data.list, 'month04') + '</td>';
+							htmlStr += '<td>' + _.sumBy(data.list, 'month05') + '</td>';
+							htmlStr += '<td>' + _.sumBy(data.list, 'month06') + '</td>';
+							htmlStr += '<td>' + _.sumBy(data.list, 'month07') + '</td>';
+							htmlStr += '<td>' + _.sumBy(data.list, 'month08') + '</td>';
+							htmlStr += '<td>' + _.sumBy(data.list, 'month09') + '</td>';
+							htmlStr += '<td>' + _.sumBy(data.list, 'month10') + '</td>';
+							htmlStr += '<td>' + _.sumBy(data.list, 'month11') + '</td>';
+							htmlStr += '<td>' + _.sumBy(data.list, 'month12') + '</td>';
+							htmlStr += '</tr>';
+						}
+						$('#dataTable tbody').html(htmlStr);
+					}
+				}
+			);
+		};
+
+		/* var excelDown = function(){
+			var searchStartDate = $("#searchStartYear").val()+$("#searchStartMonth").val();
+			var searchEndDate = $("#searchEndYear").val()+$("#searchEndMonth").val();
+			$("input[name=searchStartDate]").val(searchStartDate);
+			$("input[name=searchEndDate]").val(searchEndDate);
+			if (confirm("엑셀을 다운로드 하시겠습니까?")) {
+				$("form[name=searchForm]").attr("action", "/statistics/cil/excel");
+				$("form[name=searchForm]").submit();
+			}
+		} */
+		var excelDown = function (type, fn) {
+			var elt = document.getElementById('dataTable');
+			var wb = XLSX.utils.table_to_book(elt, { sheet: '통계', raw: true });
+			var date = moment().format('YYYYMMDD');
+			XLSX.writeFile(wb, fn || 'edu_statistics_' + date + '.' + (type || 'xlsx'));
+		};
+		return { makeTableHeader: makeTableHeader, init: init, excelDown: excelDown };
+	})();
+	statistics.makeTableHeader();
+</script>

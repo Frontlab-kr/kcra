@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>통합시스템</title>
+
+		<!-- Global stylesheets -->
+		<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" />
+		<link rel="stylesheet" type="text/css" href="http://dev2.onesnc.co.kr/static/global_assets/css/icons/icomoon/styles.css" />
+		<link rel="stylesheet" type="text/css" href="http://dev2.onesnc.co.kr/static/global_assets/css/icons/fontawesome/styles.min.css" />
+		<link rel="stylesheet" type="text/css" href="http://dev2.onesnc.co.kr/static/global_assets/css/bootstrap.css" />
+		<link rel="stylesheet" type="text/css" href="http://dev2.onesnc.co.kr/static/global_assets/css/core.css" />
+		<link rel="stylesheet" type="text/css" href="http://dev2.onesnc.co.kr/static/global_assets/css/components.css" />
+		<link rel="stylesheet" type="text/css" href="http://dev2.onesnc.co.kr/static/global_assets/css/colors.min.css" />
+		<!-- /global stylesheets -->
+
+		<!-- Core JS files -->
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/plugins/loaders/pace.min.js"></script>
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/core/libraries/jquery.min.js"></script>
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/core/libraries/bootstrap.min.js"></script>
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/plugins/loaders/blockui.min.js"></script>
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/app.js"></script>
+		<!-- /core JS files -->
+
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/plugins/ui/moment/moment.min.js"></script>
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/plugins/ui/moment/moment_locales.min.js"></script>
+
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/plugins/editors/summernote/summernote.min.js"></script>
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/plugins/forms/styling/uniform.min.js"></script>
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/plugins/editors/summernote/lang/summernote-ko-KR.js"></script>
+
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/plugins/forms/selects/select2.min.js"></script>
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/plugins/jquery-form/jquery.form.js"></script>
+
+		<!-- datepicker -->
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/core/libraries/jquery_ui/core.min.js"></script>
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/core/libraries/jquery_ui/interactions.min.js"></script>
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/core/libraries/jquery_ui/widgets.min.js"></script>
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/core/libraries/jquery_ui/effects.min.js"></script>
+		<!-- /datepicker -->
+
+		<script src="https://cdn.jsdelivr.net/lodash/4.17.4/lodash.min.js"></script>
+
+		<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+		<script src="http://dev2.onesnc.co.kr/static/common_js.js"></script>
+		<!-- /theme JS files -->
+		<!-- sheetjs  -->
+		<script type="text/javascript" src="//cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
+
+		<!-- frontlab -->
+		<link rel="stylesheet" type="text/css" href="/assets/css/common.css" />
+		<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/colresizable/1.6.0/colResizable-1.6.js"
+			integrity="sha512-0HfjrMq6p8VBkVjp/gy/obELN81BCwmKRd7fongBsAPw49BeKAfXpQn6PWSPa8rm7mvblqyV2P1kVNzvW6qR4Q=="
+			crossorigin="anonymous"
+			referrerpolicy="no-referrer"
+		></script>
+		<script>
+			$(document).ready(function () {
+				$('.kcra-list .table').colResizable({
+					liveDrag: true,
+					gripInnerHtml: "<div class='grip'></div>",
+					draggingClass: 'dragging',
+					resizeMode: 'fit',
+				});
+				$('.kcra-sidebar-list__item a').on('click', function () {
+					$(this).parents('.kcra-sidebar-list__item').toggleClass('active');
+					return false;
+				});
+			});
+		</script>
+	</head>
+
+	<body>
+		<div class="kcra">
+			<div class="kcra-sidebar">
+				<div class="kcra-sidebar-logo">
+					<a href=""><img src="/assets/images/logo.png" alt="KCRA 한국휴게음식업중앙회교육원" /></a>
+				</div>
+				<div class="kcra-sidebar-user">
+					<div class="dropdown">
+						<button id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<img src="../assets/images/user.png" alt="" />
+							관리자
+							<span class="material-symbols-outlined"> expand_more </span>
+						</button>
+						<ul class="dropdown-menu">
+							<li>
+								<a href="/logout">로그아웃</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="kcra-sidebar-list">
+					<div class="kcra-sidebar-list__item">
+						<a href=""><span class="material-symbols-outlined"> settings </span><strong>설정</strong></a>
+					</div>
+					<div class="kcra-sidebar-list__item">
+						<a href=""><span class="material-symbols-outlined"> corporate_fare </span><strong>업소정보관리</strong></a>
+					</div>
+					<div class="kcra-sidebar-list__item">
+						<a href=""><span class="material-symbols-outlined"> school </span><strong>교육결과조회</strong></a>
+					</div>
+					<div class="kcra-sidebar-list__item depth">
+						<a href=""><span class="material-symbols-outlined"> stress_management </span><strong>집합교육관리조회</strong></a>
+						<ul>
+							<li class="active">
+								<a href="/admin/offline/manage"><span>신규영업자</span></a>
+							</li>
+						</ul>
+					</div>
+					<div class="kcra-sidebar-list__item">
+						<a href=""><span class="material-symbols-outlined"> contract_edit </span><strong>통보서관리</strong></a>
+					</div>
+					<div class="kcra-sidebar-list__item">
+						<a href=""><span class="material-symbols-outlined"> data_table </span><strong>이관데이터관리</strong></a>
+					</div>
+					<div class="kcra-sidebar-list__item">
+						<a href=""><span class="material-symbols-outlined"> analytics </span><strong>수료현황</strong></a>
+					</div>
+					<div class="kcra-sidebar-list__item">
+						<a href=""><span class="material-symbols-outlined"> assignment_ind </span><strong>수료자등록</strong></a>
+					</div>
+					<div class="kcra-sidebar-list__item active depth">
+						<a href=""><span class="material-symbols-outlined"> bar_chart_4_bars </span><strong>통계</strong></a>
+						<ul>
+							<li class="active">
+								<a href="/admin/statistics/company"><span>영업대장별 통계</span></a>
+							</li>
+							<li>
+								<a href="/admin/statistics/edu"><span>교육통계</span></a>
+							</li>
+							<li>
+								<a href="/admin/statistics/period"><span>기간대비통계</span></a>
+							</li>
+							<li>
+								<a href="/admin/statistics/age"><span>연령별통계</span></a>
+							</li>
+						</ul>
+					</div>
+					<div class="kcra-sidebar-list__item">
+						<a href=""> <span class="material-symbols-outlined"> settings_cinematic_blur </span><strong>계정관리</strong></a>
+					</div>
+				</div>
+			</div>
+			<div class="kcra-contents kcra-list-form">
+				<div class="kcra-title">
+					<h1>통보서관리</h1>
+				</div>
+				<div class="kcra-form">
+					<div class="kcra-form__box">
+						<form name="searchForm" id="searchForm" method="post">
+							<input type="hidden" name="e_schSido" value="" />
+							<input type="hidden" name="orderColumn" value="" />
+							<input type="hidden" name="orderBy" value="" />
+							<table>
+								<colgroup>
+									<col style="width: 10%" />
+									<col style="width: 40%" />
+									<col style="width: 10%" />
+									<col style="width: 40%" />
+								</colgroup>
+								<tbody>
+									<tr>
+										<th>검색조건</th>
+										<td colspan="3">
+											<label class="radio-inline"><input type="radio" class="styled" name="schType" value="ALL" checked />전체</label>
+											<label class="radio-inline"><input type="radio" class="styled" name="schType" value="CEO_NAME" />대표자명</label>
+											<label class="radio-inline"><input type="radio" class="styled" name="schType" value="LICENSE_NO" />인허가번호</label>
+										</td>
+									</tr>
+									<tr>
+										<th>검색어</th>
+										<td>
+											<input type="text" class="form-control" name="schValue" value="" />
+										</td>
+										<th>상호명</th>
+										<td>
+											<input type="text" class="form-control" name="schCompanyName" value="" />
+										</td>
+									</tr>
+									<tr>
+										<th>지역</th>
+										<td colspan="3">
+											<div class="d-flex">
+												<select class="form-control search-select mr-10" id="schSido" onchange="getGungu();">
+													<option value="">시/도</option>
+												</select>
+
+												<select class="form-control search-select" id="schGungu" name="schGungu">
+													<option value="">군/구</option>
+												</select>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<th>발송구분</th>
+										<td colspan="3">
+											<label class="radio-inline"><input type="radio" class="styled" name="schSendType" value="" checked />전체</label>
+											<label class="radio-inline"><input type="radio" class="styled" name="schSendType" value="NOT_SEND" />미발송</label>
+											<label class="radio-inline"><input type="radio" class="styled" name="schSendType" value="NOT_CERT" />미수료자</label>
+										</td>
+									</tr>
+									<tr>
+										<th>영업상태</th>
+										<td colspan="3">
+											<label class="radio-inline"><input type="radio" class="styled" name="schCompanyStatus" value="" checked />전체</label>
+											<label class="radio-inline"><input type="radio" class="styled" name="schCompanyStatus" value="1" />운영</label>
+											<label class="radio-inline"><input type="radio" class="styled" name="schCompanyStatus" value="2" />양도양수</label>
+											<label class="radio-inline"><input type="radio" class="styled" name="schCompanyStatus" value="3" />상속</label>
+											<label class="radio-inline"><input type="radio" class="styled" name="schCompanyStatus" value="4" />기타</label>
+											<label class="radio-inline"><input type="radio" class="styled" name="schCompanyStatus" value="5" />폐업</label>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</form>
+					</div>
+					<div class="kcra-form__button">
+						<button type="button" class="btn" onclick="completeStudent.search();"><span class="material-symbols-outlined"> search </span>검색</button>
+						<button type="button" class="btn" onclick="completeStudent.searchReset();">
+							<span class="material-symbols-outlined"> device_reset </span>조회조건초기화
+						</button>
+					</div>
+				</div>
+				<input type="hidden" name="currentPageNo" value="1" />
+				<div class="kcra-list">
+					<div class="kcra-list-head">
+						<div class="kcra-list-head__total">조회건수 : <strong>43</strong>건</div>
+						<div class="kcra-list-head__button">
+							<button type="button" class="btn btn-sm btn-gray" onclick="completeStudent.excelDown();">
+								<span class="material-symbols-outlined"> download </span>엑셀다운로드
+							</button>
+							<button type="button" class="btn btn-sm btn-gray" onclick="showExcelUploadModal();">
+								<span class="material-symbols-outlined"> upload </span>일괄업로드
+							</button>
+						</div>
+					</div>
+					<div class="table-responsive">
+						<div class="table-responsive">
+							<table class="table result-table" id="dataTable">
+								<colgroup>
+									<col width="5%" />
+									<col width="7%" />
+									<col width="10%" />
+									<col width="10%" />
+									<col width="8%" />
+									<col width="25%" />
+									<col width="8%" />
+									<col width="8%" />
+									<col width="5%" />
+									<col width="4%" />
+									<col width="4%" />
+									<col width="4%" />
+								</colgroup>
+								<thead>
+									<tr>
+										<th>NO</th>
+										<th>영업상태</th>
+										<th>인허가번호</th>
+										<!-- <th>인허가일자</th> -->
+										<th>업소명</th>
+										<th>대표자명</th>
+										<th>주소</th>
+										<th>이수자</th>
+										<th>수료일자</th>
+										<th>수료번호</th>
+										<th>교육구분</th>
+										<th>결제내역</th>
+										<th>수료증</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td colspan="11" class="text-center" style="height: 300px">검색조건을 입력한 뒤 검색버튼을 눌러주세요.</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<div class="kcra-pagination">
+						<ul class="pagination">
+							<li><a href="javascript:goPage(1);">이전</a></li>
+							<li class="active"><a href="#">1</a></li>
+							<li><a href="javascript:goPage('2');">2</a></li>
+							<li><a href="javascript:goPage('3');">3</a></li>
+							<li><a href="javascript:goPage('4');">4</a></li>
+							<li><a href="javascript:goPage('5');">5</a></li>
+							<li><a href="javascript:goPage('6');">6</a></li>
+							<li><a href="javascript:goPage('7');">7</a></li>
+							<li><a href="javascript:goPage('8');">8</a></li>
+							<li><a href="javascript:goPage('9');">9</a></li>
+							<li><a href="javascript:goPage('10');">10</a></li>
+							<li><a href="javascript:goPage(11);">다음</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div id="uploadModal" class="modal fade" tabindex="-1">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h5 class="modal-title">일괄업로드</h5>
+					</div>
+
+					<div class="modal-body">
+						<form name="upalodForm" id="upalodForm" enctype="multipart/form-data" method="post">
+							<div class="form-group">
+								<label>엑셀파일 업로드</label>
+								<input type="file" class="form-control" name="uploadFile" id="uploadFile" />
+							</div>
+
+							<div class="form-group">
+								<a href="/static/file/down?originalNm=post_send_sample.xlsx">샘플 파일 다운로드</a>
+							</div>
+							<div>
+								<p class="text-danger">아래는 업로드 양식에 대한 설명입니다. 참고하여 작성해주세요.</p>
+								<img src="http://dev2.onesnc.co.kr/static/global_assets/images/post_send_sample_img.png" />
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-gray" data-dismiss="modal">취소</button>
+						<button type="button" class="btn" onclick="excelUpload();">등록</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="uploadResultModal" class="modal fade" tabindex="-1">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h5 class="modal-title">일괄업로드</h5>
+					</div>
+
+					<div class="modal-body"></div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
+<script>
+	$(document).ready(function () {
+		getSido();
+		//	init();
+	});
+	function getSido() {
+		commonAjaxFunc('/common/sido', {}, 'GET', function (data) {
+			$('#schSido').empty();
+			$('#schSido').append("<option value=''>시/도</option>");
+			for (var i = 0; i < data.length; i++) {
+				$('#schSido').append("<option value='" + data[i].sidoNo + "'>" + data[i].sidoNm + '</option>');
+			}
+		});
+	}
+
+	function getGungu() {
+		var sidoNo = $('#schSido').val();
+		commonAjaxFunc('/common/gungu', { sidoNo: sidoNo }, 'GET', function (data) {
+			$('#schGungu').empty();
+			$('#schGungu').append("<option value=''>군/구</option>");
+			for (var i = 0; i < data.length; i++) {
+				$('#schGungu').append("<option value='" + data[i].gunguNm + "'>" + data[i].gunguNm + '</option>');
+			}
+		});
+	}
+
+	//페이징
+	function goPage(currentPageNo) {
+		$('input[name=currentPageNo]').val(currentPageNo);
+		init();
+	}
+	//페이지당 노출갯수 선택
+	function pageUnitChange() {
+		$('input[name=currentPageNo]').val('1');
+		init();
+	}
+	//엑셀 업로드 모달 open
+	function showExcelUploadModal() {
+		$('#uploadModal').modal('show');
+	}
+	//엑셀  업로드
+	function excelUpload() {
+		if ($('input[name=uploadFile]').val() == '') {
+			alert('파일을 등록해주세요.');
+			return false;
+		}
+
+		$('#upalodForm').attr('action', '/lon/upload');
+		$('#upalodForm').ajaxSubmit({
+			cache: false,
+			beforeSubmit: function () {
+				var htmlStr = '<div id="upload-wrapper" style="width:100%;">';
+				htmlStr += '</div>';
+				$('#uploadResultModal .modal-body').html(htmlStr);
+				$('#uploadResultModal').modal('show');
+				uploadOverlayStart();
+			},
+			success: function (data) {
+				$('#uploadModal').modal('hide');
+				var totalCnt = data.totalCount;
+				var htmlStr = '<div>';
+				htmlStr += '<p>업로드완료</p>';
+				htmlStr +=
+					'<div>총 ' +
+					totalCnt +
+					"건 중 <span class='text-primary'>성공 : " +
+					data.successCount +
+					"건</span>, <span class='text-danger'>실패 " +
+					data.failCount +
+					'건 </span></div>';
+				htmlStr += '</div>';
+				htmlStr += '<table class="table">';
+				htmlStr += '<thead>';
+				htmlStr += '<tr>';
+				htmlStr += '		<th>번호</th>';
+				htmlStr += '		<th>인허가번호</th>';
+				htmlStr += '		<th>등록여부</th>';
+				htmlStr += '</tr>';
+				htmlStr += '<tbody>';
+
+				if (data.resultList != null) {
+					for (var i = 0; i < data.resultList.length; i++) {
+						var vo = data.resultList[i];
+						htmlStr += '<tr>';
+						htmlStr += '		<th>' + totalCnt + '</th>';
+						htmlStr += '		<th>' + vo.licenseNo + '</th>';
+						if (vo.successYn == 'Y') {
+							htmlStr += '		<th>등록성공</th>';
+						} else {
+							htmlStr += '		<th>등록실패</th>';
+						}
+						htmlStr += '</tr>';
+						totalCnt--;
+					}
+				}
+
+				htmlStr += '</tbody>';
+				htmlStr += '</table>';
+
+				$('#uploadResultModal .modal-body').html(htmlStr);
+				$('#uploadResult').modal('hide');
+			},
+		});
+	}
+	function searchReset() {
+		$('#searchForm')[0].reset();
+	}
+	function search() {
+		$('input[name=currentPageNo]').val('1');
+		init();
+	}
+	function init() {
+		var sendData = {
+			currentPageNo: $('input[name=currentPageNo]').val(),
+			recordsPerPage: $('select[name=recordsPerPage]').val(),
+			schType: $('input[name=schType]:checked').val(),
+			schValue: $('input[name=schValue]').val(),
+			schCompanyName: $('input[name=schCompanyName]').val(),
+			schSido: $('#schSido option:selected').text(),
+			schGungu: $('#schGungu').val(),
+			schSendType: $('input[name=schSendType]:checked').val(),
+			schCompanyStatus: $('input[name=schCompanyStatus]:checked').val(),
+		};
+
+		commonLoadingAjaxFunc('/lon/manage/list', sendData, 'GET', function (data) {
+			var htmlStr = '';
+			if (data.list == null || data.list.length == 0) {
+				htmlStr = '<tr><td colspan="10">등록된  정보가 없습니다.</td></tr>';
+			} else {
+				var no = data.pagingUtil.displayTotalRecordCount;
+				for (var i = 0; i < data.list.length; i++) {
+					var vo = data.list[i];
+					htmlStr += '<tr>';
+					htmlStr += '<td>' + no + '</td>';
+					if (vo.companyStatus == '1') {
+						htmlStr += '<td>운영</td>';
+					} else if (vo.companyStatus == '2') {
+						htmlStr += '<td>양도양수</td>';
+					} else if (vo.companyStatus == '3') {
+						htmlStr += '<td>상속</td>';
+					} else if (vo.companyStatus == '4') {
+						htmlStr += '<td>기타</td>';
+					} else if (vo.companyStatus == '5') {
+						htmlStr += '<td>폐업</td>';
+					}
+
+					htmlStr += '    <td class="text-center">' + vo.licenseNo + '</td>';
+					htmlStr += '    <td>' + vo.companyName + '</td>';
+					htmlStr += '    <td class="text-center">' + vo.ceoName + '</td>';
+
+					htmlStr += '    <td>' + vo.addr + '</td>';
+					if (!isEmpty(vo.certNo)) {
+						htmlStr += '    <td class="text-center">' + vo.certNo + '</td>';
+					} else {
+						htmlStr += '    <td class="text-center"></td>';
+					}
+
+					if (isEmpty(vo.sendDate)) {
+						htmlStr += '    <td class="text-center">-</td>';
+					} else {
+						htmlStr += '    <td class="text-center">' + moment(vo.sendDate, 'YYYYMMDD').format('YYYY.MM.DD') + '</td>';
+					}
+					if (isEmpty(vo.postNumber)) {
+						htmlStr += '    <td class="text-center">-</td>';
+					} else {
+						htmlStr += '    <td class="text-center">' + vo.postNumber + '</td>';
+					}
+
+					if (isEmpty(vo.goOutDate)) {
+						htmlStr += '    <td class="text-center">-</td>';
+					} else {
+						htmlStr += '    <td class="text-center">' + moment(vo.goOutDate, 'YYYY-MM-DD').format('YYYY.MM.DD') + '</td>';
+					}
+
+					htmlStr += '</tr>';
+					no--;
+				}
+			}
+
+			makePagination(data.pagingUtil, '', 'goPage', 'pageUnitChange');
+			$('#dataTable tbody').html(htmlStr);
+		});
+	}
+	function excelDown() {
+		$('input[name=e_schSido]').val($('#schSido option:selected').text());
+		if (confirm('엑셀을 다운로드 하시겠습니까?')) {
+			$('form[name=searchForm]').attr('action', '/lon/manage/excel/down');
+			$('form[name=searchForm]').submit();
+		}
+	}
+</script>

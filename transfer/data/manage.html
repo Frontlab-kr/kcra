@@ -1,0 +1,1378 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>통합시스템</title>
+
+		<!-- Global stylesheets -->
+		<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" />
+		<link rel="stylesheet" type="text/css" href="http://dev2.onesnc.co.kr/static/global_assets/css/icons/icomoon/styles.css" />
+		<link rel="stylesheet" type="text/css" href="http://dev2.onesnc.co.kr/static/global_assets/css/icons/fontawesome/styles.min.css" />
+		<link rel="stylesheet" type="text/css" href="http://dev2.onesnc.co.kr/static/global_assets/css/bootstrap.css" />
+		<link rel="stylesheet" type="text/css" href="http://dev2.onesnc.co.kr/static/global_assets/css/core.css" />
+		<link rel="stylesheet" type="text/css" href="http://dev2.onesnc.co.kr/static/global_assets/css/components.css" />
+		<link rel="stylesheet" type="text/css" href="http://dev2.onesnc.co.kr/static/global_assets/css/colors.min.css" />
+		<!-- /global stylesheets -->
+
+		<!-- Core JS files -->
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/plugins/loaders/pace.min.js"></script>
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/core/libraries/jquery.min.js"></script>
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/core/libraries/bootstrap.min.js"></script>
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/plugins/loaders/blockui.min.js"></script>
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/app.js"></script>
+		<!-- /core JS files -->
+
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/plugins/ui/moment/moment.min.js"></script>
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/plugins/ui/moment/moment_locales.min.js"></script>
+
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/plugins/editors/summernote/summernote.min.js"></script>
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/plugins/forms/styling/uniform.min.js"></script>
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/plugins/editors/summernote/lang/summernote-ko-KR.js"></script>
+
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/plugins/forms/selects/select2.min.js"></script>
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/plugins/jquery-form/jquery.form.js"></script>
+
+		<!-- datepicker -->
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/core/libraries/jquery_ui/core.min.js"></script>
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/core/libraries/jquery_ui/interactions.min.js"></script>
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/core/libraries/jquery_ui/widgets.min.js"></script>
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/core/libraries/jquery_ui/effects.min.js"></script>
+		<!-- /datepicker -->
+
+		<script src="https://cdn.jsdelivr.net/lodash/4.17.4/lodash.min.js"></script>
+
+		<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+		<script src="http://dev2.onesnc.co.kr/static/common_js.js"></script>
+		<!-- /theme JS files -->
+		<!-- sheetjs  -->
+		<script type="text/javascript" src="//cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
+
+		<!-- frontlab -->
+		<link rel="stylesheet" type="text/css" href="/assets/css/common.css" />
+		<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/colresizable/1.6.0/colResizable-1.6.js"
+			integrity="sha512-0HfjrMq6p8VBkVjp/gy/obELN81BCwmKRd7fongBsAPw49BeKAfXpQn6PWSPa8rm7mvblqyV2P1kVNzvW6qR4Q=="
+			crossorigin="anonymous"
+			referrerpolicy="no-referrer"
+		></script>
+		<script>
+			$(document).ready(function () {
+				$('.kcra-list .table').colResizable({
+					liveDrag: true,
+					gripInnerHtml: "<div class='grip'></div>",
+					draggingClass: 'dragging',
+					resizeMode: 'fit',
+				});
+				$('.kcra-sidebar-list__item a').on('click', function () {
+					$(this).parents('.kcra-sidebar-list__item').toggleClass('active');
+					return false;
+				});
+			});
+		</script>
+	</head>
+
+	<body>
+		<div class="kcra">
+			<div class="kcra-sidebar">
+				<div class="kcra-sidebar-logo">
+					<a href=""><img src="/assets/images/logo.png" alt="KCRA 한국휴게음식업중앙회교육원" /></a>
+				</div>
+				<div class="kcra-sidebar-user">
+					<div class="dropdown">
+						<button id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<img src="../assets/images/user.png" alt="" />
+							관리자
+							<span class="material-symbols-outlined"> expand_more </span>
+						</button>
+						<ul class="dropdown-menu">
+							<li>
+								<a href="/logout">로그아웃</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="kcra-sidebar-list">
+					<div class="kcra-sidebar-list__item">
+						<a href=""><span class="material-symbols-outlined"> settings </span><strong>설정</strong></a>
+					</div>
+					<div class="kcra-sidebar-list__item">
+						<a href=""><span class="material-symbols-outlined"> corporate_fare </span><strong>업소정보관리</strong></a>
+					</div>
+					<div class="kcra-sidebar-list__item">
+						<a href=""><span class="material-symbols-outlined"> school </span><strong>교육결과조회</strong></a>
+					</div>
+					<div class="kcra-sidebar-list__item depth">
+						<a href=""><span class="material-symbols-outlined"> stress_management </span><strong>집합교육관리조회</strong></a>
+						<ul>
+							<li class="active">
+								<a href="/admin/offline/manage"><span>신규영업자</span></a>
+							</li>
+						</ul>
+					</div>
+					<div class="kcra-sidebar-list__item">
+						<a href=""><span class="material-symbols-outlined"> contract_edit </span><strong>통보서관리</strong></a>
+					</div>
+					<div class="kcra-sidebar-list__item">
+						<a href=""><span class="material-symbols-outlined"> data_table </span><strong>이관데이터관리</strong></a>
+					</div>
+					<div class="kcra-sidebar-list__item">
+						<a href=""><span class="material-symbols-outlined"> analytics </span><strong>수료현황</strong></a>
+					</div>
+					<div class="kcra-sidebar-list__item">
+						<a href=""><span class="material-symbols-outlined"> assignment_ind </span><strong>수료자등록</strong></a>
+					</div>
+					<div class="kcra-sidebar-list__item active depth">
+						<a href=""><span class="material-symbols-outlined"> bar_chart_4_bars </span><strong>통계</strong></a>
+						<ul>
+							<li class="active">
+								<a href="/admin/statistics/company"><span>영업대장별 통계</span></a>
+							</li>
+							<li>
+								<a href="/admin/statistics/edu"><span>교육통계</span></a>
+							</li>
+							<li>
+								<a href="/admin/statistics/period"><span>기간대비통계</span></a>
+							</li>
+							<li>
+								<a href="/admin/statistics/age"><span>연령별통계</span></a>
+							</li>
+						</ul>
+					</div>
+					<div class="kcra-sidebar-list__item">
+						<a href=""> <span class="material-symbols-outlined"> settings_cinematic_blur </span><strong>계정관리</strong></a>
+					</div>
+				</div>
+			</div>
+			<div class="kcra-contents kcra-list-form">
+				<div class="kcra-title">
+					<h1>이관데이터관리</h1>
+				</div>
+				<div class="kcra-form">
+					<div class="kcra-form__box">
+						<form name="searchForm" id="searchForm" method="post">
+							<table>
+								<tbody>
+									<tr>
+										<th>이수년도</th>
+										<td>
+											<select name="searchCcYear" class="form-control">
+												<option value="">전체</option>
+												<option value="2022" selected="selected">2022</option>
+												<option value="2021">2021</option>
+												<option value="2020">2020</option>
+												<option value="2019">2019</option>
+												<option value="2018">2018</option>
+												<option value="2017">2017</option>
+												<option value="2016">2016</option>
+											</select>
+										</td>
+										<th>영업자구분</th>
+										<td>
+											<select name="searchCcTarget" class="form-control">
+												<option value="" selected="selected">구분</option>
+												<option value="신규영업자">신규영업자</option>
+												<option value="기존영업자">기존영업자</option>
+												<option value="자판기영업자">자판기영업자</option>
+											</select>
+										</td>
+									</tr>
+									<tr>
+										<th>유형</th>
+										<td>
+											<label class="radio-inline"><input type="radio" name="ccType" value="" checked />전체</label>
+											<label class="radio-inline"><input type="radio" name="ccType" value="ONLINE" />온라인</label>
+											<label class="radio-inline"><input type="radio" name="ccType" value="OFFLINE" />집합교육</label>
+										</td>
+										<th>주소검색</th>
+										<td class="form-inline">
+											<select name="sidoList" id="sidoList" class="form-control" onchange="getGungu();"></select>
+											<select name="gunguList" id="gunguList" class="form-control">
+												<option value="">군/구</option>
+											</select>
+										</td>
+									</tr>
+									<tr>
+										<th>검색조건</th>
+										<td colspan="3">
+											<div>
+												<label class="radio-inline"><input type="radio" name="searchType" value="ALL" checked />전체</label>
+												<label class="radio-inline"><input type="radio" name="searchType" value="USER_NAME" />교육이수자명</label>
+												<label class="radio-inline"><input type="radio" name="searchType" value="CEO_NAME" />대표자명</label>
+												<label class="radio-inline"><input type="radio" name="searchType" value="PHONE" />휴대전화번호</label>
+												<label class="radio-inline"><input type="radio" name="searchType" value="COMPANY_NAME" />상호명</label>
+												<label class="radio-inline"><input type="radio" name="searchType" value="LICENSE_NO" />인허가번호</label>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<th>검색어</th>
+										<td><input type="text" class="form-control" name="searchValue" /></td>
+										<th>생년월일</th>
+										<td><input type="text" class="form-control" name="searchBirthday" onkeyup="removeNotNumber();" maxlength="8" /></td>
+									</tr>
+									<!-- <tr>
+										<th>수료여부</th>
+										<td>
+											<label class="radio-inline"><input type="radio" name="searchStatusType" value="" checked>전체</label>
+											<label class="radio-inline"><input type="radio" name="searchStatusType" value="A">수료(교육이수일기준)</label>
+											<label class="radio-inline"><input type="radio" name="searchStatusType" value="B">미수료(교육종료일기준)</label>
+											<label class="radio-inline"><input type="radio" name="searchStatusType" value="C">수강중</label>
+											<label class="radio-inline"><input type="radio" name="searchStatusType" value="D">복수수료</label>
+										</td>
+									</tr> -->
+									<tr>
+										<th>교육이수일</th>
+										<td colspan="3">
+											<div class="form-inline">
+												<div class="input-group col-md-2">
+													<span class="input-group-addon"><i class="icon-calendar22"></i></span>
+													<input type="text" class="form-control datepicker" name="searchStartDate" placeholder="" />
+												</div>
+												<div class="input-group col-md-2">
+													<span class="input-group-addon"><i class="icon-calendar22"></i></span>
+													<input type="text" class="form-control datepicker" name="searchEndDate" placeholder="" />
+												</div>
+											</div>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</form>
+					</div>
+					<div class="kcra-form__button">
+						<button type="button" class="btn" onclick="completeStudent.search();"><span class="material-symbols-outlined"> search </span>검색</button>
+						<button type="button" class="btn" onclick="completeStudent.searchReset();">
+							<span class="material-symbols-outlined"> device_reset </span>조회조건초기화
+						</button>
+					</div>
+				</div>
+				<div class="kcra-list">
+					<div class="kcra-list-head">
+						<div class="kcra-list-head__total">조회건수 : <strong>43</strong>건</div>
+						<div class="kcra-list-head__button">
+							<button type="button" class="btn btn-sm btn-gray" onclick="completeStudent.excelDown();">
+								<span class="material-symbols-outlined"> download </span>엑셀다운로드
+							</button>
+						</div>
+					</div>
+					<div class="table-responsive">
+						<div class="table-responsive">
+							<table class="table static-table" id="data-list">
+								<thead>
+									<tr>
+										<th>번호</th>
+										<th>이수년도</th>
+										<th>구분</th>
+										<th>인허가번호</th>
+										<th>수료번호</th>
+										<th>이수자</th>
+										<th>휴대폰번호</th>
+										<th>생년월일</th>
+										<th>이수일</th>
+										<th>대표자</th>
+										<th>소재지</th>
+										<th>상호명</th>
+										<th>수료</th>
+										<th>교육매체</th>
+										<th>진도율</th>
+										<th>결제내역</th>
+										<th>수료증</th>
+										<th>지정확인서</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>161384</td>
+										<td>2021</td>
+										<td>기존영업자</td>
+										<td>20190379837</td>
+										<td>129164</td>
+										<td>나정희 <button type="button" class="btn btn-xs btn-gray" onclick="transferData.showTransferDataModal('792489')">수정</button></td>
+										<td>01064288699</td>
+										<td>19771107</td>
+										<td>2022.02.28</td>
+										<td>나정희</td>
+										<td>경기도 김포시 양촌읍 양곡1로 26-1(1층)</td>
+										<td>연휴계실</td>
+										<td>수료</td>
+										<td>온라인</td>
+										<td>86</td>
+										<td>
+											<button
+												type="button"
+												class="btn btn-xs btn-gray"
+												onclick="transferData.showPaymentInfo('efaorkr000_1646040758172','VBANK','20000','20220228220425');"
+											>
+												결제내역
+											</button>
+										</td>
+										<td><button type="button" class="btn btn-xs" onclick="transferData.showCertificates('792489');">보기</button></td>
+										<td>-</td>
+									</tr>
+									<tr>
+										<td>161383</td>
+										<td>2021</td>
+										<td>기존영업자</td>
+										<td>20200087204</td>
+										<td>129154</td>
+										<td>정수인 <button type="button" class="btn btn-xs btn-gray" onclick="transferData.showTransferDataModal('815142')">수정</button></td>
+										<td>01052555043</td>
+										<td>19931003</td>
+										<td>2022.02.28</td>
+										<td>정수인</td>
+										<td>서울특별시 영등포구 선유로9나길 24-3(305호 문래동5가)</td>
+										<td>구미호</td>
+										<td>수료</td>
+										<td>온라인</td>
+										<td>100</td>
+										<td>
+											<button
+												type="button"
+												class="btn btn-xs btn-gray"
+												onclick="transferData.showPaymentInfo('efaorkr000_1645984592481','VBANK','20000','20220228213842');"
+											>
+												결제내역
+											</button>
+										</td>
+										<td><button type="button" class="btn btn-xs" onclick="transferData.showCertificates('815142');">보기</button></td>
+										<td>-</td>
+									</tr>
+									<tr>
+										<td>161382</td>
+										<td>2021</td>
+										<td>기존영업자</td>
+										<td>20190339153</td>
+										<td>129117</td>
+										<td>신상희 <button type="button" class="btn btn-xs btn-gray" onclick="transferData.showTransferDataModal('864872')">수정</button></td>
+										<td>01081095884</td>
+										<td>19841220</td>
+										<td>2022.02.28</td>
+										<td>신상희</td>
+										<td>경기도 고양시 덕양구 행당로 1(지하1일부층 토당동)</td>
+										<td>스타덤피씨방토당본점(매점)</td>
+										<td>수료</td>
+										<td>온라인</td>
+										<td>100</td>
+										<td>
+											<button
+												type="button"
+												class="btn btn-xs btn-gray"
+												onclick="transferData.showPaymentInfo('efaorkr000_1646047624528','CARD','20000','20220228203618');"
+											>
+												결제내역
+											</button>
+										</td>
+										<td><button type="button" class="btn btn-xs" onclick="transferData.showCertificates('864872');">보기</button></td>
+										<td>-</td>
+									</tr>
+									<tr>
+										<td>161381</td>
+										<td>2021</td>
+										<td>기존영업자</td>
+										<td>20190070470</td>
+										<td>129132</td>
+										<td>김유리 <button type="button" class="btn btn-xs btn-gray" onclick="transferData.showTransferDataModal('874085')">수정</button></td>
+										<td>01037183543</td>
+										<td>19840131</td>
+										<td>2022.02.28</td>
+										<td>김유리</td>
+										<td>서울특별시 마포구 월드컵북로54길 17(사보이시티디엠씨 1층 117호 상암동)</td>
+										<td>월성맨션</td>
+										<td>수료</td>
+										<td>온라인</td>
+										<td>100</td>
+										<td>
+											<button
+												type="button"
+												class="btn btn-xs btn-gray"
+												onclick="transferData.showPaymentInfo('efaorkr000_1646047615151','CARD','20000','20220228203614');"
+											>
+												결제내역
+											</button>
+										</td>
+										<td><button type="button" class="btn btn-xs" onclick="transferData.showCertificates('874085');">보기</button></td>
+										<td>-</td>
+									</tr>
+									<tr>
+										<td>161380</td>
+										<td>2021</td>
+										<td>기존영업자</td>
+										<td>20170323091</td>
+										<td>129092</td>
+										<td>천성길 <button type="button" class="btn btn-xs btn-gray" onclick="transferData.showTransferDataModal('804828')">수정</button></td>
+										<td>01047973087</td>
+										<td>19780225</td>
+										<td>2022.02.28</td>
+										<td>천성길</td>
+										<td>경기도 고양시 덕양구 호국로 792(3일부층 성사동)</td>
+										<td>목마를때</td>
+										<td>수료</td>
+										<td>온라인</td>
+										<td>100</td>
+										<td>
+											<button
+												type="button"
+												class="btn btn-xs btn-gray"
+												onclick="transferData.showPaymentInfo('efaorkr000_1646047723408','VBANK','20000','20220228203018');"
+											>
+												결제내역
+											</button>
+										</td>
+										<td><button type="button" class="btn btn-xs" onclick="transferData.showCertificates('804828');">보기</button></td>
+										<td>-</td>
+									</tr>
+									<tr>
+										<td>161379</td>
+										<td>2021</td>
+										<td>기존영업자</td>
+										<td>20190240402</td>
+										<td>129104</td>
+										<td>임순예 <button type="button" class="btn btn-xs btn-gray" onclick="transferData.showTransferDataModal('841112')">수정</button></td>
+										<td>01075927735</td>
+										<td>19510815</td>
+										<td>2022.02.28</td>
+										<td>임순예</td>
+										<td>대전광역시 서구 도산로 88(1층 일부 도마동)</td>
+										<td>김밥마루</td>
+										<td>수료</td>
+										<td>온라인</td>
+										<td>100</td>
+										<td>
+											<button
+												type="button"
+												class="btn btn-xs btn-gray"
+												onclick="transferData.showPaymentInfo('efaorkr000_1646047480374','VBANK','20000','20220228202831');"
+											>
+												결제내역
+											</button>
+										</td>
+										<td><button type="button" class="btn btn-xs" onclick="transferData.showCertificates('841112');">보기</button></td>
+										<td>-</td>
+									</tr>
+									<tr>
+										<td>161378</td>
+										<td>2021</td>
+										<td>기존영업자</td>
+										<td>20190502093</td>
+										<td>129090</td>
+										<td>이우석 <button type="button" class="btn btn-xs btn-gray" onclick="transferData.showTransferDataModal('840928')">수정</button></td>
+										<td>01040998514</td>
+										<td>19850804</td>
+										<td>2022.02.28</td>
+										<td>이우석</td>
+										<td>전라북도 임실군 임실읍 운수로 33-5(이도타운B 1층)</td>
+										<td>콩스빅커피</td>
+										<td>수료</td>
+										<td>온라인</td>
+										<td>100</td>
+										<td>
+											<button
+												type="button"
+												class="btn btn-xs btn-gray"
+												onclick="transferData.showPaymentInfo('efaorkr000_1646047341738','CARD','20000','20220228202301');"
+											>
+												결제내역
+											</button>
+										</td>
+										<td><button type="button" class="btn btn-xs" onclick="transferData.showCertificates('840928');">보기</button></td>
+										<td>-</td>
+									</tr>
+									<tr>
+										<td>161377</td>
+										<td>2021</td>
+										<td>기존영업자</td>
+										<td>20120193243</td>
+										<td>129112</td>
+										<td>박은희 <button type="button" class="btn btn-xs btn-gray" onclick="transferData.showTransferDataModal('849100')">수정</button></td>
+										<td>01066711714</td>
+										<td>19721017</td>
+										<td>2022.02.28</td>
+										<td>박은희</td>
+										<td>인천광역시 미추홀구 한나루로 400(학익동)</td>
+										<td>쏘자토스트</td>
+										<td>수료</td>
+										<td>온라인</td>
+										<td>100</td>
+										<td>
+											<button
+												type="button"
+												class="btn btn-xs btn-gray"
+												onclick="transferData.showPaymentInfo('efaorkr000_1646046829440','CARD','20000','20220228201815');"
+											>
+												결제내역
+											</button>
+										</td>
+										<td><button type="button" class="btn btn-xs" onclick="transferData.showCertificates('849100');">보기</button></td>
+										<td>-</td>
+									</tr>
+									<tr>
+										<td>161376</td>
+										<td>2021</td>
+										<td>기존영업자</td>
+										<td>20150627799</td>
+										<td>129157</td>
+										<td>김미주 <button type="button" class="btn btn-xs btn-gray" onclick="transferData.showTransferDataModal('795913')">수정</button></td>
+										<td>01035940046</td>
+										<td>19871106</td>
+										<td>2022.02.28</td>
+										<td>김미주</td>
+										<td>제주특별자치도 제주시 사라봉길 26(1층 건입동)</td>
+										<td>카페렌</td>
+										<td>수료</td>
+										<td>온라인</td>
+										<td>100</td>
+										<td>
+											<button
+												type="button"
+												class="btn btn-xs btn-gray"
+												onclick="transferData.showPaymentInfo('efaorkr000_1646046707268','CARD','20000','20220228201215');"
+											>
+												결제내역
+											</button>
+										</td>
+										<td><button type="button" class="btn btn-xs" onclick="transferData.showCertificates('795913');">보기</button></td>
+										<td>-</td>
+									</tr>
+									<tr>
+										<td>161375</td>
+										<td>2021</td>
+										<td>기존영업자</td>
+										<td>20180076935</td>
+										<td>129087</td>
+										<td>정미영 <button type="button" class="btn btn-xs btn-gray" onclick="transferData.showTransferDataModal('845881')">수정</button></td>
+										<td>01037746699</td>
+										<td>19770902</td>
+										<td>2022.02.28</td>
+										<td>정미영</td>
+										<td>서울특별시 강서구 공항대로 549(1층층 염창동)</td>
+										<td>커피볶는카페어썸</td>
+										<td>수료</td>
+										<td>온라인</td>
+										<td>100</td>
+										<td>
+											<button
+												type="button"
+												class="btn btn-xs btn-gray"
+												onclick="transferData.showPaymentInfo('efaorkr000_1646046460197','CARD','20000','20220228200919');"
+											>
+												결제내역
+											</button>
+										</td>
+										<td><button type="button" class="btn btn-xs" onclick="transferData.showCertificates('845881');">보기</button></td>
+										<td>-</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<div class="kcra-pagination">
+						<ul class="pagination">
+							<li><a href="javascript:goPage(1);">이전</a></li>
+							<li class="active"><a href="#">1</a></li>
+							<li><a href="javascript:goPage('2');">2</a></li>
+							<li><a href="javascript:goPage('3');">3</a></li>
+							<li><a href="javascript:goPage('4');">4</a></li>
+							<li><a href="javascript:goPage('5');">5</a></li>
+							<li><a href="javascript:goPage('6');">6</a></li>
+							<li><a href="javascript:goPage('7');">7</a></li>
+							<li><a href="javascript:goPage('8');">8</a></li>
+							<li><a href="javascript:goPage('9');">9</a></li>
+							<li><a href="javascript:goPage('10');">10</a></li>
+							<li><a href="javascript:goPage(11);">다음</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Basic modal -->
+		<div id="sendEmailModal" class="modal fade" tabindex="-1">
+			<div class="modal-dialog modal-lg">
+				<form id="transferDataEmailForm" name="transferDataEmailForm" class="form-horizontal" method="post">
+					<input type="hidden" name="_userName" value="" />
+					<input type="hidden" name="_certNo" value="" />
+					<input type="hidden" name="_ccName" value="" />
+					<input type="hidden" name="body" value="" />
+
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h5 class="modal-title">이메일 발송</h5>
+						</div>
+
+						<div class="modal-body">
+							<div class="form-group">
+								<label>받는사람</label>
+								<input type="text" name="to" class="form-control" />
+							</div>
+							<div class="form-group">
+								<label>제목</label>
+								<input type="text" name="subject" class="form-control" />
+							</div>
+							<div class="form-group">
+								<label>내용</label>
+								<div id="summernote"></div>
+							</div>
+						</div>
+						<!-- /.modal-body -->
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+							<button type="button" class="btn btn-primary" onclick="transferData.sendEmail();">보내기</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+		<!-- /basic modal -->
+
+		<!-- Basic modal -->
+		<div id="modalTransferData" class="modal fade" tabindex="-1">
+			<div class="modal-dialog">
+				<form id="fmTransferData" class="form-horizontal">
+					<input type="hidden" name="seq" value="" />
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h5 class="modal-title">이관데이터 수정</h5>
+						</div>
+
+						<div class="modal-body">
+							<div class="form-group form-inline">
+								<label class="col-lg-3 control-label">교육이수자</label>
+								<div class="col-lg-9">
+									<input type="text" class="form-control" name="userName" id="userName" required="required" />
+								</div>
+							</div>
+							<div class="form-group form-inline">
+								<label class="col-lg-3 control-label">직책</label>
+								<div class="col-lg-9">
+									<label class="radio-inline"><input type="radio" name="positionType" value="C" /> 대표자</label>
+									<label class="radio-inline"><input type="radio" name="positionType" value="M" /> 식품위생관리책임자</label>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-lg-3 control-label">업소소재지</label>
+								<div class="col-lg-9">
+									<div class="form-inline">
+										<input type="text" class="form-control" name="postCode" id="postCode" value="" readonly onclick="execDaumPostcode();" />
+										<button type="button" class="btn bnt-xs btn-default" onclick="execDaumPostcode();">우편번호찾기</button>
+									</div>
+									<div><input type="text" class="form-control" name="address" id="address" value="" /></div>
+									<div><input type="text" class="form-control" name="addressDetail" id="addressDetail" value="" /></div>
+								</div>
+							</div>
+							<div class="form-group form-inline">
+								<label class="col-lg-3 control-label">휴대폰번호</label>
+								<div class="col-lg-9">
+									<input type="text" class="form-control" name="phone" />
+								</div>
+							</div>
+							<div class="form-group form-inline">
+								<label class="col-lg-3 control-label">생년월일</label>
+								<div class="col-lg-9">
+									<input type="text" class="form-control" name="birthday" />
+								</div>
+							</div>
+							<div class="form-group form-inline">
+								<label class="col-lg-3 control-label">대표자명</label>
+								<div class="col-lg-9">
+									<input type="text" class="form-control" name="ceoName" />
+								</div>
+							</div>
+							<div class="form-group form-inline">
+								<label class="col-lg-3 control-label">상호명</label>
+								<div class="col-lg-9">
+									<input type="text" class="form-control" name="companyName" />
+								</div>
+							</div>
+
+							<div class="form-group form-inline">
+								<label class="col-lg-3 control-label">인허가번호</label>
+								<div class="col-lg-9">
+									<input type="text" class="form-control" name="licenseNo" />
+								</div>
+							</div>
+							<div class="form-group form-inline">
+								<label class="col-lg-3 control-label">대표자생년월일</label>
+								<div class="col-lg-9">
+									<input type="text" class="form-control" name="ceoBirthday" />
+								</div>
+							</div>
+							<div class="form-group form-inline">
+								<label class="col-lg-3 control-label">관리자명</label>
+								<div class="col-lg-9">
+									<span name="adminName"></span>
+								</div>
+							</div>
+
+							<div class="form-group form-inline">
+								<label class="col-lg-3 control-label">수정사유</label>
+								<div class="col-lg-9">
+									<textarea col="10" row="5" class="form-control" name="historyUpdateReason"></textarea>
+								</div>
+							</div>
+						</div>
+						<!-- /.modal-body -->
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" onclick="transferData.cancelModal();">취소</button>
+							<button type="button" class="btn btn-primary" onclick="transferData.updateTransferData();">등록</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+		<!-- /basic modal -->
+
+		<!-- Basic modal -->
+		<div id="modalPaymentInfo" class="modal fade" tabindex="-1">
+			<div class="modal-dialog">
+				<input type="hidden" name="seq" value="" />
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h5 class="modal-title">결제정보</h5>
+					</div>
+
+					<div class="modal-body">
+						<table class="table static-table" id="tbPaymentInfo">
+							<thead>
+								<tr>
+									<th>주문번호</th>
+									<th>결제수단</th>
+									<th>주문금액</th>
+									<th>주문일</th>
+								</tr>
+							</thead>
+							<tbody></tbody>
+						</table>
+					</div>
+					<!-- /.modal-body -->
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- /basic modal -->
+		<div id="confirmationModal" class="modal fade" tabindex="-1">
+			<div class="modal-dialog">
+				<form id="" class="form-horizontal">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4 class="text-center modal-title content-title contact-title mb-0" id="ShowEditTitle1" slot="header">식품위생관리책임자 지정 확인서 등록</h4>
+						</div>
+
+						<div class="modal-body">
+							<div class="">
+								<div class="pt-3 tbl">
+									<h6 class="text-bold no-margin-bottom">1. 영업자</h6>
+								</div>
+								<table class="tableWrap" id="tbCeo">
+									<colgroup>
+										<col width="20%" />
+										<col width="30%" />
+										<col width="20%" />
+										<col width="30%" />
+									</colgroup>
+									<tbody class=""></tbody>
+								</table>
+							</div>
+							<div class="">
+								<div class="pt-3 tbl">
+									<h6 class="text-bold no-margin-bottom">2. 식품위생관리 책임자</h6>
+								</div>
+								<table class="tableWrap" id="tbManager">
+									<colgroup>
+										<col width="20%" />
+										<col width="30%" />
+										<col width="20%" />
+										<col width="30%" />
+									</colgroup>
+									<tbody class=""></tbody>
+								</table>
+							</div>
+							<div class="content-wrapper mb-20" style="display: block">
+								<p class="confirmation-agree-chk-msg">
+									<input type="checkbox" name="confirmationAgreechk" id="confirmationAgreechk" value="Y" checked />
+									<label for="confirmationAgreechk">식품위생관리책임자에 대한 전자서명 진행에 동의합니다.</label>
+								</p>
+							</div>
+							<div class="content-wrapper text-center text-bold" style="display: block">
+								<p class="no-margin">『식품위생법』제41조 제3항에 따른</p>
+								<span class="confirmation-text">식품위생관리책임자로 지정한 자임을 확인 합니다.</span>
+							</div>
+							<div class="text-right pt-4">
+								<h6 class="mt-15 mb-15 text-bold" id="confirmRegDate"></h6>
+								<h6 class="pt-3 pr-3">확인자(영업자) : <span name="confirmManagerName"></span></h6>
+							</div>
+							<div class="text-center pt-4 pb-5">
+								<h6 class="text-bold">(사)한국휴게음식업중앙회교육원장 귀하</h6>
+							</div>
+							<!--/main content wrapper -->
+						</div>
+						<!-- /.modal-body -->
+						<div class="modal-footer">
+							<!-- 	<button type="button" class="btn btn-sm btn-primary"
+							onclick="confirmation.updateConfirmation();">수정</button>
+						<button type="button" class="btn btn-sm" data-dismiss="modal">취소</button> -->
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</body>
+</html>
+<script>
+	$('input[name=searchValue]').on('keydown', function (e) {
+		if (event.keyCode == 13) {
+			transferData.fnSearch();
+			e.preventDefault();
+			return;
+		}
+	});
+	$('.datepicker').datepicker({ dateFormat: 'yy-mm-dd' });
+	getSido();
+
+	function getSido() {
+		commonAjaxFunc('/transfer/search/common/sido', {}, 'GET', function (data) {
+			$('#sidoList').empty();
+			$('#sidoList').append("<option value=''>시/도</option>");
+			for (var i = 0; i < data.length; i++) {
+				$('#sidoList').append("<option value='" + data[i].sidoNo + "'>" + data[i].sidoNm + '</option>');
+			}
+		});
+	}
+
+	function getGungu() {
+		var sidoNo = $('select[name=sidoList]').val();
+		commonAjaxFunc('/transfer/search/common/gungu', { sidoNo: sidoNo }, 'GET', function (data) {
+			$('#gunguList').empty();
+			$('#gunguList').append("<option value=''>군/구</option>");
+			for (var i = 0; i < data.length; i++) {
+				$('#gunguList').append("<option value='" + data[i].gunguNm + "'>" + data[i].gunguNm + '</option>');
+			}
+		});
+	}
+
+	var transferData = (function () {
+		var searchReset = function () {
+			$('#form')[0].reset();
+		};
+		var fnSearch = function () {
+			if ($('select[name=searchCcYear] option:selected').val() == '') {
+				alert('이수년도를 선택해주세요.');
+				return false;
+			}
+			/* if($("select[name=searchCcTarget] option:selected").val() == ""){
+				alert("영업자 구분을 선택해주세요.");
+				return false;
+			} */
+
+			$('#excelBtn').removeAttr('disabled');
+			$('input[name=currentPageNo]').val('1');
+			fnList();
+		};
+		var fnList = function () {
+			var url = '/transfer/data/manage';
+			var searchSido = '';
+			var searchGungu = '';
+			if ($('select[name=sidoList]').val() != '' || $('select[name=gunguList]').val() != '') {
+				searchSido = $('#sidoList option:selected').text();
+				searchGungu = $('select[name=gunguList]').val();
+				$('input[name=searchSido]').val(searchSido);
+				$('input[name=searchGungu]').val(searchGungu);
+			}
+
+			var searchStartDate = $('input[name=searchStartDate]').val();
+			var searchEndDate = $('input[name=searchEndDate]').val();
+			if (searchStartDate != null && searchStartDate != '') {
+				searchStartDate = moment(searchStartDate, 'YYYY-MM-DD').format('YYYYMMDD');
+			}
+			if (searchEndDate != null && searchEndDate != '') {
+				searchEndDate = moment(searchEndDate, 'YYYY-MM-DD').format('YYYYMMDD');
+			}
+			var data = {
+				currentPageNo: $('input[name=currentPageNo]').val(),
+				searchCcYear: $('select[name=searchCcYear]').val(),
+				searchType: $('input[name=searchType]:checked').val(),
+				searchValue: $('input[name=searchValue]').val(),
+				searchSido: searchSido,
+				searchGungu: searchGungu,
+				searchCcTarget: $('select[name=searchCcTarget]').val(),
+				searchBirthday: $('input[name=searchBirthday]').val(),
+				searchStartDate: searchStartDate,
+				searchEndDate: searchEndDate,
+				ccType: $('input[name=ccType]:checked').val(),
+				recordsPerPage: $('select[name=recordsPerPage]').val(),
+			};
+			commonLoadingAjaxFunc(url, data, 'GET', transferData.callback);
+		};
+		var callback = function (data) {
+			if (data.list == null || data.list.length == 0) {
+				$('#data-list tbody').html("<tr><td colspan='10'>등록된 정보가 없습니다.</td></tr>");
+			} else {
+				var htmlStr = '';
+				var no = data.pagingUtil.displayTotalRecordCount;
+				for (var i = 0; i < data.list.length; i++) {
+					var vo = data.list[i];
+					htmlStr += '<tr>';
+					htmlStr += '<td>' + no + '</td>';
+					htmlStr += '<td>' + vo.ccYear + '</td>';
+					htmlStr += '<td>' + vo.ccTarget + '</td>';
+					if (vo.licenseNo != null && vo.licenseNo != '') {
+						htmlStr += '<td>' + vo.licenseNo + '</td>';
+					} else {
+						htmlStr += '<td></td>';
+					}
+					htmlStr += '<td>' + vo.certNo + '</td>';
+					htmlStr +=
+						'<td>' +
+						vo.userName +
+						" <button type='button' class='btn btn-xs btn-gray' onclick=\"transferData.showTransferDataModal('" +
+						vo.seq +
+						'\')">수정</button></td>';
+					htmlStr += '<td>' + vo.phone + '</td>';
+					htmlStr += '<td>' + vo.birthday + '</td>';
+					htmlStr += '<td>';
+					if (!isEmpty(vo.certDate)) {
+						htmlStr += moment(vo.certDate, 'YYYYMMDD').format('YYYY.MM.DD');
+					}
+					htmlStr += '</td>';
+					htmlStr += '<td>' + vo.ceoName + '</td>';
+					htmlStr += '<td>' + vo.address + vo.addressDetail + '</td>';
+					htmlStr += '<td>' + vo.companyName + '</td>';
+					if (vo.studyStatus == 'C') {
+						htmlStr += '<td>수료</td>';
+					} else if (vo.studyStatus == 'F') {
+						htmlStr += '<td>미수료</td>';
+					} else if (vo.studyStatus == 'STUDY_STATUS_CANCEL' || vo.studyStatus == 'D') {
+						htmlStr += '<td>취소</td>';
+					} else {
+						htmlStr += '<td>-</td>';
+					}
+					if (vo.ccType == 'ONLINE') {
+						htmlStr += '<td>온라인</td>';
+					} else if (vo.ccType == 'OFFLINE') {
+						htmlStr += '<td>집합교육</td>';
+					}
+					htmlStr += '<td>' + vo.progress + '</td>';
+
+					if (vo.oid != null && vo.oid != '') {
+						htmlStr +=
+							'<td><button type="button" class="btn btn-xs btn-gray" onclick="transferData.showPaymentInfo(\'' +
+							vo.oid +
+							"','" +
+							vo.payType +
+							"','" +
+							vo.price +
+							"','" +
+							vo.applDate +
+							'\');">결제내역</button></td>';
+					} else {
+						htmlStr += '<td></td>';
+					}
+
+					htmlStr += '<td>';
+					if (vo.studyStatus == 'C') {
+						htmlStr += '<button type="button" class="btn btn-xs" onclick="transferData.showCertificates(\'' + vo.seq + '\');">보기</button>';
+						/*htmlStr +='<button type="button" class="btn btn-xs" onclick="transferData.sendEmailModal(\''+vo.seq+'\');">메일</button>';*/
+					}
+					htmlStr += '</td>';
+					if (vo.confirmationYn == 'Y') {
+						htmlStr += '<td><button type="button" class="btn btn-xs" onclick="transferData.viewConfirmation(\'' + vo.seq + '\');">보기</button></td>';
+					} else {
+						htmlStr += '<td>-</td>';
+					}
+
+					htmlStr += '</tr>';
+					no--;
+				}
+				$('#data-list tbody').html(htmlStr);
+			}
+
+			makePagination(data.pagingUtil, '', 'goPage', 'pageUnitChange');
+		};
+
+		//이관데이터 수정
+		var showTransferDataModal = function (seq) {
+			$('input[name=seq]').val(seq);
+			commonAjaxFunc('/transfer/data/info', { seq: seq }, 'GET', function (data) {
+				var info = data.info;
+				$('#fmTransferData input[name=userName]').val(info.userName);
+				$('#fmTransferData input[name=ceoName]').val(info.ceoName);
+				$('#fmTransferData input[name=companyName]').val(info.companyName);
+				if (info.positionType == '대표자') {
+					$("input[name=positionType][value='C']").prop('checked', true);
+				} else {
+					$("input[name=positionType][value='M']").prop('checked', true);
+				}
+				if (data.licenseNo != null) {
+					$('#fmTransferData input[name=licenseNo]').val(info.licenseNo);
+				}
+
+				$('#fmTransferData input[name=phone]').val(info.phone);
+				$('#fmTransferData input[name=birthday]').val(info.birthday);
+
+				$('#fmTransferData input[name=postCode]').val(info.postCode);
+				$('#fmTransferData input[name=address]').val(info.address);
+				$('#fmTransferData input[name=addressDetail]').val(info.addressDetail);
+				if (info.positionType == '대표자') {
+					$('#fmTransferData input[name=ceoBirthday]').val('');
+				} else {
+					$('#fmTransferData input[name=ceoBirthday]').val(info.ceoBirthday);
+				}
+				if (info.adminName == null || info.adminName == '') {
+					$('span[name=adminName]').parents('.form-inline').addClass('hide');
+				} else {
+					$('span[name=adminName]').text(info.adminName);
+				}
+				$('#fmTransferData textarea[name=historyUpdateReason]').val(info.historyUpdateReason);
+
+				$('#modalTransferData').modal('show');
+			});
+		};
+
+		//이관데이터 수정
+		var updateTransferData = function () {
+			commonAjaxFunc('/transfer/data/update', $('#fmTransferData').serialize(), 'POST', function (data) {
+				if (data == 'success') {
+					alert('변경되었습니다.');
+					$('#modalTransferData').modal('hide');
+					$('#modalTransferData').clearForm();
+					fnList();
+				}
+			});
+		};
+		var cancelModal = function () {
+			$('#modalTransferData').modal('hide');
+			$('#modalTransferData').clearForm();
+		};
+		var excelDown = function () {
+			/* if(confirm("다운로드 하시겠습니까?")){
+				//location.href="/statistics/branch/excel";
+				 $("form[name=form]").attr("action","/statistics/branch/excel");
+				$("form[name=form]").ajaxSubmit({
+					success:function(data){
+					},
+					error:function(error){
+						alert('error');
+					}
+				});
+			} */
+			if ($('select[name=searchCcYear] option:selected').val() == '') {
+				alert('다운로드할 이수년도를 선택해주세요.');
+				return false;
+			}
+			if ($('select[name=searchCcTarget] option:selected').val() == '') {
+				alert('영업자 구분을 선택해주세요.');
+				return false;
+			}
+
+			if (confirm('다운로드 하시겠습니까?')) {
+				$('#excelBtn').attr('disabled', 'disabled');
+				$('form[name=form]').attr('action', '/transfer/data/manage/excel');
+				$('form[name=form]').submit();
+			}
+		};
+		var showCertificates = function (seq) {
+			var studyWin = window.open('about:blank', 'certificateView', 'width=870,height=950,resizable=yes,scrollbars=yes');
+			$('form[name=form] input[name=seq]').val(seq);
+			var frm = document.form;
+			frm.action = '/admin/transfer/data/certificate';
+			frm.target = 'certificateView';
+			frm.submit();
+		};
+		var sendEmailModal = function (seq) {
+			commonAjaxFunc('/transfer/data/certificate/info', { seq: seq }, 'GET', function (data) {
+				$('input[name=_userName]').val(data.studentInfo.userName);
+				$('input[name=_ccName]').val(data.studentInfo.ccName);
+				$('input[name=_certNo]').val(data.studentInfo.certNo);
+
+				$('input[name=subject]').val('[한국휴게음식업중앙회] 요청하신 수료증입니다.');
+				$('input[name=to]').val(data.studentInfo.email);
+				var emailUid = data.emailUid;
+				var linkStr = 'https://kcraedu.or.kr/user/transferdata/quick/certificate?key=' + emailUid;
+				//썸머 노트
+				$('#summernote').summernote({
+					lang: 'ko-KR',
+					height: 300,
+					callbacks: {
+						onImageUpload: function (files) {
+							//이미지 업로드시
+							uploadAjaxFile(files, 'transfer', 'form', 'summernote');
+						},
+					},
+				});
+
+				var htmlStr = '';
+				htmlStr += '<div style="margin:0;padding:0 ">';
+				htmlStr += '  <table width="720" border="0" cellpadding="0" cellspacing="0" style="margin:0 auto;border-top: 4px solid #1e75d6; ">';
+				htmlStr += '    <tbody>';
+				htmlStr += '      <tr>';
+				htmlStr += '        <td style="background:#fff; border: 1px solid #dedede;">';
+				htmlStr += '          <table width="100%" border="0" cellspacing="0" cellpadding="0">';
+				htmlStr += '            <tbody>';
+				htmlStr += '              <tr>';
+				htmlStr += '                <td style="text-align:center; padding:30px 40px 25px;font-size:1px;line-height:1px">';
+				htmlStr += '                  <a href="" title="새창" target="_blank"><img';
+				htmlStr += '                      src="http://drive.google.com/uc?export=view&id=1XFnbZQOTOMjPOYfVt2VEAV4lJkL3kZ4t"';
+				htmlStr += '                      alt="한국휴게음식업중앙회 로고" style="vertical-align:top;border:none" class="CToWUd"></a>';
+				htmlStr += '                </td>';
+				htmlStr += '              </tr>';
+				htmlStr += '            </tbody>';
+				htmlStr += '          </table>';
+				htmlStr += '          <table width="100%" border="0" cellspacing="0" cellpadding="0">';
+				htmlStr += '            <tbody>';
+				htmlStr += '              <tr>';
+				htmlStr += '                <td style="width:40px"></td>';
+				htmlStr += '                <td style="padding:40px 0 50px">';
+				htmlStr += '                  <table width="100%" border="0" cellspacing="0" cellpadding="0">';
+				htmlStr += '                    <tbody>';
+				htmlStr += '                      <tr>';
+				htmlStr += '                        <td style="font:14px/22px Malgun Gothic;color:#666">';
+				htmlStr += '                          <table cellpadding="0" cellspacing="0" style="width:100%">';
+				htmlStr += '                            <tbody>';
+				htmlStr += '                              <tr>';
+				htmlStr += '                                <td style="font:18px/30px Malgun Gothic;letter-spacing:-1px;color:#969696">';
+				htmlStr += '                                  <table cellpadding="0" cellspacing="0">';
+				htmlStr += '                                    <tbody>';
+				htmlStr += '                                      <tr>';
+				htmlStr += '                                        <td style="display:block;height:25px"></td>';
+				htmlStr += '                                      </tr>';
+				htmlStr += '                                    </tbody>';
+				htmlStr += '                                  </table>';
+				htmlStr += '                                  <div';
+				htmlStr += '                                    style="font:30px Malgun Gothic;letter-spacing:-3px;color:#1e75d6;line-height:1.3">';
+				htmlStr += '                                    <strong>이전년도 수료증 </strong>안내메일';
+				htmlStr += '                                  </div>';
+				htmlStr += '                                </td>';
+				htmlStr += '                              </tr>';
+				htmlStr += '                            </tbody>';
+				htmlStr += '                          </table>';
+				htmlStr += '                          <table cellpadding="0" cellspacing="0" style="width:100% ">';
+				htmlStr += '                            <tbody>';
+				htmlStr += '                              <tr>';
+				htmlStr += '                                <td style="vertical-align:top; font:18px; letter-spacing:-1px;color:#969696">';
+				htmlStr += '                                  <table cellpadding="0" cellspacing="0">';
+				htmlStr += '                                    <tbody>';
+				htmlStr += '                                      <tr>';
+				htmlStr += '                                        <td style="display:block;height:50px">';
+				htmlStr += '                                        </td>';
+				htmlStr += '                                      </tr>';
+				htmlStr += '                                    </tbody>';
+				htmlStr += '                                  </table>';
+				htmlStr += '                                  <div style=" font-size:18px; letter-spacing:-3px;color:#000;line-height:1.8">';
+				htmlStr += '                                    <span class="il">';
+				htmlStr += '                                      [한국휴게음식업중앙회]<br>';
+				htmlStr += data.studentInfo.userName + '님의 이전년도 수료증을 보냅니다.<br>';
+				htmlStr += '                                      수료증 출력을 위해 아래 링크를 확인 바랍니다.';
+				htmlStr += '                                    </span>';
+				htmlStr += '                                  </div>';
+				htmlStr += '                                </td>';
+				htmlStr += '                              </tr>';
+				htmlStr += '                            </tbody>';
+				htmlStr += '                          </table>';
+				htmlStr += '                          <br>';
+				htmlStr += '                          <br>';
+				htmlStr += '                          <table width="100%" border="0" cellspacing="0" cellpadding="0"';
+				htmlStr += '                            style="border-collapse:collapse; font-size:15px;">';
+				htmlStr += '                            <tbody>';
+				htmlStr += '                              <tr>';
+				htmlStr += '                                <th colspan="1" rowspan="1" scope="row"';
+				htmlStr +=
+					'                                  style="border:1px solid #fff;padding:8px 3px;text-align:center;width:25%; background:#1e75d6; color:#fff; font-weight:normal;">';
+				htmlStr += '                                  과정명';
+				htmlStr += '                                </th>';
+				htmlStr += '                                <td';
+				htmlStr +=
+					'                                  style="border:1px solid #fff;padding:8px 3px;text-align:center;width:75%; background:#f3f3f3;font-weight:300;">' +
+					data.studentInfo.ccName;
+				htmlStr += '                                </td>';
+				htmlStr += '                              </tr>';
+				htmlStr += '                              <tr>';
+				htmlStr += '                                <th colspan="1" rowspan="1" scope="row"';
+				htmlStr +=
+					'                                  style="border:1px solid #fff;padding:8px 3px;text-align:center;width:25%; background:#1e75d6; color:#fff; font-weight:normal;">';
+				htmlStr += '                                  수료번호';
+				htmlStr += '                                </th>';
+				htmlStr += '                                <td';
+				htmlStr +=
+					'                                  style="border:1px solid #fff;padding:8px 3px;text-align:center;width:75%; background:#f3f3f3;font-weight:300;">' +
+					data.studentInfo.certNo;
+				htmlStr += '                                </td>';
+				htmlStr += '                              </tr>';
+				htmlStr += '                            </tbody>';
+				htmlStr += '                          </table>';
+				htmlStr += '                          <table cellspacing="0" cellpadding="0"';
+				htmlStr += '                            style="text-align:center; padding-top:20px; padding-bottom:10px">';
+				htmlStr += '                          </table>';
+				htmlStr += '                          <table border="0" cellpadding="0" cellspacing="0">';
+				htmlStr += '                            <tbody>';
+				htmlStr += '                              <tr>';
+				htmlStr += '                                <td style="display:block;height:25px">';
+				htmlStr += '                                </td>';
+				htmlStr += '                              </tr>';
+				htmlStr += '                            </tbody>';
+				htmlStr += '                          </table>';
+				htmlStr += '                          <div style="text-align:center">';
+				htmlStr += '                            <a href="' + linkStr + '"';
+				htmlStr +=
+					'                              style="border-radius: 26px; display:inline-block;vertical-align:top;padding:20px 65px 20px;color:#666;font:12px/14px Malgun Gothic;text-decoration:none;background:#0e5498;color:#fff;font-size:14px"';
+				htmlStr += '                              title="새창" target="_blank">수료증 출력</a>';
+				htmlStr += '                          </div>';
+				htmlStr += '                        </td>';
+				htmlStr += '                      </tr>';
+				htmlStr += '                    </tbody>';
+				htmlStr += '                  </table>';
+				htmlStr += '                </td>';
+				htmlStr += '                <td style="width:40px"></td>';
+				htmlStr += '              </tr>';
+				htmlStr += '            </tbody>';
+				htmlStr += '          </table>';
+				htmlStr += '          <table width="100%" border="0" cellspacing="0" cellpadding="0">';
+				htmlStr += '            <tbody>';
+				htmlStr += '              <tr>';
+				htmlStr += '                <td';
+				htmlStr +=
+					'                  style="padding:40px;border-top:2px #e0e0e0 solid;border-bottom:1px #e0e0e0 solid;font:14px/23px Malgun Gothic;background-color:#f5f5f5; color:#aeaeae;text-align:center">';
+				htmlStr += '                  ※ 본 메일은 발신전용이므로 회신이 되지 않습니다.<br>';
+				htmlStr +=
+					'                  궁금하신 점이나 불편한 사항은 <span><a href="https://kcraedu.or.kr">고객센터</a></span>에 문의해 주시기 바랍니다.<br><br>';
+				htmlStr += '                  서울시 관악구 봉천동 1659-2(청동빌딩 601호) 한국휴게음식업중앙회<br>';
+				htmlStr += '                  대표전화 02-425-6126~8 <span style="padding:0 2px">|</span> 팩스 02-425-6129 <span';
+				htmlStr += '                    style="padding:0 2px">|</span> 사업자 번호 : 101-82-04756 <span style="padding:0 2px">|</span> 대표자 : 최성회';
+				htmlStr += '                </td>';
+				htmlStr += '              </tr>';
+				htmlStr += '              <tr>';
+				htmlStr += '                <td style="padding:10px 10px;font:12px/20px Malgun Gothic; color:#aeaeae; text-align:center">';
+				htmlStr += '                  ⓒCOPYRIGHT(C) 2012 EFA ALL RIGHTS SESERVED.';
+				htmlStr += '                </td>';
+				htmlStr += '              </tr>';
+				htmlStr += '            </tbody>';
+				htmlStr += '          </table>';
+				htmlStr += '        </td>';
+				htmlStr += '      </tr>';
+				htmlStr += '    </tbody>';
+				htmlStr += '  </table>';
+				htmlStr += '</div>';
+				$('#summernote').summernote('code', htmlStr);
+				$('#sendEmailModal').modal('show');
+			});
+		};
+		var sendEmail = function () {
+			var contents = $('#summernote').summernote('code');
+			$('input[name=body]').val(contents);
+
+			$('form[name=transferDataEmailForm]').attr('action', '/aws/email/send/transfer/certificate');
+			$('form[name=transferDataEmailForm]').ajaxSubmit({
+				cache: false,
+				success: function (data) {
+					alert('메일이 발송되었습니다.');
+					$('#sendEmailModal').modal('hide');
+				},
+			});
+		};
+
+		var showPaymentInfo = function (oid, payType, price, applDate) {
+			var htmlStr = '';
+			htmlStr += '<tr>';
+			htmlStr += '<td>' + oid + '</td>';
+			if (payType == 'CARD') {
+				htmlStr += '<td>카드</td>';
+			} else if (payType == 'VBANK') {
+				htmlStr += '<td>가상계좌</td>';
+			} else if (payType == 'DIRECTBANK') {
+				htmlStr += '<td>실시간계좌이체</td>';
+			}
+
+			htmlStr += '<td>' + price + '</td>';
+			htmlStr += '<td>' + moment(applDate, 'YYYYMMDD').format('YYYY.MM.DD') + '</td>';
+			htmlStr += '</tr>';
+			$('#tbPaymentInfo tbody').html(htmlStr);
+			$('#modalPaymentInfo').modal('show');
+		};
+
+		var viewConfirmation = function (seq) {
+			commonAjaxFunc('/transfer/data/info', { seq: seq }, 'GET', function (data) {
+				if (data.info != null) {
+					var vo = data.info;
+					var htmlStr = '';
+					htmlStr += '<tr>';
+					htmlStr += '	<th class="tableNumber">성명</th>';
+					htmlStr += '	<td class="tableTitle">';
+					htmlStr += '		<span class="txtInput">' + vo.ceoName + '</span>';
+					htmlStr += '	</td>';
+					htmlStr += '	<th class="tableNumber">생년월일</th>';
+					htmlStr += '	<td class="tableTitle">';
+					htmlStr +=
+						'		<input type="text" class="form-control" name="ceoBirthday" value="' +
+						vo.ceoBirthday +
+						'" palcehodler="19450404" maxlength="8" onKeydown="isNumber();">';
+					htmlStr += '	</td>';
+					htmlStr += '</tr>';
+					htmlStr += '<tr>';
+					htmlStr += '	<th class="tableNumber">영업소 명칭 또는 상호</th>';
+					htmlStr += '	<td colspan="4" class="tableTitle">' + vo.companyName + '</td>';
+					htmlStr += '</tr>';
+					htmlStr += '<tr>';
+					htmlStr += '	<th class="tableNumber">영업소의 소재지</th>';
+					htmlStr += '	<td colspan="4" class="tableTitle">' + vo.address + ' ' + vo.addressDetail + '</td>';
+					htmlStr += '</tr>';
+					$('#tbCeo tbody').html(htmlStr);
+
+					htmlStr = '<tr>';
+					htmlStr += '	<th class="tableNumber">성명</th>';
+					htmlStr += '	<td class="tableTitle"><span class="txtInput">' + vo.userName + '</span></td>';
+					htmlStr += '	<th class="tableNumber">생년월일</th>';
+					htmlStr += '	<td class="tableTitle">' + vo.birthday + '</td>';
+					htmlStr += '</tr>';
+					htmlStr += '<tr>';
+					htmlStr += '	<th class="tableNumber">주소</th>';
+					htmlStr += '	<td colspan="4" class="tableTitle">' + vo.address + ' ' + vo.addressDetail + '</td>';
+					htmlStr += '</tr>';
+					htmlStr += '<tr>';
+					htmlStr += '	<th class="tableNumber">직책</th>';
+					htmlStr += '	<td colspan="4" class="tableTitle">위생관리책임자</td>';
+					htmlStr += '</tr>';
+					$('#tbManager tbody').html(htmlStr);
+					$('span[name=confirmManagerName]').text(vo.ceoName);
+					if (vo.confirmationRegDate != null && vo.confirmationRegDate != '') {
+						$('#confirmRegDate').text(moment(vo.confirmationRegDate, 'YYYYMMDD').format('YYYY년 MM월 DD일'));
+					}
+					$('#confirmationModal').modal('show');
+				}
+			});
+		};
+
+		return {
+			searchReset: searchReset,
+			callback: callback,
+			fnList: fnList,
+			excelDown: excelDown,
+			fnSearch: fnSearch,
+			showCertificates: showCertificates,
+			sendEmailModal: sendEmailModal,
+			sendEmail: sendEmail,
+			showTransferDataModal: showTransferDataModal,
+			updateTransferData: updateTransferData,
+			cancelModal: cancelModal,
+			showPaymentInfo: showPaymentInfo,
+			viewConfirmation: viewConfirmation,
+		};
+	})();
+
+	function goPage(currentPageNo) {
+		$('input[name=currentPageNo]').val(currentPageNo);
+		transferData.fnList();
+	}
+	//페이지당 노출갯수 선택
+	function pageUnitChange() {
+		$('input[name=currentPageNo]').val('1');
+		transferData.fnList();
+	}
+
+	//transferData.fnList();
+</script>

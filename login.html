@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>교육관리 통합시스템</title>
+
+		<!-- Global stylesheets -->
+		<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" />
+		<link rel="stylesheet" type="text/css" href="http://dev2.onesnc.co.kr/static/global_assets/css/icons/icomoon/styles.css" />
+		<link rel="stylesheet" type="text/css" href="http://dev2.onesnc.co.kr/static/global_assets/css/icons/fontawesome/styles.min.css" />
+		<link rel="stylesheet" type="text/css" href="http://dev2.onesnc.co.kr/static/global_assets/css/bootstrap.css" />
+		<link rel="stylesheet" type="text/css" href="http://dev2.onesnc.co.kr/static/global_assets/css/core.css" />
+		<link rel="stylesheet" type="text/css" href="http://dev2.onesnc.co.kr/static/global_assets/css/components.css" />
+		<link rel="stylesheet" type="text/css" href="http://dev2.onesnc.co.kr/static/global_assets/css/colors.min.css" />
+		<!-- /global stylesheets -->
+
+		<!-- Core JS files -->
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/plugins/loaders/pace.min.js"></script>
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/core/libraries/jquery.min.js"></script>
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/core/libraries/bootstrap.min.js"></script>
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/plugins/loaders/blockui.min.js"></script>
+
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/plugins/jquery-form/jquery.form.js"></script>
+
+		<!-- /core JS files -->
+		<script src="http://dev2.onesnc.co.kr/static/common_js.js"></script>
+
+		<!-- frontlab -->
+		<link rel="stylesheet" type="text/css" href="/assets/css/common.css" />
+	</head>
+
+	<body>
+		<div class="kcra-login">
+			<div class="kcra-login__inner">
+				<div class="kcra-login__logo">
+					<img src="http://dev2.onesnc.co.kr/static/global_assets/images/logo.png" alt="KCRA 한국휴게음식업중앙회교육원" />
+				</div>
+				<div class="kcra-login__title">
+					<h1>교육관리 통합시스템</h1>
+					<p>로그인이 필요합니다.</p>
+				</div>
+				<div class="kcra-login__form">
+					<input type="text" class="form-control" id="loginId" name="userId" placeholder="아이디" />
+					<input type="password" class="form-control" id="loginPw" name="passwd" placeholder="비밀번호" onkeydown="if(event.keyCode == 13){userLogin();}" />
+					<button type="button" class="btn">로그인</button>
+				</div>
+
+				<div class="kcra-login__text" id="loginRequestWrapper"></div>
+				<div class="kcra-login__link">
+					<a href="javascript:showReqModal();">계정요청</a>
+				</div>
+				<address>
+					서울시 관악구 봉천동 1659-2(청동빌딩 601호) 한국휴게음식업중앙회 TEL : 02-425-6126~8 FAX : 02-425-6129
+					<p>
+						<strong>COPYRIGHT(C) 2012 EFA ALL RIGHTS SESERVED.</strong>
+					</p>
+				</address>
+			</div>
+		</div>
+
+		<div id="modal" class="modal fade" tabindex="-1">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h5 class="modal-title">계정요청</h5>
+					</div>
+
+					<div class="modal-body">
+						<form class="form-horizontal" name="registForm" id="registForm" method="post" enctype="multipart/form-data">
+							<div class="form-group">
+								<label class="col-md-2"><span class="text-danger">*</span> 지역선택</label>
+								<div class="col-md-10 d-flex">
+									<input type="hidden" name="orgSido" value="" />
+									<input type="hidden" name="orgGungu" value="" />
+									<select class="form-control mr-10" id="sido" onchange="getGungu();">
+										<option value="">시/도</option>
+									</select>
+
+									<select class="form-control" id="gungu" name="gungu">
+										<option value="">군/구</option>
+									</select>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-2"><span class="text-danger">*</span> 기관명</label>
+								<div class="col-md-10"><input type="text" class="form-control" name="orgName" placeholder="기관명을 입력해주세요." /></div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-2"><span class="text-danger">*</span> 아이디</label>
+								<div class="col-md-10 d-flex">
+									<input type="hidden" name="userIdOverlapChk" value="N" />
+									<input type="text" class="form-control" name="userId" placeholder="아이디를 입력해주세요." />
+									<button type="button" class="btn ml-10" onclick="overlapChk();">중복체크</button>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-2"><span class="text-danger">*</span> 패스워드</label>
+								<div class="col-md-10">
+									<input type="password" class="form-control mb-5" name="passwd" placeholder="비밀번호를 입력하세요." />
+									<input type="password" class="form-control" name="passwdConfirm" placeholder="비밀번호 확인 값을 입력하세요." />
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-2"><span class="text-danger">*</span> 이름</label>
+								<div class="col-md-10"><input type="text" class="form-control" name="userName" /></div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-2"><span class="text-danger"></span> 공문선택</label>
+								<div class="col-md-10"><input type="file" class="form-control" name="uploadFile" /></div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-2"><span class="text-danger">*</span> 연락처</label>
+								<div class="col-md-10">
+									<input type="text" class="form-control" name="phone" placeholder="연락처는 숫자로만 입력해주세요. ex)01012345678" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-2"><span class="text-danger">*</span> 이메일</label>
+								<div class="col-md-10 d-flex">
+									<input type="hidden" name="email" value="" />
+									<input type="text" class="form-control" name="emailHeader" />
+									<span class="d-flex" style="align-items: center; padding: 0 4px">@</span>
+									<input type="text" class="form-control" name="emailTail" />
+									<select name="emailSel" id="emailSel" class="form-control ml-10">
+										<option value="">직접입력</option>
+										<option value="naver.com">naver.com</option>
+										<option value="daum.net">daum.net</option>
+										<option value="gmail.com">gmail.com</option>
+									</select>
+								</div>
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-gray" data-dismiss="modal">취소</button>
+						<button type="button" class="btn btn-primary" onclick="requestAccount();">저장</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script>
+			$(document).ready(function () {
+				getSiteInfo();
+				getSido();
+				$('#emailSel').change(function () {
+					if ($('#emailSel').val() != '') {
+						$('input[name=emailTail]').val($('#emailSel').val());
+						$('input[name=emailTail]').attr('readonly', true);
+					} else {
+						$('input[name=emailTail]').val('');
+						$('input[name=emailTail]').removeAttr('readonly');
+					}
+				});
+			});
+
+			function getSido() {
+				commonAjaxFunc('/common/sido', {}, 'GET', function (data) {
+					$('#sido').empty();
+					$('#sido').append("<option value=''>시/도</option>");
+					for (var i = 0; i < data.length; i++) {
+						$('#sido').append("<option value='" + data[i].sidoNo + "'>" + data[i].sidoNm + '</option>');
+					}
+				});
+			}
+
+			function getGungu() {
+				var sidoNo = $('#sido').val();
+				commonAjaxFunc('/common/gungu', { sidoNo: sidoNo }, 'GET', function (data) {
+					$('#gungu').empty();
+					$('#gungu').append("<option value=''>군/구</option>");
+					for (var i = 0; i < data.length; i++) {
+						$('#gungu').append("<option value='" + data[i].gunguNm + "'>" + data[i].gunguNm + '</option>');
+					}
+				});
+			}
+
+			function getSiteInfo() {
+				commonAjaxFunc('/site/info', {}, 'GET', function (data) {
+					if (data.accountRequestUseYn == 'Y') {
+						$('#loginRequestWrapper').html('<a href="javascript:showReqModal();" style=\'color: gray;font-weight: 400;font-size: 15px;\'>계정요청</a>');
+					}
+				});
+			}
+
+			function showReqModal() {
+				$('#registForm')[0].reset();
+				$('#modal').modal('show');
+			}
+
+			function userLogin() {
+				var userId = $('input[name=userId]').val();
+				var passwd = $('input[name=passwd]').val();
+
+				if (isEmpty(userId)) {
+					alert('아이디를 입력하세요.');
+					return false;
+				}
+				if (isEmpty(passwd)) {
+					alert('비밀번호를 입력하세요.');
+					return false;
+				}
+
+				var data = {
+					userId: userId,
+					passwd: passwd,
+				};
+				commonAjaxFunc('/login', data, 'post', loginCallback);
+			}
+
+			function loginCallback(data) {
+				if (data == 'LOGIN_COMPLETE') {
+					location.href = '/';
+				} else if (data == 'NO_USER') {
+					alert('회원정보가 없습니다.');
+				} else {
+					alert('아이디 또는 패스워드가 일치하지 않습니다.');
+				}
+			}
+
+			//이메일 유효성 체크
+			function validEmailChk(value) {
+				emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+				return emailReg.test(value);
+			}
+
+			function validUserIdCheck(value) {
+				var userId = $('#registForm input[name=userId]').val();
+				var intErr = '';
+				for (i = 0; i < userId.length; i++) {
+					var retCode = userId.charAt(i);
+					//입력받은 값중에 한글/특수문자제어
+					if (!(retCode >= '0' && retCode <= '9') && !(retCode >= 'a' && retCode <= 'z')) {
+						intErr = -1;
+						break;
+					} else if (userId.indexOf(' ') >= 0) {
+						//공백
+						intErr = -1;
+						break;
+					}
+				}
+
+				if (userId == '') {
+					alert('아이디를 입력해주세요.');
+					$('#registForm input[name=userId]').focus();
+					return false;
+				} else if (intErr == -1) {
+					alert('아이디에 한글/특수문자/영어 대문자/공백이 들어갈 수 없습니다.');
+					$('#registForm input[name=userId]').focus();
+					return false;
+				} else if (userId.length < 4 || userId.length > 10) {
+					alert('아이디는 4자리 이상 10자리 미만으로 입력해주세요.');
+					$('#registForm input[name=userId]').focus();
+					return false;
+				} else {
+					return true;
+				}
+			}
+
+			function validPhoneChk() {
+				var regExp = /^[0-9]+$/;
+
+				if ($('input[name=phone]').val() == '') {
+					alert('휴대폰번호를 입력하세요.');
+					return false;
+				} else {
+					if ($('input[name=phone]').val() == '') {
+						alert('휴대폰번호를 입력하세요.');
+						return false;
+					} else if ($('input[name=phone]').val().length < 11) {
+						alert('휴대폰번호를 정확히 입력해주세요.');
+						return false;
+					} else if (!regExp.test($('input[name=phone]').val())) {
+						alert('휴대폰 형식이 잘못되었습니다.');
+						$('input[name=phone]').val('');
+						return false;
+					}
+				}
+				return true;
+			}
+			function validPasswdCheck(value) {
+				var passwd = $('#registForm input[name=passwd]').val();
+
+				var checkNum = passwd.search(/[0-9]/g); // 숫자사용
+				var checkEng = passwd.search(/[a-zA-Z]/gi); // 영문사용
+				if (passwd == '') {
+					alert('비밀번호를 입력해주세요.');
+					$('#registForm input[name=passwd]').focus();
+					return false;
+				} else if (passwd.length < 6 || passwd.length > 20) {
+					alert('비밀번호는 영문, 숫자를 혼용하여 6글자 이상 20자리 미만으로 설정해주세요.');
+					$('#registForm input[name=passwd]').focus();
+					return false;
+				} else if (checkNum < 0 || checkEng < 0) {
+					alert('비밀번호는 영문, 숫자를 혼용하여 6글자 이상 20자리 미만으로 설정해주세요');
+					return false;
+				} else if (passwd.search(/[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/gi) > -1) {
+					alert('비밀번호에 한글이 들어갈 수 없습니다.');
+					$('#registForm input[name=passwd]').focus();
+					return false;
+				} else {
+					return true;
+				}
+			}
+			function validCheck() {
+				$('#registForm input[name=userId]').val($('#registForm input[name=userId]').val().trim());
+				$('input[name=userName]').val($('input[name=userName]').val().trim());
+				$('input[name=emailHeader]').val($('input[name=emailHeader]').val().trim());
+				$('input[name=email]').val($('input[name=email]').val().trim());
+
+				var email = '';
+				email = $('input[name=emailHeader]').val() + '@';
+				if ($('select[name=emailSel]').val() == '') {
+					email += $('input[name=emailTail]').val();
+				} else {
+					email += $('select[name=emailSel]').val();
+				}
+
+				$('input[name=email]').val(email);
+
+				var returnVal = false;
+				if (isEmpty($('#sido').val()) || isEmpty($('#gungu').val())) {
+					alert('지역을 선택해주세요.');
+					return false;
+				} else if (isEmpty($('input[name=orgName]').val())) {
+					alert('기관명을 입력해주세요.');
+					$('input[name=orgName]').focus();
+					return false;
+				} else if (!validUserIdCheck()) {
+					return false;
+				} else if ($('input[name=userIdOverlapChk]').val() == 'N') {
+					alert('아이디 중복체크를 해주세요.');
+					$('#registForm input[name=userId]').focus();
+					return false;
+				} else if (!validPasswdCheck()) {
+					return false;
+				} else if ($('#registForm input[name=passwd]').val() != $('#registForm input[name=passwdConfirm]').val()) {
+					alert('비밀번호 확인값이 일치하지 않습니다.');
+					$('#registForm input[name=passwdConfirm]').focus();
+					return false;
+				} else if ($('input[name=userName]').val() == '') {
+					alert('이름을 입력하세요.');
+					$('input[name=userName]').focus();
+					return false;
+				} else if (!validPhoneChk()) {
+					return false;
+				} else if ($('input[name=emailHeader]').val() == '' || $('input[name=emailTailInput]').val() == '') {
+					alert('이메일을 입력하세요.');
+					$('input[name=emailHeader]').focus();
+					return false;
+				} else if (!validEmailChk($('input[name=email]').val())) {
+					alert('올바른 이메일 형식이 아닙니다.');
+					$('input[name=email]').focus();
+					return false;
+				} else {
+					returnVal = true;
+					return true;
+				}
+				return returnVal;
+			}
+
+			function overlapChk() {
+				if (validUserIdCheck()) {
+					var url = '/user/' + $('#registForm input[name=userId]').val() + '/chk';
+					var data = { userId: $('#registForm input[name=userId]').val() };
+					commonAjaxFunc(url, data, 'GET', function (data) {
+						if (data != 0) {
+							alert('이미 사용중인 아이디입니다.');
+							$('input[name=userIdOverlapChk]').val('N');
+							$('#registForm input[name=userId]').val('');
+							$('#registForm input[name=userId]').focus();
+						} else {
+							alert('사용가능한 아이디입니다.');
+							$('input[name=userIdOverlapChk]').val('Y');
+						}
+					});
+				}
+			}
+			function requestAccount() {
+				if (validCheck()) {
+					$('input[name=orgSido]').val($('#sido  option:selected').text());
+					$('input[name=orgGungu]').val($('#gungu').val());
+
+					$('#registForm').attr('action', '/user');
+					$('#registForm').ajaxSubmit({
+						beforeSubmit: function () {},
+						cache: false,
+						success: function (data) {
+							alert('등록되었습니다.');
+							$('#modal').modal('hide');
+						},
+					});
+				}
+			}
+		</script>
+	</body>
+</html>

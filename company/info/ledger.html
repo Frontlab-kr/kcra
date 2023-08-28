@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>통합시스템</title>
+
+		<!-- Global stylesheets -->
+		<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" />
+		<link rel="stylesheet" type="text/css" href="http://dev2.onesnc.co.kr/static/global_assets/css/icons/icomoon/styles.css" />
+		<link rel="stylesheet" type="text/css" href="http://dev2.onesnc.co.kr/static/global_assets/css/icons/fontawesome/styles.min.css" />
+		<link rel="stylesheet" type="text/css" href="http://dev2.onesnc.co.kr/static/global_assets/css/bootstrap.css" />
+		<link rel="stylesheet" type="text/css" href="http://dev2.onesnc.co.kr/static/global_assets/css/core.css" />
+		<link rel="stylesheet" type="text/css" href="http://dev2.onesnc.co.kr/static/global_assets/css/components.css" />
+		<link rel="stylesheet" type="text/css" href="http://dev2.onesnc.co.kr/static/global_assets/css/colors.min.css" />
+		<!-- /global stylesheets -->
+
+		<!-- Core JS files -->
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/plugins/loaders/pace.min.js"></script>
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/core/libraries/jquery.min.js"></script>
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/core/libraries/bootstrap.min.js"></script>
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/plugins/loaders/blockui.min.js"></script>
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/app.js"></script>
+		<!-- /core JS files -->
+
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/plugins/ui/moment/moment.min.js"></script>
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/plugins/ui/moment/moment_locales.min.js"></script>
+
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/plugins/editors/summernote/summernote.min.js"></script>
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/plugins/forms/styling/uniform.min.js"></script>
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/plugins/editors/summernote/lang/summernote-ko-KR.js"></script>
+
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/plugins/forms/selects/select2.min.js"></script>
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/plugins/jquery-form/jquery.form.js"></script>
+
+		<!-- datepicker -->
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/core/libraries/jquery_ui/core.min.js"></script>
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/core/libraries/jquery_ui/interactions.min.js"></script>
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/core/libraries/jquery_ui/widgets.min.js"></script>
+		<script src="http://dev2.onesnc.co.kr/static/global_assets/js/core/libraries/jquery_ui/effects.min.js"></script>
+		<!-- /datepicker -->
+
+		<script src="https://cdn.jsdelivr.net/lodash/4.17.4/lodash.min.js"></script>
+
+		<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+		<script src="http://dev2.onesnc.co.kr/static/common_js.js"></script>
+		<!-- /theme JS files -->
+		<!-- sheetjs  -->
+		<script type="text/javascript" src="//cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
+
+		<!-- frontlab -->
+		<link rel="stylesheet" type="text/css" href="/assets/css/common.css" />
+		<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/colresizable/1.6.0/colResizable-1.6.js"
+			integrity="sha512-0HfjrMq6p8VBkVjp/gy/obELN81BCwmKRd7fongBsAPw49BeKAfXpQn6PWSPa8rm7mvblqyV2P1kVNzvW6qR4Q=="
+			crossorigin="anonymous"
+			referrerpolicy="no-referrer"
+		></script>
+		<script>
+			$(document).ready(function () {
+				$('.kcra-list .table').colResizable({
+					liveDrag: true,
+					gripInnerHtml: "<div class='grip'></div>",
+					draggingClass: 'dragging',
+					resizeMode: 'fit',
+				});
+				$('.kcra-sidebar-list__item a').on('click', function () {
+					$(this).parents('.kcra-sidebar-list__item').toggleClass('active');
+					return false;
+				});
+			});
+		</script>
+	</head>
+
+	<body>
+		<div class="kcra">
+			<div class="kcra-sidebar">
+				<div class="kcra-sidebar-logo">
+					<a href=""><img src="/assets/images/logo.png" alt="KCRA 한국휴게음식업중앙회교육원" /></a>
+				</div>
+				<div class="kcra-sidebar-user">
+					<div class="dropdown">
+						<button id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<img src="../assets/images/user.png" alt="" />
+							관리자
+							<span class="material-symbols-outlined"> expand_more </span>
+						</button>
+						<ul class="dropdown-menu">
+							<li>
+								<a href="/logout">로그아웃</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="kcra-sidebar-list">
+					<div class="kcra-sidebar-list__item">
+						<a href=""><span class="material-symbols-outlined"> settings </span><strong>설정</strong></a>
+					</div>
+					<div class="kcra-sidebar-list__item">
+						<a href=""><span class="material-symbols-outlined"> corporate_fare </span><strong>업소정보관리</strong></a>
+					</div>
+					<div class="kcra-sidebar-list__item">
+						<a href=""><span class="material-symbols-outlined"> school </span><strong>교육결과조회</strong></a>
+					</div>
+					<div class="kcra-sidebar-list__item depth">
+						<a href=""><span class="material-symbols-outlined"> stress_management </span><strong>집합교육관리조회</strong></a>
+						<ul>
+							<li class="active">
+								<a href="/admin/offline/manage"><span>신규영업자</span></a>
+							</li>
+						</ul>
+					</div>
+					<div class="kcra-sidebar-list__item">
+						<a href=""><span class="material-symbols-outlined"> contract_edit </span><strong>통보서관리</strong></a>
+					</div>
+					<div class="kcra-sidebar-list__item">
+						<a href=""><span class="material-symbols-outlined"> data_table </span><strong>이관데이터관리</strong></a>
+					</div>
+					<div class="kcra-sidebar-list__item">
+						<a href=""><span class="material-symbols-outlined"> analytics </span><strong>수료현황</strong></a>
+					</div>
+					<div class="kcra-sidebar-list__item">
+						<a href=""><span class="material-symbols-outlined"> assignment_ind </span><strong>수료자등록</strong></a>
+					</div>
+					<div class="kcra-sidebar-list__item active depth">
+						<a href=""><span class="material-symbols-outlined"> bar_chart_4_bars </span><strong>통계</strong></a>
+						<ul>
+							<li class="active">
+								<a href="/admin/statistics/company"><span>영업대장별 통계</span></a>
+							</li>
+							<li>
+								<a href="/admin/statistics/edu"><span>교육통계</span></a>
+							</li>
+							<li>
+								<a href="/admin/statistics/period"><span>기간대비통계</span></a>
+							</li>
+							<li>
+								<a href="/admin/statistics/age"><span>연령별통계</span></a>
+							</li>
+						</ul>
+					</div>
+					<div class="kcra-sidebar-list__item">
+						<a href=""> <span class="material-symbols-outlined"> settings_cinematic_blur </span><strong>계정관리</strong></a>
+					</div>
+				</div>
+			</div>
+			<div class="kcra-contents kcra-list-form">
+				<div class="kcra-title">
+					<h1>영업대장조회</h1>
+				</div>
+				<div class="kcra-form">
+					<div class="kcra-form__box">
+						<form name="searchForm" id="searchForm" method="post">
+							<input type="hidden" name="e_schSido" value="" />
+							<input type="hidden" name="orderColumn" value="" />
+							<input type="hidden" name="orderBy" value="" />
+							<input type="hidden" name="currentPageNo" value="1" />
+							<input type="hidden" name="studyStatus" value="C" />
+							<table>
+								<colgroup>
+									<col style="width: 10%" />
+									<col style="width: 40%" />
+									<col style="width: 10%" />
+									<col style="width: 40%" />
+								</colgroup>
+								<tbody>
+									<tr>
+										<th>업소명</th>
+										<td><input type="text" class="form-control" name="schCompanyName" /></td>
+										<th>대표자명</th>
+										<td><input type="text" class="form-control" name="schCeoName" value="" /></td>
+									</tr>
+
+									<tr>
+										<th>지역</th>
+										<td class="d-flex">
+											<select class="form-control mr-10" id="schSido" onchange="getGungu();">
+												<option value="">시/도</option>
+											</select>
+
+											<select class="form-control" id="schGungu" name="schGungu">
+												<option value="">군/구</option>
+											</select>
+										</td>
+										<th>인허가번호</th>
+										<td><input type="text" class="form-control" name="schLicenseNo" value="" /></td>
+									</tr>
+									<tr>
+										<th>업종</th>
+										<td>
+											<select class="form-control" id="schCompanyType" name="schCompanyType">
+												<option value="">전체</option>
+												<option value="휴게음식점">휴게음식점</option>
+												<option value="식품자동판매기업">식품자동판매기업</option>
+											</select>
+										</td>
+										<th>영업상태</th>
+										<td>
+											<select class="form-control" id="schCompanyStatus" name="schCompanyStatus">
+												<option value="">전체</option>
+												<option value="1">운영</option>
+												<option value="2">양도양수</option>
+												<option value="3">상속</option>
+												<option value="4">기타</option>
+												<option value="5">폐업</option>
+											</select>
+										</td>
+									</tr>
+									<tr>
+										<th>인허가일자</th>
+										<td colspan="3">
+											<div class="form-inline">
+												<div class="kcra-datepicker">
+													<div class="kcra-datepicker__input">
+														<input type="text" class="form-control datepicker" name="schStartDate" placeholder="" />
+														<span class="material-symbols-outlined"> calendar_month </span>
+													</div>
+													<span>~</span>
+													<div class="kcra-datepicker__input">
+														<input type="text" class="form-control datepicker" name="schEndDate" placeholder="" />
+														<span class="material-symbols-outlined"> calendar_month </span>
+													</div>
+												</div>
+												<button type="button" class="btn btn-sm btn-gray ml-15" onclick="setSearchDate('All');">전체</button>
+												<button type="button" class="btn btn-sm btn-gray" onclick="setSearchDate('today');">오늘</button>
+												<button type="button" class="btn btn-sm btn-gray" onclick="setSearchDate('1month');">1개월</button>
+												<button type="button" class="btn btn-sm btn-gray" onclick="setSearchDate('3month');">3개월</button>
+											</div>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</form>
+					</div>
+					<div class="kcra-form__button">
+						<button type="button" class="btn" onclick="completeStudent.search();"><span class="material-symbols-outlined"> search </span>검색</button>
+						<button type="button" class="btn" onclick="completeStudent.searchReset();">
+							<span class="material-symbols-outlined"> device_reset </span>조회조건초기화
+						</button>
+					</div>
+				</div>
+				<div class="kcra-list">
+					<div class="kcra-list-head">
+						<div class="kcra-list-head__total">조회건수 : <strong>43</strong>건</div>
+						<div class="kcra-list-head__button">
+							<button type="button" class="btn btn-gray" onclick="showRegistModal();"><span class="material-symbols-outlined"> add </span>추가</button>
+							<button type="button" class="btn btn-gray" onclick="cil.excelDown();">
+								<span class="material-symbols-outlined"> download </span>엑셀다운로드
+							</button>
+							<button type="button" class="btn btn-gray" onclick="showExcelUploadModal();">
+								<span class="material-symbols-outlined"> upload </span>일괄업로드
+							</button>
+						</div>
+					</div>
+					<div class="table-responsive">
+						<input type="hidden" name="currentPageNo" value="1" />
+						<table class="table result-table" id="dataTable">
+							<colgroup>
+								<col width="6%" />
+								<col width="10%" />
+								<col width="8%" />
+								<col width="8%" />
+								<col width="8%" />
+								<col width="8%" />
+								<col width="20%" />
+								<col width="8%" />
+								<col width="8%" />
+								<col width="8%" />
+								<col width="8%" />
+							</colgroup>
+
+							<thead>
+								<tr>
+									<th>NO</th>
+									<th class="text-center" data-order="LICENSE_NO">인허가번호</th>
+									<th class="text-center" data-order="LICENSE_DATE">인허가일자</th>
+									<th class="text-center" data-order="COMPANY_NAME">업소명</th>
+									<th class="text-center">업종</th>
+									<!-- <th class="text-center sort_asc"  data-order="CEO_NAME">주대표자명</th> -->
+									<th class="text-center" data-order="CEO_NAME">주대표자명</th>
+									<th class="text-center">업소주소</th>
+									<th class="text-center">우편번호</th>
+									<th class="text-center">영업상태</th>
+									<th class="text-center" data-order="REG_DATE">일자</th>
+									<!-- <th class="text-center sort_asc sort_active" data-order="REG_DATE">일자</th> -->
+									<th class="text-center">변경이력</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td colspan="11" class="text-center" style="height: 300px">검색조건을 입력한 뒤 검색버튼을 눌러주세요.</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="kcra-pagination">
+						<ul class="pagination">
+							<li><a href="javascript:goPage(1);">이전</a></li>
+							<li class="active"><a href="#">1</a></li>
+							<li><a href="javascript:goPage('2');">2</a></li>
+							<li><a href="javascript:goPage('3');">3</a></li>
+							<li><a href="javascript:goPage('4');">4</a></li>
+							<li><a href="javascript:goPage('5');">5</a></li>
+							<li><a href="javascript:goPage('6');">6</a></li>
+							<li><a href="javascript:goPage('7');">7</a></li>
+							<li><a href="javascript:goPage('8');">8</a></li>
+							<li><a href="javascript:goPage('9');">9</a></li>
+							<li><a href="javascript:goPage('10');">10</a></li>
+							<li><a href="javascript:goPage(11);">다음</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div id="uploadModal" class="modal fade" tabindex="-1">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h5 class="modal-title">일괄업로드</h5>
+					</div>
+
+					<div class="modal-body">
+						<form name="upalodForm" id="upalodForm" enctype="multipart/form-data" method="post">
+							<div class="form-group">
+								<label>엑셀파일 업로드</label>
+								<input type="file" class="form-control" name="uploadFile" id="uploadFile" />
+							</div>
+
+							<div class="form-group">
+								<a href="/static/file/down?originalNm=company_upload_sample.xlsx">샘플 파일 다운로드</a>
+							</div>
+							<div>
+								<p class="text-danger">아래는 업로드 양식에 대한 설명입니다. 참고하여 작성해주세요.</p>
+								<img src="/static/global_assets/images/companyUploadSampleImg.png" style="width: 100%" />
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-gray" data-dismiss="modal">취소</button>
+						<button type="button" class="btn" onclick="excelUpload();">등록</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="uploadResultModal" class="modal fade" tabindex="-1">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h5 class="modal-title">일괄업로드</h5>
+					</div>
+
+					<div class="modal-body"></div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div id="registModal" class="modal fade" tabindex="-1">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h5 class="modal-title">업소정보 등록</h5>
+					</div>
+
+					<div class="modal-body">
+						<form class="form-horizontal" name="registForm" method="post">
+							<input type="hidden" name="companyType" value="휴게음식점" />
+							<div class="form-group">
+								<label class="col-md-2"><span class="text-danger">*</span> 인허가번호</label>
+								<div class="col-md-10"><input type="text" class="form-control" name="licenseNo" /></div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-2"><span class="text-danger">*</span> 업소명</label>
+								<div class="col-md-10"><input type="text" class="form-control" name="companyName" /></div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-2">인허가일자</label>
+								<div class="col-md-10">
+									<div class="kcra-datepicker">
+										<div class="kcra-datepicker__input">
+											<input type="text" class="form-control datepicker" name="licenseDate" placeholder="" />
+											<span class="material-symbols-outlined"> calendar_month </span>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-2"><span class="text-danger">*</span> 대표자명</label>
+								<div class="col-md-10"><input type="text" class="form-control" name="ceoName" /></div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-2"><span class="text-danger">*</span> 업소주소</label>
+								<div class="col-md-10"><input type="text" class="form-control" name="companyAddress" /></div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-2">우편번호</label>
+								<div class="col-md-10"><input type="text" class="form-control" name="postCode" /></div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-2">영업상태</label>
+								<div class="col-md-10">
+									<label class="radio-inline"><input type="radio" class="styled" name="companyStatus" value="1" />운영</label>
+									<label class="radio-inline"><input type="radio" class="styled" name="companyStatus" value="2" />양도양수</label>
+									<label class="radio-inline"><input type="radio" class="styled" name="companyStatus" value="3" />상속</label>
+									<label class="radio-inline"><input type="radio" class="styled" name="companyStatus" value="4" />기타</label>
+									<label class="radio-inline"><input type="radio" class="styled" name="companyStatus" value="5" />폐업</label>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-2">일자</label>
+								<div class="col-md-10">
+									<div class="kcra-datepicker">
+										<div class="kcra-datepicker__input">
+											<input type="text" class="form-control datepicker" name="goOutDate" placeholder="" />
+											<span class="material-symbols-outlined"> calendar_month </span>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-2">비고</label>
+								<div class="col-md-10"><input type="text" class="form-control" name="memo" /></div>
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-gray" data-dismiss="modal">취소</button>
+						<button type="button" class="btn" id="btnAdd" onclick="cil.registCompany();">저장</button>
+						<button type="button" class="btn hide" id="btnEdit" onclick="cil.updateCompany();">수정</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div id="historyModal" class="modal fade" tabindex="-1">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h5 class="modal-title">변경이력</h5>
+					</div>
+
+					<div class="modal-body">
+						<ul class="change-log-ul"></ul>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
+
+<script>
+	$(document).ready(function () {
+		getSido();
+	});
+	$('.datepicker').datepicker({ dateFormat: 'yy-mm-dd' });
+
+	//thead 정렬 이슈
+	$('.result-table th').click(function () {
+		$('.result-table th').removeClass('sort-active');
+		var orderColumn = $(this).attr('data-order');
+		var orderBy = 'DESC';
+
+		if ($(this).hasClass('sort_asc')) {
+			$(this).removeClass('sort_asc').addClass('sort_desc sort-active');
+			orderBy = 'DESC';
+		} else {
+			$(this).removeClass('sort_desc').addClass('sort_asc sort-active');
+			orderBy = 'ASC';
+		}
+
+		$('input[name=orderColumn]').val(orderColumn);
+		$('input[name=orderBy]').val(orderBy);
+		cil.search();
+	});
+
+	$('input[name=checkAll]').change(function () {
+		if ($('input[name=checkAll]').is(':checked')) {
+			$('input[name=check_seq]').prop('checked', true);
+		} else {
+			$('input[name=check_seq]').prop('checked', false);
+		}
+	});
+
+	$('#registModal').on('hidden.bs.modal', function () {
+		$('form[name=registForm]')[0].reset();
+	});
+
+	function getSido() {
+		commonAjaxFunc('/common/sido', {}, 'GET', function (data) {
+			$('#schSido').empty();
+			$('#schSido').append("<option value=''>시/도</option>");
+			for (var i = 0; i < data.length; i++) {
+				$('#schSido').append("<option value='" + data[i].sidoNo + "'>" + data[i].sidoNm + '</option>');
+			}
+		});
+	}
+
+	function getGungu() {
+		var sidoNo = $('#schSido').val();
+		commonAjaxFunc('/common/gungu', { sidoNo: sidoNo }, 'GET', function (data) {
+			$('#schGungu').empty();
+			$('#schGungu').append("<option value=''>군/구</option>");
+			for (var i = 0; i < data.length; i++) {
+				$('#schGungu').append("<option value='" + data[i].gunguNm + "'>" + data[i].gunguNm + '</option>');
+			}
+		});
+	}
+
+	function setSearchDate(type) {
+		if (type == 'All') {
+			$('input[name=schStartDate]').val('');
+			$('input[name=schEndDate]').val('');
+		} else if (type == 'today') {
+			$('input[name=schStartDate]').val(moment().format('YYYY-MM-DD'));
+			$('input[name=schEndDate]').val(moment().format('YYYY-MM-DD'));
+		} else if (type == '1month') {
+			$('input[name=schStartDate]').val(moment().subtract(1, 'months').format('YYYY-MM-DD'));
+			$('input[name=schEndDate]').val(moment().format('YYYY-MM-DD'));
+		} else if (type == '3month') {
+			$('input[name=schStartDate]').val(moment().subtract(3, 'months').format('YYYY-MM-DD'));
+			$('input[name=schEndDate]').val(moment().format('YYYY-MM-DD'));
+		}
+	}
+	//페이징
+	function goPage(currentPageNo) {
+		$('input[name=currentPageNo]').val(currentPageNo);
+		cil.init();
+	}
+	//페이지당 노출갯수 선택
+	function pageUnitChange() {
+		$('input[name=currentPageNo]').val('1');
+		cil.init();
+	}
+
+	//엑셀 업로드 모달 open
+	function showExcelUploadModal() {
+		$('#uploadModal').modal('show');
+	}
+	//업소 추가 모달 open
+	function showRegistModal() {
+		$('form[name=registForm]')[0].reset();
+		$('#btnAdd').removeClass('hide');
+		$('#btnEdit').addClass('hide');
+
+		$('#registModal').modal('show');
+	}
+
+	//엑셀  업로드
+	function excelUpload() {
+		if ($('input[name=uploadFile]').val() == '') {
+			alert('파일을 등록해주세요.');
+			return false;
+		}
+
+		$('#upalodForm').attr('action', '/cil/excel/upload');
+		$('#upalodForm').ajaxSubmit({
+			cache: false,
+			beforeSubmit: function () {
+				var htmlStr = '<div id="upload-wrapper" style="width:100%;">';
+				htmlStr += '</div>';
+				$('#uploadResultModal .modal-body').html(htmlStr);
+				$('#uploadResultModal').modal('show');
+				uploadOverlayStart();
+			},
+			success: function (data) {
+				uploadOverlayStop();
+				$('#uploadModal').modal('hide');
+				var totalCnt = data.totalCount;
+				var htmlStr = '<div>';
+				htmlStr += '<p>업로드완료</p>';
+				htmlStr +=
+					'<div>총 ' +
+					totalCnt +
+					"건 중 <span class='text-primary'>성공 : " +
+					data.successCount +
+					"건</span>, <span class='text-danger'>실패 " +
+					data.failCount +
+					'건 </span></div>';
+				htmlStr += '</div>';
+				htmlStr += '<table class="table">';
+				htmlStr += '<thead>';
+				htmlStr += '<tr>';
+				htmlStr += '		<th>번호</th>';
+				htmlStr += '		<th>인허가번호</th>';
+				htmlStr += '		<th>등록여부</th>';
+				htmlStr += '</tr>';
+				htmlStr += '<tbody>';
+
+				if (data.resultList != null) {
+					for (var i = 0; i < data.resultList.length; i++) {
+						var vo = data.resultList[i];
+						htmlStr += '<tr>';
+						htmlStr += '		<th>' + totalCnt + '</th>';
+						htmlStr += '		<th>' + vo.licenseNo + '</th>';
+						if (vo.regSuccessYn == 'Y') {
+							htmlStr += '		<th>등록성공</th>';
+						} else {
+							htmlStr += '		<th>등록실패</th>';
+						}
+						htmlStr += '</tr>';
+						totalCnt--;
+					}
+				}
+
+				htmlStr += '</tbody>';
+				htmlStr += '</table>';
+
+				$('#uploadResultModal .modal-body').html(htmlStr);
+				$('#uploadResult').modal('hide');
+			},
+		});
+	}
+
+	var cil = (function () {
+		var searchReset = function () {
+			$('#searchForm')[0].reset();
+		};
+		var search = function () {
+			$('input[name=currentPageNo]').val('1');
+			init();
+		};
+
+		var init = function () {
+			var sendData = {
+				currentPageNo: $('input[name=currentPageNo]').val(),
+				recordsPerPage: $('select[name=recordsPerPage]').val(),
+				schCompanyName: $('input[name=schCompanyName]').val(),
+				schCeoName: $('input[name=schCeoName]').val(),
+				schSido: $('#schSido option:selected').text(),
+				schGungu: $('#schGungu').val(),
+				schLicenseNo: $('input[name=schLicenseNo]').val(),
+				schCompanyType: $('#schCompanyType').val(),
+				schCompanyStatus: $('#schCompanyStatus').val(),
+				schStartDate: $('input[name=schStartDate]').val(),
+				schEndDate: $('input[name=schEndDate]').val(),
+				orderColumn: $('input[name=orderColumn]').val(),
+				orderBy: $('input[name=orderBy]').val(),
+			};
+
+			commonLoadingAjaxFunc('/cil/list', sendData, 'GET', function (data) {
+				var htmlStr = '';
+				if (data.list == null || data.list.length == 0) {
+					htmlStr = '<tr><td colspan="11">등록된  정보가 없습니다.</td></tr>';
+				} else {
+					var no = data.pagingUtil.displayTotalRecordCount;
+					for (var i = 0; i < data.list.length; i++) {
+						var vo = data.list[i];
+						htmlStr += '<tr>';
+						htmlStr += '<td>' + no + '</td>';
+						htmlStr += '    <td class="text-center"><a href="javascript:cil.getCompanyInfo(\'' + vo.licenseNo + '\')">' + vo.licenseNo + '</a></td>';
+						if (!isEmpty(vo.licenseDate)) {
+							htmlStr += '    <td class="text-center">' + moment(vo.licenseDate, 'YYYYMMDD').format('YYYY.MM.DD') + '</td>';
+						} else {
+							htmlStr += '    <td class="text-center">-</td>';
+						}
+						htmlStr += '    <td>' + vo.companyName + '</td>';
+						htmlStr += '    <td class="text-center">' + vo.companyType + '</td>';
+						htmlStr += '    <td class="text-center">' + vo.ceoName + '</td>';
+						htmlStr += '    <td>' + vo.companyAddress + '</td>';
+						htmlStr += '    <td class="text-center">' + vo.postCode + '</td>';
+
+						if (vo.companyStatus == '1') {
+							htmlStr += '    <td class="text-center"><span class="text-primary">운영</span></td>';
+						} else if (vo.companyStatus == '2') {
+							htmlStr += '    <td class="text-center"><span class="text-primary">양도양수</span></td>';
+						} else if (vo.companyStatus == '3') {
+							htmlStr += '    <td class="text-center"><span class="text-primary">상속</span></td>';
+						} else if (vo.companyStatus == '4') {
+							htmlStr += '    <td class="text-center"><span class="text-primary">기타</span></td>';
+						} else if (vo.companyStatus == '5') {
+							htmlStr += '    <td class="text-center"><span class="text-danger">폐업</span></td>';
+						} else {
+							htmlStr += '    <td class="text-center"><span class="">-</span></td>';
+						}
+
+						htmlStr += '    <td class="text-center">' + moment(vo.regDate, 'YYYYMMDD').format('YYYY.MM.DD') + '</td>';
+						htmlStr +=
+							'    <td class="text-center"><button type="button" class="btn btn-xs btn-warning" onclick="cil.history(\'' +
+							vo.licenseNo +
+							'\');">조회</button></td>';
+						htmlStr += '</tr>';
+						no--;
+					}
+				}
+
+				makePagination(data.pagingUtil, '', 'goPage', 'pageUnitChange');
+				$('#dataTable tbody').html(htmlStr);
+			});
+		};
+
+		var excelDown = function () {
+			$('input[name=e_schSido]').val($('#schSido option:selected').text());
+			if (confirm('엑셀을 다운로드 하시겠습니까?')) {
+				$('form[name=searchForm]').attr('action', '/cil/excel/down');
+				$('form[name=searchForm]').submit();
+			}
+		};
+
+		var registCompany = function () {
+			if (isEmpty($('input[name=licenseNo]').val())) {
+				alert('인허가번호를  입력하세요.');
+				$('input[name=licenseNo]').focus();
+				return false;
+			}
+
+			if (isEmpty($('input[name=companyName]').val())) {
+				alert('업소명을  입력하세요.');
+				$('input[name=companyName]').focus();
+				return false;
+			}
+
+			if (isEmpty($('input[name=ceoName]').val())) {
+				alert('대표자명을  입력하세요.');
+				$('input[name=companyName]').focus();
+				return false;
+			}
+			if (isEmpty($('input[name=companyAddress]').val())) {
+				alert('업소주소를  입력하세요.');
+				$('input[name=companyAddress]').focus();
+				return false;
+			}
+
+			if ($('input[name=companyStatus]:checked').length < 1) {
+				alert('영업상태를 선택해주세요.');
+				return false;
+			}
+			if (confirm('해당 업소를 등록하시겠습니까?')) {
+				commonAjaxFunc('/cil/info/insert', $('form[name=registForm]').serialize(), 'POST', function (data) {
+					if (data == 'success') {
+						alert('등록되었습니다.');
+						$('#registModal').modal('hide');
+						//cil.search();
+					} else {
+						alert('처리 중 문제가 발생했습니다.');
+						$('#registModal').modal('hide');
+					}
+				});
+			}
+		};
+
+		var updateCompany = function () {
+			if (isEmpty($('input[name=licenseNo]').val())) {
+				alert('인허가번호를  입력하세요.');
+				$('input[name=licenseNo]').focus();
+				return false;
+			}
+
+			if (isEmpty($('input[name=companyName]').val())) {
+				alert('업소명을  입력하세요.');
+				$('input[name=companyName]').focus();
+				return false;
+			}
+
+			if (isEmpty($('input[name=ceoName]').val())) {
+				alert('대표자명을  입력하세요.');
+				$('input[name=companyName]').focus();
+				return false;
+			}
+			if (isEmpty($('input[name=companyAddress]').val())) {
+				alert('업소주소를  입력하세요.');
+				$('input[name=companyAddress]').focus();
+				return false;
+			}
+			if ($('input[name=companyStatus]:checked').length < 1) {
+				alert('영업상태를 선택해주세요.');
+				return false;
+			}
+			if (confirm('해당 업소정보를 수정하시겠습니까?')) {
+				commonAjaxFunc('/cil/info/update', $('form[name=registForm]').serialize(), 'POST', function (data) {
+					if (data == 'success') {
+						alert('등록되었습니다.');
+						$('#registModal').modal('hide');
+					} else {
+						alert('처리 중 문제가 발생했습니다.');
+						$('#registModal').modal('hide');
+					}
+				});
+			}
+		};
+
+		var history = function (licenseNo) {
+			commonAjaxFunc('/cil/change/log', { licenseNo: licenseNo }, 'GET', function (data) {
+				if (data == null || data.length == 0) {
+					$('#historyModal .change-log-ul').html('<li>변경이력이 없습니다.</li>');
+				} else {
+					var htmlStr = '';
+					for (var i = 0; i < data.length; i++) {
+						var vo = data[i];
+						var beforeData = JSON.parse(vo.beforeData);
+						var afterData = JSON.parse(vo.afterData);
+						var changeStr = '';
+						var changeCount = 0;
+
+						if (beforeData.companyName != afterData.companyName) {
+							changeStr += '    <p><span>[변경전]</span>업소명 : ' + beforeData.companyName + '</p>';
+							changeStr += '    <p><span>[변경후]</span>업소명 : ' + afterData.companyName + '</p>';
+							changeCount++;
+						}
+
+						if (beforeData.ceoName != afterData.ceoName) {
+							changeStr += '    <p><span>[변경전]</span>대표자명 : ' + beforeData.ceoName + '</p>';
+							changeStr += '    <p><span>[변경후]</span>대표자명: ' + afterData.ceoName + '</p>';
+							changeCount++;
+						}
+
+						if (beforeData.companyAddress != afterData.companyAddress) {
+							changeStr += '    <p><span>[변경전]</span>업소주소 : ' + beforeData.companyAddress + '</p>';
+							changeStr += '    <p><span>[변경후]</span>업소주소: ' + afterData.companyAddress + '</p>';
+							changeCount++;
+						}
+
+						if (beforeData.licenseDate != afterData.licenseDate) {
+							changeStr += '    <p><span>[변경전]</span>인허가일자 : ' + beforeData.licenseDate + '</p>';
+							changeStr += '    <p><span>[변경후]</span>인허가일자: ' + afterData.licenseDate + '</p>';
+							changeCount++;
+						}
+
+						if (changeCount > 0) {
+							htmlStr += '<li class="d-flex" style="justify-content: center;align-items: center;">';
+							htmlStr += '	<div>' + changeStr + '</div>';
+							htmlStr += '    <p class="log-date" style="margin-left:auto;">' + moment(vo.regDate, 'YYYYMMDD').format('YYYY.MM.DD') + '</p>';
+							htmlStr += '</li>';
+						}
+					}
+
+					$('#historyModal .change-log-ul').html(htmlStr);
+				}
+			});
+
+			$('#historyModal').modal('show');
+		};
+
+		//업소정보 조회
+		var getCompanyInfo = function (licenseNo) {
+			commonAjaxFunc('/cil/info', { licenseNo: licenseNo }, 'GET', function (data) {
+				$('input[name=licenseNo]').val(data.licenseNo).attr('readonly', 'readonly');
+				$('input[name=companyName]').val(data.companyName);
+				$('input[name=licenseDate]').val(data.licenseDate);
+				$('input[name=ceoName]').val(data.ceoName);
+				$('input[name=companyAddress]').val(data.companyAddress);
+				$('input[name=postCode]').val(data.postCode);
+				$("input[name=companyStatus]:input[value='" + data.companyStatus + "']").prop('checked', true);
+				$('input[name=goOutDate]').val(data.goOutDate);
+				$('input[name=memo]').val(data.memo);
+
+				$('#btnAdd').addClass('hide');
+				$('#btnEdit').removeClass('hide');
+
+				$('#registModal').modal('show');
+			});
+		};
+		return {
+			searchReset: searchReset,
+			search: search,
+			init: init,
+			excelDown: excelDown,
+			registCompany: registCompany,
+			updateCompany: updateCompany,
+			history: history,
+			getCompanyInfo: getCompanyInfo,
+		};
+	})();
+</script>
