@@ -48,274 +48,521 @@
 		<!-- /theme JS files -->
 		<!-- sheetjs  -->
 		<script type="text/javascript" src="//cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
+
+		<!-- frontlab -->
+		<link rel="stylesheet" type="text/css" href="/assets/css/common.css" />
+		<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/colresizable/1.6.0/colResizable-1.6.js"
+			integrity="sha512-0HfjrMq6p8VBkVjp/gy/obELN81BCwmKRd7fongBsAPw49BeKAfXpQn6PWSPa8rm7mvblqyV2P1kVNzvW6qR4Q=="
+			crossorigin="anonymous"
+			referrerpolicy="no-referrer"
+		></script>
+		<script>
+			$(document).ready(function () {
+				$('.kcra-list .table').colResizable({
+					liveDrag: true,
+					gripInnerHtml: "<div class='grip'></div>",
+					draggingClass: 'dragging',
+					resizeMode: 'fit',
+				});
+				$('.kcra-sidebar-list__item a').on('click', function () {
+					$(this).parents('.kcra-sidebar-list__item').toggleClass('active');
+					return false;
+				});
+			});
+		</script>
 	</head>
 
 	<body>
-		<!-- Main navbar -->
-		<div class="navbar navbar-inverse header-highlight">
-			<!-- navbar-default 제거 -->
-			<div class="navbar-header">
-				<a class="navbar-brand" href="/">한국휴게음식업중앙회</a>
-
-				<ul class="nav navbar-nav visible-xs-block">
-					<li>
-						<a data-toggle="collapse" data-target="#navbar-mobile"><i class="icon-tree5"></i></a>
-					</li>
-					<li>
-						<a class="sidebar-mobile-main-toggle"><i class="icon-paragraph-justify3"></i></a>
-					</li>
-				</ul>
-			</div>
-
-			<div class="navbar-collapse collapse" id="navbar-mobile">
-				<ul class="nav navbar-nav">
-					<li>
-						<a class="sidebar-control sidebar-main-toggle hidden-xs"><i class="icon-paragraph-justify3"></i></a>
-					</li>
-				</ul>
-
-				<ul class="nav navbar-nav navbar-right">
-					<!-- 	<li><a href="#">Text link</a></li>
-
-				<li>
-					<a href="#">
-						<i class="icon-cog3"></i>
-						<span class="visible-xs-inline-block position-right">Icon link</span>
-					</a>
-				</li> -->
-
-					<li class="dropdown dropdown-user">
-						<a class="dropdown-toggle" data-toggle="dropdown">
-							<img src="http://dev2.onesnc.co.kr/static/global_assets/images/image.png" alt="" />
-							<span>관리자</span>
-							<i class="caret"></i>
-						</a>
-
-						<ul class="dropdown-menu dropdown-menu-right">
+		<div class="kcra">
+			<div class="kcra-sidebar">
+				<div class="kcra-sidebar-logo">
+					<a href=""><img src="/assets/images/logo.png" alt="KCRA 한국휴게음식업중앙회교육원" /></a>
+				</div>
+				<div class="kcra-sidebar-user">
+					<div class="dropdown">
+						<button id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<img src="../assets/images/user.png" alt="" />
+							관리자
+							<span class="material-symbols-outlined"> expand_more </span>
+						</button>
+						<ul class="dropdown-menu">
 							<li>
-								<a href="/logout"><i class="icon-switch2"></i> Logout</a>
+								<a href="/logout">로그아웃</a>
 							</li>
 						</ul>
-					</li>
-				</ul>
-			</div>
-		</div>
-		<!-- /main navbar -->
-		<script>
-			var LOGIN_USER_ID = 'admin';
-			var LOGIN_USER_TYPE = 'MASTER_ADMIN';
-			$.datepicker.setDefaults({
-				dateFormat: 'yymmdd',
-				prevText: '이전 달',
-				nextText: '다음 달',
-				monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-				monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-				dayNames: ['일', '월', '화', '수', '목', '금', '토'],
-				dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
-				dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
-				showMonthAfterYear: true,
-				yearSuffix: '년',
-			});
-		</script>
-
-		<!-- Page container -->
-		<div class="page-container">
-			<!-- Page content -->
-			<div class="page-content">
-				<!-- Main sidebar -->
-				<div class="sidebar sidebar-main sidebar-default">
-					<div class="sidebar-content">
-						<!-- Main navigation -->
-						<div class="sidebar-category sidebar-category-visible">
-							<div class="category-content no-padding">
-								<ul class="navigation navigation-main navigation-accordion" id="site_menu"></ul>
-							</div>
-						</div>
-						<!-- /main navigation -->
 					</div>
 				</div>
-				<!-- /main sidebar -->
-
-				<script>
-					commonAjaxFunc('/site/menu', { menuType: 'MENU_' + LOGIN_USER_TYPE }, 'GET', function (data) {
-						if (data != null) {
-							$('#site_menu').empty();
-							for (var i = 0; i < data.length; i++) {
-								var vo = data[i];
-								var menuCd = vo.menuCd;
-								var moduleCd = vo.moduleCd;
-								var menuName = vo.menuName;
-								var moduleUri = vo.moduleUri;
-								var menuDepthType = vo.menuDepthType;
-								if (menuDepthType == 'U') {
-									if (menuCd == 'MENU_00011') {
-										$('#site_menu').append(
-											"<li  data-id='" +
-												menuCd +
-												"' class='active'><a href='" +
-												moduleUri +
-												"'><i class='" +
-												vo.iconClass +
-												"'></i><span>" +
-												menuName +
-												'</span></a></li>'
-										);
-									} else {
-										$('#site_menu').append(
-											"<li  data-id='" + menuCd + "'><a href='" + moduleUri + "'><i class='" + vo.iconClass + "'></i><span>" + menuName + '</span></a></li>'
-										);
-									}
-								} else if (menuDepthType == 'M') {
-									if (menuCd == 'MENU_00011' || moduleUri == '/admin/statistics/company') {
-										if ($('#site_menu > li').last().find('ul').length == 0) {
-											$('#site_menu li')
-												.last()
-												.append(
-													"<ul><li data-id='" +
-														menuCd +
-														"' class='active'><a href='" +
-														moduleUri +
-														"'><i class=''></i><span>" +
-														menuName +
-														'</span></a></li></ul>'
-												);
-										} else {
-											$('#site_menu > li')
-												.last()
-												.find('ul')
-												.append(
-													"<li data-id='" + menuCd + "' class='active'><a href='" + moduleUri + "'><i class=''></i><span>" + menuName + '</span></a></li>'
-												);
-										}
-									} else {
-										if ($('#site_menu > li').last().find('ul').length == 0) {
-											$('#site_menu li')
-												.last()
-												.append("<ul><li data-id='" + menuCd + "'><a href='" + moduleUri + "'><i class=''></i><span>" + menuName + '</span></a></li></ul>');
-										} else {
-											$('#site_menu > li')
-												.last()
-												.find('ul')
-												.append("<li data-id='" + menuCd + "'><a href='" + moduleUri + "'><i class=''></i><span>" + menuName + '</span></a></li>');
-										}
-									}
-								}
-							}
-							//$("#site_menu li[data-id = 'MENU_00011']").addClass("active");
-							mainNavigationSetting();
-						}
-					});
-
-					$(document).on('click', '#site_menu li > a', function (e) {
-						if ($(this).parent().attr('data-id') != undefined) {
-							moveMenu($(this).parent().attr('data-id'));
-						}
-					});
-				</script>
-
-				<div class="content-wrapper">
-					<div class="content">
-						<!-- list table s  -->
-						<input type="hidden" name="currentPageNo" value="1" />
-						<div class="row">
-							<div class="panel panel-flat">
-								<div class="panel-heading">
-									<h5 class="panel-title">영업신고별 통계</h5>
-								</div>
-								<div class="panel-body">
-									<div class="table-responsive">
-										<form name="searchForm" id="searchForm" method="post">
-											<input type="hidden" class="form-control" name="searchStartDate" placeholder="" />
-											<input type="hidden" class="form-control" name="searchEndDate" placeholder="" />
-											<table class="table search-table">
-												<tbody>
-													<tr>
-														<th>구분</th>
-														<td>
-															<select name="searchCompanyType" id="searchCompanyType" class="form-control">
-																<option value="" selected="selected">구분</option>
-																<option value="신규영업자">신규영업자</option>
-																<option value="자판기영업자">자판기영업자</option>
-															</select>
-														</td>
-													</tr>
-													<tr>
-														<th>인허가일자</th>
-														<td>
-															<div class="form-inline">
-																<select name="searchStartYear" id="searchStartYear" class="form-control">
-																	<option value="">년도</option>
-																</select>
-																<select name="searchStartMonth" id="searchStartMonth" class="form-control">
-																	<option value="">월</option>
-																</select>
-																~
-																<select name="searchEndYear" id="searchEndYear" class="form-control">
-																	<option value="">년도</option>
-																</select>
-																<select name="searchEndMonth" id="searchEndMonth" class="form-control">
-																	<option value="">월</option>
-																</select>
-																<script>
-																	commonAjaxFunc('/common/code/list', { commonCode: 'CMM_MONTH' }, 'GET', function (data) {
-																		$('#searchStartMonth, #searchEndMonth').empty();
-																		$('#searchStartMonth, #searchEndMonth').append("<option value=''>월</option>");
-																		for (var i = 0; i < data.length; i++) {
-																			$('#searchStartMonth,#searchEndMonth').append(
-																				"<option value='" + data[i].codeValue + "'>" + data[i].codeName + '</option>'
-																			);
-																		}
-																	});
-																	commonAjaxFunc('/common/code/list', { commonCode: 'STATIC_YEAR' }, 'GET', function (data) {
-																		$('#searchStartYear, #searchEndYear').empty();
-																		$('#searchStartYear, #searchEndYear').append("<option value=''>년도</option>");
-																		for (var i = 0; i < data.length; i++) {
-																			$('#searchStartYear, #searchEndYear').append(
-																				"<option value='" + data[i].codeValue + "'>" + data[i].codeName + '</option>'
-																			);
-																		}
-																	});
-																</script>
-															</div>
-														</td>
-													</tr>
-													<tr>
-														<th>영업상태</th>
-														<td>
-															<div>
-																<label class="radio-inline"><input type="radio" name="searchCompanyStatus" value="" checked />전체</label>
-																<label class="radio-inline"><input type="radio" name="searchCompanyStatus" value="1" />운영</label>
-																<label class="radio-inline"><input type="radio" name="searchCompanyStatus" value="2" />양도양수</label>
-																<label class="radio-inline"><input type="radio" name="searchCompanyStatus" value="3" />상속</label>
-																<label class="radio-inline"><input type="radio" name="searchCompanyStatus" value="4" />폐업</label>
-																<label class="radio-inline"><input type="radio" name="searchCompanyStatus" value="5" />기타</label>
-															</div>
-														</td>
-													</tr>
-												</tbody>
-											</table>
-										</form>
-										<div class="text-center mt-10">
-											<button type="button" class="btn btn-xs btn-search" onclick="statistics.init();">검색</button>
-										</div>
-									</div>
-									<div class="d-flex flex-row-reverse">
-										<button type="button" class="btn btn-xs btn-info mr-5" onclick="statistics.excelDown('xlsx');">다운로드</button>
-									</div>
-									<div class="table-responsive">
-										<table class="table result-table" id="dataTable">
-											<thead></thead>
-											<tbody></tbody>
-										</table>
-									</div>
-								</div>
-							</div>
+				<div class="kcra-sidebar-list">
+					<div class="kcra-sidebar-list__item">
+						<a href=""><span class="material-symbols-outlined"> settings </span><strong>설정</strong></a>
+					</div>
+					<div class="kcra-sidebar-list__item">
+						<a href=""><span class="material-symbols-outlined"> corporate_fare </span><strong>업소정보관리</strong></a>
+					</div>
+					<div class="kcra-sidebar-list__item">
+						<a href=""><span class="material-symbols-outlined"> school </span><strong>교육결과조회</strong></a>
+					</div>
+					<div class="kcra-sidebar-list__item depth">
+						<a href=""><span class="material-symbols-outlined"> stress_management </span><strong>집합교육관리조회</strong></a>
+						<ul>
+							<li class="active">
+								<a href="/admin/offline/manage"><span>신규영업자</span></a>
+							</li>
+						</ul>
+					</div>
+					<div class="kcra-sidebar-list__item">
+						<a href=""><span class="material-symbols-outlined"> contract_edit </span><strong>통보서관리</strong></a>
+					</div>
+					<div class="kcra-sidebar-list__item">
+						<a href=""><span class="material-symbols-outlined"> data_table </span><strong>이관데이터관리</strong></a>
+					</div>
+					<div class="kcra-sidebar-list__item">
+						<a href=""><span class="material-symbols-outlined"> analytics </span><strong>수료현황</strong></a>
+					</div>
+					<div class="kcra-sidebar-list__item">
+						<a href=""><span class="material-symbols-outlined"> assignment_ind </span><strong>수료자등록</strong></a>
+					</div>
+					<div class="kcra-sidebar-list__item active depth">
+						<a href=""><span class="material-symbols-outlined"> bar_chart_4_bars </span><strong>통계</strong></a>
+						<ul>
+							<li class="active">
+								<a href="/admin/statistics/company"><span>영업대장별 통계</span></a>
+							</li>
+							<li>
+								<a href="/admin/statistics/edu"><span>교육통계</span></a>
+							</li>
+							<li>
+								<a href="/admin/statistics/period"><span>기간대비통계</span></a>
+							</li>
+							<li>
+								<a href="/admin/statistics/age"><span>연령별통계</span></a>
+							</li>
+						</ul>
+					</div>
+					<div class="kcra-sidebar-list__item">
+						<a href=""> <span class="material-symbols-outlined"> settings_cinematic_blur </span><strong>계정관리</strong></a>
+					</div>
+				</div>
+			</div>
+			<div class="kcra-contents kcra-list-form">
+				<div class="kcra-title">
+					<h1>영업신고별 통계</h1>
+				</div>
+				<div class="kcra-form">
+					<div class="kcra-form__box">
+						<form name="searchForm" id="searchForm" method="post">
+							<input type="hidden" class="form-control" name="searchStartDate" placeholder="" />
+							<input type="hidden" class="form-control" name="searchEndDate" placeholder="" />
+							<table>
+								<colgroup>
+									<col style="width: 10%" />
+									<col style="width: 90%" />
+								</colgroup>
+								<tbody>
+									<tr>
+										<th>구분</th>
+										<td>
+											<select name="searchCompanyType" id="searchCompanyType" class="form-control">
+												<option value="" selected="selected">구분</option>
+												<option value="신규영업자">신규영업자</option>
+												<option value="자판기영업자">자판기영업자</option>
+											</select>
+										</td>
+									</tr>
+									<tr>
+										<th>인허가일자</th>
+										<td>
+											<div class="kcra-datepicker" style="width: 500px">
+												<select name="searchStartYear" id="searchStartYear" class="form-control mr-10">
+													<option value="">년도</option>
+												</select>
+												<select name="searchStartMonth" id="searchStartMonth" class="form-control">
+													<option value="">월</option>
+												</select>
+												<span>~</span>
+												<select name="searchEndYear" id="searchEndYear" class="form-control mr-10">
+													<option value="">년도</option>
+												</select>
+												<select name="searchEndMonth" id="searchEndMonth" class="form-control">
+													<option value="">월</option>
+												</select>
+												<script>
+													commonAjaxFunc('/common/code/list', { commonCode: 'CMM_MONTH' }, 'GET', function (data) {
+														$('#searchStartMonth, #searchEndMonth').empty();
+														$('#searchStartMonth, #searchEndMonth').append("<option value=''>월</option>");
+														for (var i = 0; i < data.length; i++) {
+															$('#searchStartMonth,#searchEndMonth').append("<option value='" + data[i].codeValue + "'>" + data[i].codeName + '</option>');
+														}
+													});
+													commonAjaxFunc('/common/code/list', { commonCode: 'STATIC_YEAR' }, 'GET', function (data) {
+														$('#searchStartYear, #searchEndYear').empty();
+														$('#searchStartYear, #searchEndYear').append("<option value=''>년도</option>");
+														for (var i = 0; i < data.length; i++) {
+															$('#searchStartYear, #searchEndYear').append("<option value='" + data[i].codeValue + "'>" + data[i].codeName + '</option>');
+														}
+													});
+												</script>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<th>영업상태</th>
+										<td>
+											<div>
+												<label class="radio-inline"><input type="radio" name="searchCompanyStatus" value="" checked />전체</label>
+												<label class="radio-inline"><input type="radio" name="searchCompanyStatus" value="1" />운영</label>
+												<label class="radio-inline"><input type="radio" name="searchCompanyStatus" value="2" />양도양수</label>
+												<label class="radio-inline"><input type="radio" name="searchCompanyStatus" value="3" />상속</label>
+												<label class="radio-inline"><input type="radio" name="searchCompanyStatus" value="4" />폐업</label>
+												<label class="radio-inline"><input type="radio" name="searchCompanyStatus" value="5" />기타</label>
+											</div>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</form>
+					</div>
+					<div class="kcra-form__button">
+						<button type="button" class="btn" onclick="statistics.init();"><span class="material-symbols-outlined"> search </span>검색</button>
+					</div>
+				</div>
+				<div class="kcra-list">
+					<div class="kcra-list-head">
+						<div class="kcra-list-head__total">조회건수 : <strong>43</strong>건</div>
+						<div class="kcra-list-head__button">
+							<button type="button" class="btn btn-sm btn-gray" onclick="statistics.excelDown('xlsx');">
+								<span class="material-symbols-outlined"> download </span>다운로드
+							</button>
 						</div>
-						<!-- list table e  -->
-
-						<!-- Footer -->
-						<div class="footer text-muted">© 2021 ONESNC-Software & Creative</div>
-						<!-- /footer -->
+					</div>
+					<div class="table-responsive">
+						<table class="table result-table" id="dataTable">
+							<thead>
+								<tr>
+									<th style="background-color: #ddd">지역</th>
+									<th style="background-color: #ddd">합계</th>
+									<th style="background-color: #ddd; width: 7%">1월</th>
+									<th style="background-color: #ddd; width: 7%">2월</th>
+									<th style="background-color: #ddd; width: 7%">3월</th>
+									<th style="background-color: #ddd; width: 7%">4월</th>
+									<th style="background-color: #ddd; width: 7%">5월</th>
+									<th style="background-color: #ddd; width: 7%">6월</th>
+									<th style="background-color: #ddd; width: 7%">7월</th>
+									<th style="background-color: #ddd; width: 7%">8월</th>
+									<th style="background-color: #ddd; width: 7%">9월</th>
+									<th style="background-color: #ddd; width: 7%">10월</th>
+									<th style="background-color: #ddd; width: 7%">11월</th>
+									<th style="background-color: #ddd; width: 7%">12월</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>서울</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+								</tr>
+								<tr>
+									<td>부산</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+								</tr>
+								<tr>
+									<td>인천</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+								</tr>
+								<tr>
+									<td>대구</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+								</tr>
+								<tr>
+									<td>대전</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+								</tr>
+								<tr>
+									<td>광주</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+								</tr>
+								<tr>
+									<td>울산</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+								</tr>
+								<tr>
+									<td>세종</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+								</tr>
+								<tr>
+									<td>경기</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+								</tr>
+								<tr>
+									<td>강원</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+								</tr>
+								<tr>
+									<td>충북</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+								</tr>
+								<tr>
+									<td>충남</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+								</tr>
+								<tr>
+									<td>전북</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+								</tr>
+								<tr>
+									<td>전남</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+								</tr>
+								<tr>
+									<td>경북</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+								</tr>
+								<tr>
+									<td>경남</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+								</tr>
+								<tr>
+									<td>제주</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+								</tr>
+								<tr>
+									<td>합계</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="kcra-pagination">
+						<ul class="pagination">
+							<li><a href="javascript:goPage(1);">이전</a></li>
+							<li class="active"><a href="#">1</a></li>
+							<li><a href="javascript:goPage('2');">2</a></li>
+							<li><a href="javascript:goPage('3');">3</a></li>
+							<li><a href="javascript:goPage('4');">4</a></li>
+							<li><a href="javascript:goPage('5');">5</a></li>
+							<li><a href="javascript:goPage('6');">6</a></li>
+							<li><a href="javascript:goPage('7');">7</a></li>
+							<li><a href="javascript:goPage('8');">8</a></li>
+							<li><a href="javascript:goPage('9');">9</a></li>
+							<li><a href="javascript:goPage('10');">10</a></li>
+							<li><a href="javascript:goPage(11);">다음</a></li>
+						</ul>
 					</div>
 				</div>
 			</div>
