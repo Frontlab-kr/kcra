@@ -37,7 +37,8 @@
 	font-style: normal;
 	font-weight: 400;
 	line-height: 18px; /* 128.571% */
-	&:hover {
+	&:hover,
+	&:focus {
 		background: #333;
 		border-color: #333;
 		color: #fff;
@@ -55,7 +56,8 @@
 	&.btn-gray {
 		border: 1px solid #8f8f8f;
 		background: #989898;
-		&:hover {
+		&:hover,
+		&:focus {
 			background: #888;
 			border-color: #888;
 			color: #fff;
