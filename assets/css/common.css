@@ -303,6 +303,7 @@ select.form-control {
   border-bottom: 1px solid #50555c;
   background-color: #f7f7f9;
   white-space: nowrap;
+  overflow: hidden;
 }
 .kcra-list .table > thead > tr > th:first-child {
   border-left: none;
